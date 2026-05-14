@@ -31,12 +31,52 @@
             "title": "our favorites",
             "text": "shop community-loved picks and salon favorites curated for shine, softness, and all-day healthy hair confidence."
           }
+        },
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I use this hair mist daily?",
+            "answer": "Yes, it is safe for daily use and can be applied multiple times a day."
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will it make my hair sticky?",
+            "answer": "No, the formula is designed to feel fresh and does not leave stickiness."
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I use it on wet hair?",
+            "answer": "It works best on dry hair for instant freshness and fragrance."
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Does the fragrance last long?",
+            "answer": "Yes, it leaves a soft floral scent that lasts for hours."
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it suitable for all hair types?",
+            "answer": "Yes, it is suitable for all hair types and textures."
+          }
         }
       },
       "block_order": [
         "col_1",
         "col_2",
-        "col_3"
+        "col_3",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
       ]
     }
   },
