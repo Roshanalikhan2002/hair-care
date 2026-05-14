@@ -31,9 +31,11 @@
     {% assign elaris_gallery_src_2 = 'floral-blossom-hair-mist-before-after.jpg' | asset_url %}
   {% endif %}
   {% liquid
-    # B1G1: same scope as asset gallery — product.handle OR JSON template suffix
+    # B1G1: (1) Section checkbox in product JSON templates, OR (2) handle / template.suffix
     assign elaris_b1g1 = false
-    if product.handle == 'hair-regrowth-spray' or template.suffix == 'hair-regrowth-spray'
+    if section.settings.b1g1_enable
+      assign elaris_b1g1 = true
+    elsif product.handle == 'hair-regrowth-spray' or template.suffix == 'hair-regrowth-spray'
       assign elaris_b1g1 = true
     elsif product.handle == 'anti-frizz-keratin-serum' or template.suffix == 'anti-frizz-keratin-serum'
       assign elaris_b1g1 = true
@@ -734,6 +736,13 @@
     {
       "type": "header",
       "content": "Buy 1 Get 1 (Hair Regrowth, Keratin Serum, Floral Mist)"
+    },
+    {
+      "type": "checkbox",
+      "id": "b1g1_enable",
+      "label": "Enable Buy 1 Get 1 + free gift picker",
+      "default": false,
+      "info": "Turn ON in the three product JSON templates (hair-regrowth-spray, anti-frizz-keratin-serum, floral-blossom-hair-mist). Hides Subscribe and shows gift list. Products must use that theme template in Admin."
     },
     {
       "type": "paragraph",
