@@ -155,28 +155,29 @@
             {% assign card_default_asset = 'feature-bundle.jpeg' %}
           {% endif %}
         {% endif %}
+        {% assign card_link_raw = block.settings.link | default: '' %}
+        {% assign card_handle_from_link = '' %}
+        {% if card_link_raw contains '/products/' %}
+          {% assign card_handle_from_link = card_link_raw | split: '/products/' | last | split: '?' | first | split: '/' | first %}
+        {% endif %}
+        {% assign card_link_product = all_products[card_handle_from_link] %}
+        {% assign card_bg_url = '' %}
+        {% if block.settings.image != blank %}
+          {% assign card_bg_url = block.settings.image | image_url: width: 1200 %}
+        {% elsif card_default_asset != blank %}
+          {% assign card_bg_url = card_default_asset | asset_url %}
+        {% elsif card_link_product != blank and card_link_product.featured_image != blank %}
+          {% assign card_bg_url = card_link_product.featured_image | image_url: width: 1200 %}
+        {% endif %}
         <div class="card"{% if block_card_url != blank %} data-card-url="{{ block_card_url }}"{% endif %} {{ block.shopify_attributes }}>
-          <div class="card-image">
-            {% if block.settings.image != blank %}
-              <img
-                class="card-image__img"
-                src="{{ block.settings.image | image_url: width: 800 }}"
-                srcset="{{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 800 }} 800w, {{ block.settings.image | image_url: width: 1000 }} 1000w"
-                sizes="(max-width: 1024px) 85vw, 25vw"
-                alt="{{ block.settings.title | escape }}"
-                loading="lazy"
-                decoding="async"
-              >
-            {% elsif card_default_asset != blank %}
-              <img
-                class="card-image__img"
-                src="{{ card_default_asset | asset_url }}"
-                alt="{{ block.settings.title | escape }}"
-                loading="lazy"
-                decoding="async"
-              >
+          <div
+            class="card-image"
+            {% if card_bg_url != blank %}
+              style="background-image: url('{{ card_bg_url }}');"
             {% endif %}
-          </div>
+            role="img"
+            aria-label="{{ block.settings.title | escape }}"
+          ></div>
           <div class="card-info">
             <h3>{{ block.settings.title }}</h3>
             {% if block.settings.product != blank %}
@@ -208,15 +209,13 @@
             {% assign card_default_asset = 'home-card-floral-blossom-hair-mist.jpg' %}
         {% endcase %}
         <div class="card" data-card-url="/products/{{ fallback_handle }}">
-          <div class="card-image">
-            <img
-              class="card-image__img"
-              src="{{ card_default_asset | asset_url }}"
-              alt="{{ fallback_handle | replace: '-', ' ' | escape }}"
-              loading="lazy"
-              decoding="async"
-            >
-          </div>
+          {% assign fb_bg = card_default_asset | asset_url %}
+          <div
+            class="card-image"
+            style="background-image: url('{{ fb_bg }}');"
+            role="img"
+            aria-label="{{ fallback_handle | replace: '-', ' ' | escape }}"
+          ></div>
           <div class="card-info">
             <h3>
               {% if fallback_product != blank %}
