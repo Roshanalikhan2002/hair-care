@@ -10,10 +10,25 @@
 {% else %}
   {% assign elaris_regrowth_gallery = false %}
   {% assign elaris_keratin_gallery = false %}
+  {% assign elaris_floral_gallery = false %}
+  {% assign elaris_asset_gallery = false %}
+  {% assign elaris_gallery_src_1 = '' %}
+  {% assign elaris_gallery_src_2 = '' %}
   {% if product.handle == 'hair-regrowth-spray' or template.suffix == 'hair-regrowth-spray' %}
     {% assign elaris_regrowth_gallery = true %}
+    {% assign elaris_asset_gallery = true %}
+    {% assign elaris_gallery_src_1 = 'hair-regrowth-spray.jpg' | asset_url %}
+    {% assign elaris_gallery_src_2 = 'hair-regrowth-spray-before-after.jpg' | asset_url %}
   {% elsif product.handle == 'anti-frizz-keratin-serum' or template.suffix == 'anti-frizz-keratin-serum' %}
     {% assign elaris_keratin_gallery = true %}
+    {% assign elaris_asset_gallery = true %}
+    {% assign elaris_gallery_src_1 = 'anti-frizz-keratin-serum.jpg' | asset_url %}
+    {% assign elaris_gallery_src_2 = 'anti-frizz-keratin-serum-before-after.jpg' | asset_url %}
+  {% elsif product.handle == 'floral-blossom-hair-mist' or template.suffix == 'floral-blossom-hair-mist' %}
+    {% assign elaris_floral_gallery = true %}
+    {% assign elaris_asset_gallery = true %}
+    {% assign elaris_gallery_src_1 = 'floral-blossom-hair-mist.jpg' | asset_url %}
+    {% assign elaris_gallery_src_2 = 'floral-blossom-hair-mist-before-after.jpg' | asset_url %}
   {% endif %}
   {% assign current_variant = product.selected_or_first_available_variant %}
   {% if current_variant.featured_media %}
@@ -71,14 +86,7 @@
 
     <section class="product-wrap">
       <div class="product-media">
-        {% if elaris_regrowth_gallery or elaris_keratin_gallery %}
-          {% if elaris_regrowth_gallery %}
-            {% assign regrowth_src_1 = 'hair-regrowth-spray.jpg' | asset_url %}
-            {% assign regrowth_src_2 = 'hair-regrowth-spray-before-after.jpg' | asset_url %}
-          {% else %}
-            {% assign regrowth_src_1 = 'anti-frizz-keratin-serum.jpg' | asset_url %}
-            {% assign regrowth_src_2 = 'anti-frizz-keratin-serum-before-after.jpg' | asset_url %}
-          {% endif %}
+        {% if elaris_asset_gallery %}
           <div class="elaris-regrowth-media">
             <div class="main-image-wrap">
               <div
@@ -88,7 +96,7 @@
               >
                 <img
                   id="ElarisMainImgTag-{{ section.id }}"
-                  src="{{ regrowth_src_1 }}"
+                  src="{{ elaris_gallery_src_1 }}"
                   alt="{{ product.title | escape }}"
                   loading="eager"
                   width="1200"
@@ -110,23 +118,23 @@
                   <button
                     type="button"
                     class="thumb elaris-regrowth-thumb is-active"
-                    data-image-src="{{ regrowth_src_1 }}"
+                    data-image-src="{{ elaris_gallery_src_1 }}"
                     data-image-alt="{{ product.title | escape }}"
                     aria-label="Show product image 1"
                   >
                     <span class="elaris-regrowth-thumb__inner">
-                      <img src="{{ regrowth_src_1 }}" alt="" loading="eager" width="160" height="160">
+                      <img src="{{ elaris_gallery_src_1 }}" alt="" loading="eager" width="160" height="160">
                     </span>
                   </button>
                   <button
                     type="button"
                     class="thumb elaris-regrowth-thumb"
-                    data-image-src="{{ regrowth_src_2 }}"
+                    data-image-src="{{ elaris_gallery_src_2 }}"
                     data-image-alt="{{ product.title | escape }} — before and after"
                     aria-label="Show before and after"
                   >
                     <span class="elaris-regrowth-thumb__inner">
-                      <img src="{{ regrowth_src_2 }}" alt="" loading="lazy" width="160" height="160">
+                      <img src="{{ elaris_gallery_src_2 }}" alt="" loading="lazy" width="160" height="160">
                     </span>
                   </button>
                 </div>
@@ -324,6 +332,8 @@
           style="background-image: url('{{ section.settings.collections_image | image_url: width: 1400 }}');"
         {% elsif elaris_keratin_gallery %}
           style="background-image: url('{{ 'anti-frizz-our-collection.jpg' | asset_url }}');"
+        {% elsif elaris_floral_gallery %}
+          style="background-image: url('{{ 'floral-blossom-our-collection.jpg' | asset_url }}');"
         {% else %}
           style="background-image: url('{{ 'our-collection.jpg' | asset_url }}');"
         {% endif %}
@@ -367,16 +377,18 @@
       </div>
 
       <div
-        class="faq-image{% if section.settings.faq_image != blank or elaris_regrowth_gallery or elaris_keratin_gallery %} has-image{% endif %}"
+        class="faq-image{% if section.settings.faq_image != blank or elaris_regrowth_gallery or elaris_keratin_gallery or elaris_floral_gallery %} has-image{% endif %}"
         {% if section.settings.faq_image != blank %}
           style="background-image: url('{{ section.settings.faq_image | image_url: width: 1200 }}');"
         {% elsif elaris_regrowth_gallery %}
           style="background-image: url('{{ 'hair-regrowth-faq.jpg' | asset_url }}');"
         {% elsif elaris_keratin_gallery %}
           style="background-image: url('{{ 'anti-frizz-faq.jpg' | asset_url }}');"
+        {% elsif elaris_floral_gallery %}
+          style="background-image: url('{{ 'floral-blossom-faq.jpg' | asset_url }}');"
         {% endif %}
       >
-        {% if section.settings.faq_image == blank and elaris_regrowth_gallery == false and elaris_keratin_gallery == false %}
+        {% if section.settings.faq_image == blank and elaris_regrowth_gallery == false and elaris_keratin_gallery == false and elaris_floral_gallery == false %}
           <span>FAQ image area</span>
         {% endif %}
       </div>
