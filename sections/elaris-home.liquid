@@ -1,12 +1,36 @@
 {{ 'elaris-home.css' | asset_url | stylesheet_tag }}
 {{ 'elaris-footer.css' | asset_url | stylesheet_tag }}
 
+{% liquid
+  assign elaris_top_bar = section.settings.top_bar_text | strip
+  assign elaris_bar_down = elaris_top_bar | downcase
+  if elaris_bar_down contains 'free shipping' or elaris_bar_down contains 'smoothing solution' or elaris_bar_down contains 'orders $'
+    assign elaris_top_bar = 'buy 1 get 1 free'
+  endif
+
+  assign hero_heading = section.settings.hero_heading | strip
+  assign hero_subheading = section.settings.hero_subheading | strip
+  assign hero_cta = section.settings.hero_cta_label | strip
+  assign hero_h_down = hero_heading | downcase
+  assign hero_s_down = hero_subheading | downcase
+  assign hero_c_down = hero_cta | downcase
+  if hero_h_down contains 'mother' or hero_h_down contains 'free gifts for the women'
+    assign hero_heading = ''
+  endif
+  if hero_s_down contains 'mother' or hero_s_down contains 'body crème' or hero_s_down contains 'scalp reboot' or hero_s_down contains 'curated care'
+    assign hero_subheading = ''
+  endif
+  if hero_c_down contains 'mother' or hero_c_down contains "mother's day"
+    assign hero_cta = ''
+  endif
+%}
+
 <div class="elaris-home-root">
   <div class="top-bar" role="region" aria-label="Announcement">
     <div class="top-bar-marquee">
       <div class="top-bar-track">
-        <span class="top-bar-group">{{ section.settings.top_bar_text }}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
-        <span class="top-bar-group" aria-hidden="true">{{ section.settings.top_bar_text }}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+        <span class="top-bar-group">{{ elaris_top_bar }}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+        <span class="top-bar-group" aria-hidden="true">{{ elaris_top_bar }}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
       </div>
     </div>
   </div>
@@ -81,9 +105,6 @@
     </div>
 
     {% liquid
-      assign hero_heading = section.settings.hero_heading | strip
-      assign hero_subheading = section.settings.hero_subheading | strip
-      assign hero_cta = section.settings.hero_cta_label | strip
       assign show_hero_copy = false
       if hero_heading != blank or hero_subheading != blank or hero_cta != blank
         assign show_hero_copy = true
@@ -93,13 +114,13 @@
       <div class="hero-left">
         <div class="hero-copy">
           {% if hero_heading != blank %}
-            <h1>{{ section.settings.hero_heading }}</h1>
+            <h1>{{ hero_heading }}</h1>
           {% endif %}
           {% if hero_subheading != blank %}
-            <p>{{ section.settings.hero_subheading }}</p>
+            <p>{{ hero_subheading }}</p>
           {% endif %}
           {% if hero_cta != blank %}
-            <a href="{{ section.settings.hero_cta_link | default: '#' }}">{{ section.settings.hero_cta_label }}</a>
+            <a href="{{ section.settings.hero_cta_link | default: '#' }}">{{ hero_cta }}</a>
           {% endif %}
         </div>
       </div>
