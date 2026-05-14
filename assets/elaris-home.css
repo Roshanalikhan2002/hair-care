@@ -139,10 +139,10 @@
 
 .product-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
   padding: 60px 44px;
-  max-width: 1200px;
+  max-width: 1320px;
   margin: 0 auto;
 }
 
@@ -153,6 +153,7 @@
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid rgba(88, 5, 20, 0.12);
+  min-width: 0;
 }
 
 .card[data-card-url] {
@@ -176,11 +177,12 @@
 }
 
 .card-info h3 {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  margin: 0 0 20px;
+  margin: 0 0 16px;
   color: #580514;
   text-transform: uppercase;
+  line-height: 1.35;
 }
 
 .card-info .card-btn,
