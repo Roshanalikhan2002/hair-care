@@ -213,7 +213,13 @@
       <h2>{{ section.settings.feature_heading }}</h2>
       <p>{{ section.settings.feature_text }}</p>
       {% if section.settings.feature_cta_label != blank %}
-        <a href="{{ section.settings.feature_cta_link | default: '#' }}" class="btn-black">{{ section.settings.feature_cta_label }}</a>
+        {% liquid
+          assign feature_cta_href = section.settings.feature_cta_link | strip
+          if feature_cta_href == blank
+            assign feature_cta_href = '/products/hair-care-bundle-1'
+          endif
+        %}
+        <a href="{{ feature_cta_href }}" class="btn-black">{{ section.settings.feature_cta_label }}</a>
       {% endif %}
     </div>
   </section>
@@ -380,7 +386,8 @@
     {
       "type": "url",
       "id": "feature_cta_link",
-      "label": "Button link"
+      "label": "Button link",
+      "info": "Leave empty to open your Hair Care Bundle product (/products/hair-care-bundle-1). Change the handle in code if your product URL is different."
     },
     {
       "type": "header",
