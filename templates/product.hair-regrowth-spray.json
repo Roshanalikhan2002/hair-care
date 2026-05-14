@@ -31,12 +31,52 @@
             "title": "our favorites",
             "text": "shop community-loved picks and salon favorites curated for shine, softness, and all-day healthy hair confidence."
           }
+        },
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I use this spray daily?",
+            "answer": "Yes, it is designed for daily use, both morning and night, for best results."
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do I need to wash my hair after applying it?",
+            "answer": "No, leave it on the scalp. It works best when left overnight without rinsing."
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will it make my scalp greasy?",
+            "answer": "No, the formula absorbs quickly and does not leave a greasy feel."
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How often should I use it?",
+            "answer": "Visible improvements can appear with consistent use over a few months."
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it suitable for all hair types?",
+            "answer": "Yes, it works for all hair types, especially thinning or weak hair."
+          }
         }
       },
       "block_order": [
         "col_1",
         "col_2",
-        "col_3"
+        "col_3",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
       ]
     }
   },
