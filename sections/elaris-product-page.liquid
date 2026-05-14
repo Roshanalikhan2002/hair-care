@@ -31,27 +31,42 @@
     {% assign elaris_gallery_src_2 = 'floral-blossom-hair-mist-before-after.jpg' | asset_url %}
   {% endif %}
   {% liquid
-    # B1G1 on: (1) Section checkbox true, (2) handle / template.suffix, (3) gallery flags, (4) English title match (Default template + custom handles)
     assign elaris_b1g1 = false
+    assign ph = product.title | handleize
     assign tit = product.title | strip | downcase
-    if section.settings.b1g1_enable
+    assign elaris_tag_b1g1 = false
+    for t in product.tags
+      assign td = t | strip | downcase
+      if td == 'b1g1' or td == 'e7-b1g1' or td == 'buy-1-get-1'
+        assign elaris_tag_b1g1 = true
+      endif
+    endfor
+    if elaris_tag_b1g1
       assign elaris_b1g1 = true
-    elsif product.handle == 'hair-regrowth-spray' or template.suffix == 'hair-regrowth-spray'
+    endif
+    if elaris_b1g1 == false and section.settings.b1g1_enable == true
       assign elaris_b1g1 = true
-    elsif product.handle == 'anti-frizz-keratin-serum' or template.suffix == 'anti-frizz-keratin-serum'
-      assign elaris_b1g1 = true
-    elsif product.handle == 'floral-blossom-hair-mist' or template.suffix == 'floral-blossom-hair-mist'
-      assign elaris_b1g1 = true
-    elsif elaris_regrowth_gallery or elaris_keratin_gallery or elaris_floral_gallery
-      assign elaris_b1g1 = true
-    elsif tit contains 'floral blossom' and tit contains 'mist'
-      assign elaris_b1g1 = true
-    elsif tit contains 'anti frizz' and tit contains 'keratin'
-      assign elaris_b1g1 = true
-    elsif tit contains 'anti-frizz' and tit contains 'keratin'
-      assign elaris_b1g1 = true
-    elsif tit contains 'hair regrowth' and tit contains 'spray'
-      assign elaris_b1g1 = true
+    endif
+    if elaris_b1g1 == false
+      if product.handle == 'hair-regrowth-spray' or template.suffix == 'hair-regrowth-spray'
+        assign elaris_b1g1 = true
+      elsif product.handle == 'anti-frizz-keratin-serum' or template.suffix == 'anti-frizz-keratin-serum'
+        assign elaris_b1g1 = true
+      elsif product.handle == 'floral-blossom-hair-mist' or template.suffix == 'floral-blossom-hair-mist'
+        assign elaris_b1g1 = true
+      elsif elaris_regrowth_gallery or elaris_keratin_gallery or elaris_floral_gallery
+        assign elaris_b1g1 = true
+      elsif ph == 'hair-regrowth-spray' or ph == 'anti-frizz-keratin-serum' or ph == 'floral-blossom-hair-mist'
+        assign elaris_b1g1 = true
+      elsif tit contains 'floral blossom' and tit contains 'mist'
+        assign elaris_b1g1 = true
+      elsif tit contains 'anti frizz' and tit contains 'keratin'
+        assign elaris_b1g1 = true
+      elsif tit contains 'anti-frizz' and tit contains 'keratin'
+        assign elaris_b1g1 = true
+      elsif tit contains 'hair regrowth' and tit contains 'spray'
+        assign elaris_b1g1 = true
+      endif
     endif
   %}
   {% liquid
@@ -753,7 +768,7 @@
       "id": "b1g1_enable",
       "label": "Enable Buy 1 Get 1 + free gift picker",
       "default": false,
-      "info": "When ON, always shows B1G1 (overrides title matching). When OFF, B1G1 still turns on for the three spray-line products by title/handle/template. Set OFF on Default product template (product.json) for other SKUs."
+      "info": "ON = always B1G1 for this template. OFF = auto-detect by product handle, title (handleize), or tags b1g1 / e7-b1g1 / buy-1-get-1. Default product template uses OFF so other SKUs stay normal."
     },
     {
       "type": "paragraph",
