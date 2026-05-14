@@ -27,7 +27,7 @@
 .top-bar-track {
   display: flex;
   width: max-content;
-  animation: elaris-top-bar-marquee 8s linear infinite;
+  animation: elaris-top-bar-marquee 14s linear infinite;
   will-change: transform;
 }
 
@@ -38,10 +38,10 @@
 
 @keyframes elaris-top-bar-marquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
