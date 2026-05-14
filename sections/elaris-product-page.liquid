@@ -1,5 +1,6 @@
 {{ 'elaris-product.css' | asset_url | stylesheet_tag }}
 {{ 'elaris-footer.css' | asset_url | stylesheet_tag }}
+{% comment %}B1G1 build: free gift + no subscribe when elaris_b1g1 true. Sync this file from GitHub if store shows old UI.{% endcomment %}
 
 {% assign elaris_form_id = 'ElarisProductForm-' | append: section.id %}
 
