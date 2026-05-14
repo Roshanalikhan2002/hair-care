@@ -1,3 +1,38 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "current": {}
+  "current": {
+    "sections": {
+      "elaris-home": {
+        "type": "elaris-home",
+        "settings": {
+          "top_bar_text": "buy 1 get 1 free",
+          "logo_text": "Elaris 7",
+          "nav_shop_url": "",
+          "nav_offers_url": "",
+          "nav_learn_url": "",
+          "nav_quiz_url": "",
+          "nav_pros_url": "",
+          "hero_heading": "",
+          "hero_subheading": "",
+          "hero_cta_label": "",
+          "hero_cta_link": "",
+          "feature_badge": "NEW!",
+          "feature_heading": "body crème cleanser",
+          "feature_text": "Restore your skin's natural glow with aloe, coconut oil, shea butter, hyaluronic acid, niacinamide, baobab, and green tea—working together to hydrate, nourish, and protect.",
+          "feature_cta_label": "Shop Now",
+          "feature_cta_link": "",
+          "faq_heading": "Frequently Asked Questions"
+        }
+      }
+    },
+    "content_for_index": []
+  }
 }
