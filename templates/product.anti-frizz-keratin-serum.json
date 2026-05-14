@@ -31,12 +31,52 @@
             "title": "our favorites",
             "text": "shop community-loved picks and salon favorites curated for shine, softness, and all-day healthy hair confidence."
           }
+        },
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I use this serum on dry hair?",
+            "answer": "Yes, it works well on both damp and dry hair to control frizz and add shine."
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will it make my hair greasy?",
+            "answer": "No, the formula is designed to be non-greasy and does not weigh hair down."
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I use it before heat styling?",
+            "answer": "Yes, it acts as a heat protectant and helps reduce damage from styling tools."
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it suitable for all hair types?",
+            "answer": "Yes, it works for all hair types, especially dry, frizzy, or damaged hair."
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How often should I use it?",
+            "answer": "You can use it daily or whenever your hair needs smoothness and control."
+          }
         }
       },
       "block_order": [
         "col_1",
         "col_2",
-        "col_3"
+        "col_3",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
       ]
     }
   },
