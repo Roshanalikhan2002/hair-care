@@ -10,7 +10,7 @@
         "feature_heading": "body crème cleanser",
         "feature_text": "Restore your skin's natural glow with aloe, coconut oil, shea butter, hyaluronic acid, niacinamide, baobab, and green tea—working together to hydrate, nourish, and protect.",
         "feature_cta_label": "Shop Now",
-        "feature_cta_link": "/products/hair-care-bundle-1",
+        "feature_cta_link": "/products/hair-care-bundle",
         "faq_heading": "Frequently Asked Questions"
       },
       "blocks": {
@@ -40,7 +40,7 @@
           "settings": {
             "title": "HAIR CARE BUNDLE",
             "button_label": "VIEW BUNDLE",
-            "link": "/products/hair-care-bundle-1"
+            "link": "/products/hair-care-bundle"
           }
         },
         "faq_1": {

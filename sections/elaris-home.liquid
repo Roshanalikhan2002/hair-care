@@ -217,7 +217,7 @@
         {% liquid
           assign feature_cta_href = section.settings.feature_cta_link | strip
           if feature_cta_href == blank
-            assign feature_cta_href = '/products/hair-care-bundle-1'
+            assign feature_cta_href = '/products/hair-care-bundle'
           endif
         %}
         <a href="{{ feature_cta_href }}" class="btn-black">{{ section.settings.feature_cta_label }}</a>
@@ -388,7 +388,7 @@
       "type": "url",
       "id": "feature_cta_link",
       "label": "Button link",
-      "info": "Leave empty to open your Hair Care Bundle product (/products/hair-care-bundle-1). Change the handle in code if your product URL is different."
+      "info": "Leave empty to open Hair Care Bundle (/products/hair-care-bundle). In Theme customize you can set another product URL if your handle differs."
     },
     {
       "type": "header",
