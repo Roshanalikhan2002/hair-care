@@ -31,8 +31,9 @@
     {% assign elaris_gallery_src_2 = 'floral-blossom-hair-mist-before-after.jpg' | asset_url %}
   {% endif %}
   {% liquid
-    # B1G1: (1) Section checkbox in product JSON templates, OR (2) handle / template.suffix
+    # B1G1 on: (1) Section checkbox true, (2) handle / template.suffix, (3) gallery flags, (4) English title match (Default template + custom handles)
     assign elaris_b1g1 = false
+    assign tit = product.title | strip | downcase
     if section.settings.b1g1_enable
       assign elaris_b1g1 = true
     elsif product.handle == 'hair-regrowth-spray' or template.suffix == 'hair-regrowth-spray'
@@ -40,6 +41,16 @@
     elsif product.handle == 'anti-frizz-keratin-serum' or template.suffix == 'anti-frizz-keratin-serum'
       assign elaris_b1g1 = true
     elsif product.handle == 'floral-blossom-hair-mist' or template.suffix == 'floral-blossom-hair-mist'
+      assign elaris_b1g1 = true
+    elsif elaris_regrowth_gallery or elaris_keratin_gallery or elaris_floral_gallery
+      assign elaris_b1g1 = true
+    elsif tit contains 'floral blossom' and tit contains 'mist'
+      assign elaris_b1g1 = true
+    elsif tit contains 'anti frizz' and tit contains 'keratin'
+      assign elaris_b1g1 = true
+    elsif tit contains 'anti-frizz' and tit contains 'keratin'
+      assign elaris_b1g1 = true
+    elsif tit contains 'hair regrowth' and tit contains 'spray'
       assign elaris_b1g1 = true
     endif
   %}
@@ -742,7 +753,7 @@
       "id": "b1g1_enable",
       "label": "Enable Buy 1 Get 1 + free gift picker",
       "default": false,
-      "info": "Turn ON in the three product JSON templates (hair-regrowth-spray, anti-frizz-keratin-serum, floral-blossom-hair-mist). Hides Subscribe and shows gift list. Products must use that theme template in Admin."
+      "info": "When ON, always shows B1G1 (overrides title matching). When OFF, B1G1 still turns on for the three spray-line products by title/handle/template. Set OFF on Default product template (product.json) for other SKUs."
     },
     {
       "type": "paragraph",

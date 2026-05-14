@@ -4,7 +4,8 @@
       "type": "elaris-product-page",
       "settings": {
         "logo_text": "Elaris7",
-        "subtitle": "Elaris7 — luxurious hair care"
+        "subtitle": "Elaris7 — luxurious hair care",
+        "b1g1_enable": false
       },
       "blocks": {
         "col_1": {
