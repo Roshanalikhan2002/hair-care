@@ -225,21 +225,33 @@
     </div>
   </section>
 
+  {% liquid
+    assign faq_blocks_count = 0
+    for block in section.blocks
+      if block.type == 'faq_item'
+        assign faq_blocks_count = faq_blocks_count | plus: 1
+      endif
+    endfor
+  %}
   <section class="faq-section">
     <div class="faq-content">
       <h2>{{ section.settings.faq_heading }}</h2>
       <div class="accordion">
-        {% for block in section.blocks %}
-          {% if block.type == 'faq_item' %}
-            <details class="accordion-item" name="faq-home-{{ section.id }}" {{ block.shopify_attributes }}>
-              <summary class="accordion-header">
-                {{ block.settings.question }}
-                <span class="icon">+</span>
-              </summary>
-              <div class="accordion-body">{{ block.settings.answer }}</div>
-            </details>
-          {% endif %}
-        {% endfor %}
+        {% if faq_blocks_count > 0 %}
+          {% for block in section.blocks %}
+            {% if block.type == 'faq_item' %}
+              <details class="accordion-item" name="faq-home-{{ section.id }}" {{ block.shopify_attributes }}>
+                <summary class="accordion-header">
+                  {{ block.settings.question }}
+                  <span class="icon">+</span>
+                </summary>
+                <div class="accordion-body">{{ block.settings.answer }}</div>
+              </details>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          {% render 'elaris-home-faq-fallback', home_section_id: section.id %}
+        {% endif %}
       </div>
     </div>
     <div
