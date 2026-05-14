@@ -5,47 +5,99 @@
     assign ann = 'buy 1 get 1 free'
   endif
 %}
+{%- assign ann_label = '• ' | append: ann | append: ' •' -%}
 <div class="elaris-announcement" role="region" aria-label="Announcement">
-  <div class="elaris-announcement__strip">
-    {%- assign ann_label = '• ' | append: ann | append: ' •' -%}
-    {%- for i in (1..3) -%}
-      <span class="elaris-announcement__cell" {% if i > 1 %}aria-hidden="true"{% endif %}>{{ ann_label }}</span>
-    {%- endfor -%}
+  <span class="elaris-announcement__sr-only">{{ ann_label }}</span>
+  <div class="elaris-announcement__viewport" aria-hidden="true">
+    <div class="elaris-announcement__track">
+      <div class="elaris-announcement__half">
+        {%- for i in (1..10) -%}
+          <span class="elaris-announcement__item">{{ ann_label }}</span>
+        {%- endfor -%}
+      </div>
+      <div class="elaris-announcement__half" aria-hidden="true">
+        {%- for i in (1..10) -%}
+          <span class="elaris-announcement__item">{{ ann_label }}</span>
+        {%- endfor -%}
+      </div>
+    </div>
   </div>
 </div>
 <style>
   .elaris-announcement {
     background: #580514;
     color: #fff;
-    padding: 10px 12px;
+    padding: 10px 0;
     font-size: 14px;
     font-weight: 600;
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
+    position: relative;
   }
-  .elaris-announcement__strip {
-    display: flex;
+  .elaris-announcement__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .elaris-announcement__viewport {
+    overflow: hidden;
     width: 100%;
     max-width: 100%;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
   }
-  .elaris-announcement__cell {
-    flex: 1 1 0;
-    min-width: 0;
-    text-align: center;
+  .elaris-announcement__track {
+    display: flex;
+    width: max-content;
+    animation: elaris-announcement-marquee 28s linear infinite;
+    will-change: transform;
+  }
+  .elaris-announcement__half {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    padding-right: clamp(1.5rem, 4vw, 3.5rem);
+  }
+  .elaris-announcement__item {
+    flex-shrink: 0;
     white-space: nowrap;
+  }
+  @keyframes elaris-announcement-marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .elaris-announcement__sr-only {
+      position: static;
+      width: auto;
+      height: auto;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      display: block;
+      text-align: center;
+      padding: 0 12px;
+    }
+    .elaris-announcement__viewport {
+      display: none;
+    }
   }
   @media (max-width: 560px) {
     .elaris-announcement {
       font-size: 12px;
-      padding-left: 8px;
-      padding-right: 8px;
     }
-    .elaris-announcement__strip {
-      gap: 4px;
+    .elaris-announcement__half {
+      gap: clamp(1rem, 3vw, 2rem);
+      padding-right: clamp(1rem, 3vw, 2rem);
     }
   }
 </style>
