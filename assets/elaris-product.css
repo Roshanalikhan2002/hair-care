@@ -486,6 +486,25 @@
   flex-shrink: 0;
 }
 
+.elaris-free-gift__thumb {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(88, 5, 20, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.elaris-free-gift__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 .elaris-free-gift__text {
   flex: 1;
   line-height: 1.35;

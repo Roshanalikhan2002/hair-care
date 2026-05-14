@@ -366,6 +366,13 @@
                     {% if gv.id == gift_default_variant_id %}checked{% endif %}
                     {% unless gv.available %}disabled{% endunless %}
                   >
+                  <span class="elaris-free-gift__thumb" aria-hidden="true">
+                    {% if gv.image %}
+                      <img src="{{ gv.image | image_url: width: 160 }}" alt="" width="72" height="72" loading="lazy">
+                    {% elsif gift_floral.featured_media %}
+                      <img src="{{ gift_floral.featured_media | image_url: width: 160 }}" alt="" width="72" height="72" loading="lazy">
+                    {% endif %}
+                  </span>
                   <span class="elaris-free-gift__text">{{ gift_floral.title }}</span>
                 </label>
               {% endif %}
@@ -379,6 +386,13 @@
                     {% if gv.id == gift_default_variant_id %}checked{% endif %}
                     {% unless gv.available %}disabled{% endunless %}
                   >
+                  <span class="elaris-free-gift__thumb" aria-hidden="true">
+                    {% if gv.image %}
+                      <img src="{{ gv.image | image_url: width: 160 }}" alt="" width="72" height="72" loading="lazy">
+                    {% elsif gift_regrowth.featured_media %}
+                      <img src="{{ gift_regrowth.featured_media | image_url: width: 160 }}" alt="" width="72" height="72" loading="lazy">
+                    {% endif %}
+                  </span>
                   <span class="elaris-free-gift__text">{{ gift_regrowth.title }}</span>
                 </label>
               {% endif %}
@@ -392,6 +406,13 @@
                     {% if gv.id == gift_default_variant_id %}checked{% endif %}
                     {% unless gv.available %}disabled{% endunless %}
                   >
+                  <span class="elaris-free-gift__thumb" aria-hidden="true">
+                    {% if gv.image %}
+                      <img src="{{ gv.image | image_url: width: 160 }}" alt="" width="72" height="72" loading="lazy">
+                    {% elsif gift_keratin.featured_media %}
+                      <img src="{{ gift_keratin.featured_media | image_url: width: 160 }}" alt="" width="72" height="72" loading="lazy">
+                    {% endif %}
+                  </span>
                   <span class="elaris-free-gift__text">{{ gift_keratin.title }}</span>
                 </label>
               {% endif %}
