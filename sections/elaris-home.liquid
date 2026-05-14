@@ -129,43 +129,56 @@
         {% elsif block.settings.link != blank %}
           {% assign block_card_url = block.settings.link %}
         {% endif %}
-        {% liquid
-          assign card_default_asset = ''
-          if block.settings.product != blank
-            case block.settings.product.handle
-              when 'hair-regrowth-spray'
-                assign card_default_asset = 'home-card-hair-regrowth-spray.jpg'
-              when 'anti-frizz-keratin-serum'
-                assign card_default_asset = 'home-card-anti-frizz-keratin-serum.jpg'
-              when 'floral-blossom-hair-mist'
-                assign card_default_asset = 'home-card-floral-blossom-hair-mist.jpg'
-              when 'hair-care-bundle'
-                assign card_default_asset = 'feature-bundle.jpeg'
-            endcase
-          endif
-          if card_default_asset == blank
-            assign link_h = block.settings.link | default: '' | downcase
-            assign title_h = block.settings.title | default: '' | downcase
-            if link_h contains 'hair-regrowth-spray' or title_h contains 'regrow'
-              assign card_default_asset = 'home-card-hair-regrowth-spray.jpg'
-            elsif link_h contains 'anti-frizz' or title_h contains 'keratin' or title_h contains 'frizz'
-              assign card_default_asset = 'home-card-anti-frizz-keratin-serum.jpg'
-            elsif link_h contains 'floral-blossom' or title_h contains 'floral' or title_h contains 'blossom'
-              assign card_default_asset = 'home-card-floral-blossom-hair-mist.jpg'
-            elsif link_h contains 'hair-care-bundle' or title_h contains 'bundle'
-              assign card_default_asset = 'feature-bundle.jpeg'
-            endif
-          endif
-        %}
+        {% assign card_default_asset = '' %}
+        {% if block.settings.product != blank %}
+          {% case block.settings.product.handle %}
+            {% when 'hair-regrowth-spray' %}
+              {% assign card_default_asset = 'home-card-hair-regrowth-spray.jpg' %}
+            {% when 'anti-frizz-keratin-serum' %}
+              {% assign card_default_asset = 'home-card-anti-frizz-keratin-serum.jpg' %}
+            {% when 'floral-blossom-hair-mist' %}
+              {% assign card_default_asset = 'home-card-floral-blossom-hair-mist.jpg' %}
+            {% when 'hair-care-bundle' %}
+              {% assign card_default_asset = 'feature-bundle.jpeg' %}
+          {% endcase %}
+        {% endif %}
+        {% if card_default_asset == blank %}
+          {% assign link_h = block.settings.link | default: '' | downcase %}
+          {% assign title_h = block.settings.title | default: '' | downcase %}
+          {% if link_h contains 'hair-regrowth-spray' or title_h contains 'regrow' %}
+            {% assign card_default_asset = 'home-card-hair-regrowth-spray.jpg' %}
+          {% elsif link_h contains 'anti-frizz' or title_h contains 'keratin' or title_h contains 'frizz' %}
+            {% assign card_default_asset = 'home-card-anti-frizz-keratin-serum.jpg' %}
+          {% elsif link_h contains 'floral-blossom' or title_h contains 'floral' or title_h contains 'blossom' %}
+            {% assign card_default_asset = 'home-card-floral-blossom-hair-mist.jpg' %}
+          {% elsif link_h contains 'hair-care-bundle' or title_h contains 'bundle' %}
+            {% assign card_default_asset = 'feature-bundle.jpeg' %}
+          {% endif %}
+        {% endif %}
         <div class="card"{% if block_card_url != blank %} data-card-url="{{ block_card_url }}"{% endif %} {{ block.shopify_attributes }}>
-          <div
-            class="card-image"
+          <div class="card-image">
             {% if block.settings.image != blank %}
-              style="background-image: url('{{ block.settings.image | image_url: width: 800 }}');"
+              <img
+                class="card-image__img"
+                src="{{ block.settings.image | image_url: width: 800 }}"
+                alt="{{ block.settings.title | escape }}"
+                width="800"
+                height="1000"
+                loading="lazy"
+                decoding="async"
+              >
             {% elsif card_default_asset != blank %}
-              style="background-image: url('{{ card_default_asset | asset_url }}');"
+              <img
+                class="card-image__img"
+                src="{{ card_default_asset | asset_url }}"
+                alt="{{ block.settings.title | escape }}"
+                width="800"
+                height="1000"
+                loading="lazy"
+                decoding="async"
+              >
             {% endif %}
-          ></div>
+          </div>
           <div class="card-info">
             <h3>{{ block.settings.title }}</h3>
             {% if block.settings.product != blank %}
@@ -197,7 +210,17 @@
             {% assign card_default_asset = 'home-card-floral-blossom-hair-mist.jpg' %}
         {% endcase %}
         <div class="card" data-card-url="/products/{{ fallback_handle }}">
-          <div class="card-image" style="background-image: url('{{ card_default_asset | asset_url }}');"></div>
+          <div class="card-image">
+            <img
+              class="card-image__img"
+              src="{{ card_default_asset | asset_url }}"
+              alt="{{ fallback_handle | replace: '-', ' ' | escape }}"
+              width="800"
+              height="1000"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
           <div class="card-info">
             <h3>
               {% if fallback_product != blank %}

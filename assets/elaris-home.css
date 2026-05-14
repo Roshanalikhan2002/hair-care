@@ -164,8 +164,17 @@
   width: 100%;
   aspect-ratio: 4 / 5;
   background-color: rgba(88, 5, 20, 0.06);
-  background-size: cover;
-  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .card-info {
