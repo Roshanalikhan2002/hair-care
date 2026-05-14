@@ -31,14 +31,33 @@
     {% assign elaris_gallery_src_2 = 'floral-blossom-hair-mist-before-after.jpg' | asset_url %}
   {% endif %}
   {% liquid
+    # B1G1: same scope as asset gallery — product.handle OR JSON template suffix
     assign elaris_b1g1 = false
-    if product.handle == 'hair-regrowth-spray' or product.handle == 'anti-frizz-keratin-serum' or product.handle == 'floral-blossom-hair-mist'
+    if product.handle == 'hair-regrowth-spray' or template.suffix == 'hair-regrowth-spray'
+      assign elaris_b1g1 = true
+    elsif product.handle == 'anti-frizz-keratin-serum' or template.suffix == 'anti-frizz-keratin-serum'
+      assign elaris_b1g1 = true
+    elsif product.handle == 'floral-blossom-hair-mist' or template.suffix == 'floral-blossom-hair-mist'
       assign elaris_b1g1 = true
     endif
   %}
-  {% assign gift_floral = all_products['floral-blossom-hair-mist'] %}
-  {% assign gift_regrowth = all_products['hair-regrowth-spray'] %}
-  {% assign gift_keratin = all_products['anti-frizz-keratin-serum'] %}
+  {% liquid
+    assign gh_floral = section.settings.b1g1_gift_handle_floral | strip
+    if gh_floral == blank
+      assign gh_floral = 'floral-blossom-hair-mist'
+    endif
+    assign gh_regrowth = section.settings.b1g1_gift_handle_regrowth | strip
+    if gh_regrowth == blank
+      assign gh_regrowth = 'hair-regrowth-spray'
+    endif
+    assign gh_keratin = section.settings.b1g1_gift_handle_keratin | strip
+    if gh_keratin == blank
+      assign gh_keratin = 'anti-frizz-keratin-serum'
+    endif
+  %}
+  {% assign gift_floral = all_products[gh_floral] %}
+  {% assign gift_regrowth = all_products[gh_regrowth] %}
+  {% assign gift_keratin = all_products[gh_keratin] %}
   {% liquid
     assign gift_default_variant_id = ''
     if gift_floral != blank and gift_floral.selected_or_first_available_variant.available
@@ -719,6 +738,25 @@
     {
       "type": "paragraph",
       "content": "On those three products, Subscribe is hidden and customers pick a free gift. Add both lines to the cart. Use Admin → Discounts (e.g. Buy X Get Y) so the gift line is free, or adjust pricing as you prefer."
+    },
+    {
+      "type": "text",
+      "id": "b1g1_gift_handle_floral",
+      "label": "Free gift — Floral product handle",
+      "default": "floral-blossom-hair-mist",
+      "info": "Admin → Products → handle in URL. Fix here if your store uses a different handle."
+    },
+    {
+      "type": "text",
+      "id": "b1g1_gift_handle_regrowth",
+      "label": "Free gift — Hair regrowth product handle",
+      "default": "hair-regrowth-spray"
+    },
+    {
+      "type": "text",
+      "id": "b1g1_gift_handle_keratin",
+      "label": "Free gift — Keratin serum product handle",
+      "default": "anti-frizz-keratin-serum"
     },
     {
       "type": "text",
