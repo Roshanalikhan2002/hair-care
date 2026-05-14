@@ -1,0 +1,54 @@
+{
+  "sections": {
+    "elaris_home": {
+      "type": "elaris-home",
+      "settings": {},
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "title": "HAIR REGROW SPRAY",
+            "button_label": "BUY - RS. 2,790"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "title": "ANTI FRIZZ KERATIN SERUM",
+            "button_label": "BUY - RS. 2,680"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "title": "FLORAL BLOSSOM HAIR MIST",
+            "button_label": "BUY - RS. 2,960"
+          }
+        },
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are the key ingredients?",
+            "answer": "Our products use natural ingredients like aloe, coconut oil, shea butter, and green tea to hydrate and protect your hair."
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How often should I use the cleanser?",
+            "answer": "For best results, use 2-3 times a week depending on your hair type."
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is this safe for color-treated hair?",
+            "answer": "Yes! All our formulas are sulfate-free and completely safe for color-treated hair."
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2", "card_3", "faq_1", "faq_2", "faq_3"]
+    }
+  },
+  "order": ["elaris_home"]
+}

@@ -1,0 +1,765 @@
+{{ 'elaris-product.css' | asset_url | stylesheet_tag }}
+{{ 'elaris-footer.css' | asset_url | stylesheet_tag }}
+
+{% assign elaris_form_id = 'ElarisProductForm-' | append: section.id %}
+
+{% if product == blank %}
+  <div class="elaris-product-page" style="padding: 40px 20px; text-align: center;">
+    <p>This template is for product pages. Assign the “elaris” product template to a product in the admin.</p>
+  </div>
+{% else %}
+  {% assign elaris_regrowth_gallery = false %}
+  {% assign elaris_keratin_gallery = false %}
+  {% if product.handle == 'hair-regrowth-spray' or template.suffix == 'hair-regrowth-spray' %}
+    {% assign elaris_regrowth_gallery = true %}
+  {% elsif product.handle == 'anti-frizz-keratin-serum' or template.suffix == 'anti-frizz-keratin-serum' %}
+    {% assign elaris_keratin_gallery = true %}
+  {% endif %}
+  {% assign current_variant = product.selected_or_first_available_variant %}
+  {% if current_variant.featured_media %}
+    {% assign featured = current_variant.featured_media %}
+  {% else %}
+    {% assign featured = product.featured_media %}
+  {% endif %}
+  {% assign first_selling_plan = product.selling_plan_groups.first.selling_plans.first %}
+
+  <div class="elaris-product-page" style="color:#161616;font-family:Arial,Helvetica,sans-serif;">
+    <div class="top-bar">{{ section.settings.top_bar_text }}</div>
+
+    <header class="navbar">
+      <div class="left-nav">
+        <button type="button" aria-label="menu" class="menu-btn">&#9776;</button>
+        <div class="logo">
+          <a href="{{ routes.root_url }}">{{ section.settings.logo_text }}</a>
+        </div>
+      </div>
+      <nav class="desktop-nav">
+        <a href="{{ section.settings.nav_shop_url | default: routes.all_products_collection_url }}">Shop</a>
+        <a href="{{ section.settings.nav_offers_url | default: '#' }}">Offers</a>
+        <a href="{{ section.settings.nav_learn_url | default: '#' }}">Learn</a>
+        <a href="{{ section.settings.nav_quiz_url | default: '#' }}">Hair Quiz</a>
+        <a href="{{ section.settings.nav_pros_url | default: '#' }}">Pros</a>
+      </nav>
+      <div class="icons">
+        <a href="{{ routes.search_url }}" class="icon-btn" aria-label="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.5"></circle>
+            <line x1="16" y1="16" x2="21" y2="21"></line>
+          </svg>
+        </a>
+        <a href="{{ routes.account_login_url }}" class="icon-btn profile" aria-label="account">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="8" r="3.6"></circle>
+            <path d="M4.5 20c0-4 3.2-6.5 7.5-6.5s7.5 2.5 7.5 6.5"></path>
+          </svg>
+        </a>
+        <a href="{{ routes.cart_url }}" class="icon-btn" aria-label="cart">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="10" cy="19" r="1.6"></circle>
+            <circle cx="17" cy="19" r="1.6"></circle>
+            <path d="M3 4h2l2 10h10l2-7H7"></path>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <div class="promo-strip">
+      {% for i in (1..4) %}
+        <span>{{ section.settings.promo_strip_text }}</span>
+      {% endfor %}
+    </div>
+
+    <section class="product-wrap">
+      <div class="product-media">
+        {% if elaris_regrowth_gallery or elaris_keratin_gallery %}
+          {% if elaris_regrowth_gallery %}
+            {% assign regrowth_src_1 = 'hair-regrowth-spray.jpg' | asset_url %}
+            {% assign regrowth_src_2 = 'hair-regrowth-spray-before-after.jpg' | asset_url %}
+          {% else %}
+            {% assign regrowth_src_1 = 'anti-frizz-keratin-serum.jpg' | asset_url %}
+            {% assign regrowth_src_2 = 'anti-frizz-keratin-serum-before-after.jpg' | asset_url %}
+          {% endif %}
+          <div class="elaris-regrowth-media">
+            <div class="main-image-wrap">
+              <div
+                class="main-image-placeholder has-image elaris-regrowth-main"
+                id="ElarisMainImage-{{ section.id }}"
+                data-placeholder-label="{{ 'Main product image' | escape }}"
+              >
+                <img
+                  id="ElarisMainImgTag-{{ section.id }}"
+                  src="{{ regrowth_src_1 }}"
+                  alt="{{ product.title | escape }}"
+                  loading="eager"
+                  width="1200"
+                  height="1200"
+                >
+              </div>
+            </div>
+            <div class="elaris-regrowth-carousel">
+              <button
+                type="button"
+                class="elaris-regrowth-carousel__arrow elaris-regrowth-carousel__arrow--prev"
+                id="ElarisRegrowthPrev-{{ section.id }}"
+                aria-label="Previous thumbnails"
+              >
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </button>
+              <div class="elaris-regrowth-carousel__strip" id="ElarisRegrowthStrip-{{ section.id }}">
+                <div id="ElarisThumbs-{{ section.id }}" class="elaris-regrowth-thumb-row">
+                  <button
+                    type="button"
+                    class="thumb elaris-regrowth-thumb is-active"
+                    data-image-src="{{ regrowth_src_1 }}"
+                    data-image-alt="{{ product.title | escape }}"
+                    aria-label="Show product image 1"
+                  >
+                    <span class="elaris-regrowth-thumb__inner">
+                      <img src="{{ regrowth_src_1 }}" alt="" loading="eager" width="160" height="160">
+                    </span>
+                  </button>
+                  <button
+                    type="button"
+                    class="thumb elaris-regrowth-thumb"
+                    data-image-src="{{ regrowth_src_2 }}"
+                    data-image-alt="{{ product.title | escape }} — before and after"
+                    aria-label="Show before and after"
+                  >
+                    <span class="elaris-regrowth-thumb__inner">
+                      <img src="{{ regrowth_src_2 }}" alt="" loading="lazy" width="160" height="160">
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="elaris-regrowth-carousel__arrow elaris-regrowth-carousel__arrow--next"
+                id="ElarisRegrowthNext-{{ section.id }}"
+                aria-label="Next thumbnails"
+              >
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </button>
+            </div>
+          </div>
+        {% else %}
+          <div class="main-image-wrap">
+            <div
+              class="main-image-placeholder{% if featured != blank %} has-image{% endif %}"
+              id="ElarisMainImage-{{ section.id }}"
+              data-placeholder-label="{{ 'Main product image' | escape }}"
+            >
+              {% if featured != blank %}
+                <img
+                  id="ElarisMainImgTag-{{ section.id }}"
+                  src="{{ featured | image_url: width: 1200 }}"
+                  alt="{{ featured.alt | escape }}"
+                  width="{{ featured.width }}"
+                  height="{{ featured.height }}"
+                  loading="eager"
+                >
+              {% else %}
+                <span>Main product image</span>
+              {% endif %}
+            </div>
+          </div>
+          {% if product.media.size > 1 %}
+            <div class="thumb-row" id="ElarisThumbs-{{ section.id }}">
+              {% for media in product.media %}
+                {% if media.media_type == 'image' %}
+                  <button
+                    type="button"
+                    class="thumb{% if forloop.first %} is-active{% endif %}"
+                    data-image-src="{{ media | image_url: width: 1200 }}"
+                    data-image-srcset="{{ media | image_url: width: 600 }} 600w, {{ media | image_url: width: 1200 }} 1200w"
+                    data-image-alt="{{ media.alt | escape }}"
+                    aria-label="Show image {{ forloop.index }}"
+                  >
+                    <img src="{{ media | image_url: width: 200 }}" alt="" loading="lazy" width="200" height="200">
+                  </button>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% elsif featured == blank %}
+            <div class="thumb-row">
+              {% for i in (1..4) %}
+                <div class="thumb">Image {{ i }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      <div class="product-info">
+        {% for tag in product.tags %}
+          {% assign tag_down = tag | downcase %}
+          {% if tag_down == 'new' %}
+            <div class="tag">NEW</div>
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if section.settings.force_new_badge %}
+          <div class="tag">NEW</div>
+        {% endif %}
+
+        <h1>{{ product.title }}</h1>
+        {% if product.metafields.custom.subtitle != blank %}
+          <h3>{{ product.metafields.custom.subtitle }}</h3>
+        {% elsif section.settings.subtitle != blank %}
+          <h3>{{ section.settings.subtitle }}</h3>
+        {% endif %}
+
+        <div class="rte">
+          {{ product.description }}
+        </div>
+
+        <div class="rating">
+          &#9733;&#9733;&#9733;&#9733;&#9733;
+          <span>{{ section.settings.reviews_label }}</span>
+        </div>
+
+        {% form 'product', product, id: elaris_form_id, novalidate: 'novalidate' %}
+          <input type="hidden" name="id" id="ElarisVariantId-{{ section.id }}" value="{{ current_variant.id }}">
+          <input type="hidden" name="selling_plan" id="ElarisSellingPlan-{{ section.id }}" value="">
+
+          {% unless product.has_only_default_variant %}
+            <div class="variant-select" style="margin-bottom:14px;">
+              <label for="ElarisVariantSelect-{{ section.id }}" class="label" style="display:block;">Options</label>
+              <select
+                id="ElarisVariantSelect-{{ section.id }}"
+                style="width:100%;padding:10px;font-size:16px;border:1px solid #a7a7a7;border-radius:8px;"
+              >
+                {% for variant in product.variants %}
+                  <option
+                    value="{{ variant.id }}"
+                    {% if variant == current_variant %}
+                      selected
+                    {% endif %}
+                    {% unless variant.available %}
+                      disabled
+                    {% endunless %}
+                  >
+                    {{ variant.title }} — {{ variant.price | money }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endunless %}
+
+          <div class="qty-block">
+            <div class="label">quantity</div>
+            <div class="qty-controls">
+              <button type="button" id="ElarisQtyMinus-{{ section.id }}" aria-label="Decrease quantity">-</button>
+              <span id="ElarisQtyDisplay-{{ section.id }}">1</span>
+              <button type="button" id="ElarisQtyPlus-{{ section.id }}" aria-label="Increase quantity">+</button>
+            </div>
+            <input type="hidden" name="quantity" id="ElarisQtyInput-{{ section.id }}" value="1" min="1">
+          </div>
+
+          <div class="purchase-label">purchase options</div>
+
+          <button
+            type="button"
+            class="buy-option active"
+            id="ElarisPurchaseOnetime-{{ section.id }}"
+            data-mode="onetime"
+          >
+            <span>one time purchase</span>
+            <span id="ElarisPriceOnetime-{{ section.id }}">{{ current_variant.price | money }}</span>
+          </button>
+
+          {% if first_selling_plan != nil %}
+            <button
+              type="button"
+              class="buy-option"
+              id="ElarisPurchaseSubscribe-{{ section.id }}"
+              data-mode="subscribe"
+              data-selling-plan-id="{{ first_selling_plan.id }}"
+            >
+              <span>subscribe and save</span>
+              <span>
+                <span id="ElarisPriceSubscribe-{{ section.id }}">{{ section.settings.subscribe_price_placeholder }}</span>
+                <s id="ElarisCompareSubscribe-{{ section.id }}">{{ current_variant.price | money }}</s>
+              </span>
+            </button>
+          {% else %}
+            <button type="button" class="buy-option" id="ElarisPurchaseSubscribe-{{ section.id }}" data-mode="subscribe-placeholder">
+              <span>subscribe and save</span>
+              <span>
+                {% if current_variant.compare_at_price > current_variant.price %}
+                  <span id="ElarisPriceSubscribe-{{ section.id }}">{{ current_variant.price | money }}</span>
+                  <s id="ElarisCompareSubscribe-{{ section.id }}">{{ current_variant.compare_at_price | money }}</s>
+                {% else %}
+                  <span id="ElarisPriceSubscribe-{{ section.id }}">{{ section.settings.subscribe_price_placeholder }}</span>
+                  <s id="ElarisCompareSubscribe-{{ section.id }}">{{ current_variant.price | money }}</s>
+                {% endif %}
+              </span>
+            </button>
+          {% endif %}
+
+          <button
+            type="submit"
+            name="add"
+            class="add-cart"
+            id="ElarisAddCart-{{ section.id }}"
+            {% unless current_variant.available %}
+              disabled
+            {% endunless %}
+          >
+            {% if current_variant.available %}
+              add to cart
+            {% else %}
+              sold out
+            {% endif %}
+          </button>
+        {% endform %}
+      </div>
+    </section>
+
+    <section class="collections-wrap">
+      <h2 class="collections-heading">{{ section.settings.collections_heading }}</h2>
+
+      <div
+        class="collections-image has-image"
+        {% if section.settings.collections_image != blank %}
+          style="background-image: url('{{ section.settings.collections_image | image_url: width: 1400 }}');"
+        {% elsif elaris_keratin_gallery %}
+          style="background-image: url('{{ 'anti-frizz-our-collection.jpg' | asset_url }}');"
+        {% else %}
+          style="background-image: url('{{ 'our-collection.jpg' | asset_url }}');"
+        {% endif %}
+      ></div>
+
+      <div class="collections-content">
+        {% for block in section.blocks %}
+          {% if block.type == 'collection_row' %}
+            <div class="collection-item" {{ block.shopify_attributes }}>
+              <div class="item-main">
+                <div class="item-title-row">
+                  <span class="item-icon">{{ block.settings.icon }}</span>
+                  <h3>{{ block.settings.title }}</h3>
+                </div>
+                <p>{{ block.settings.text }}</p>
+              </div>
+              <a class="item-arrow" href="{{ block.settings.link | default: '#' }}" aria-label="open collection">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l7 7-7 7"></path></svg>
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="faq-wrap">
+      <div class="faq-content">
+        <h2>{{ section.settings.faq_heading }}</h2>
+
+        {% for block in section.blocks %}
+          {% if block.type == 'faq_item' %}
+            <details class="faq-item" {{ block.shopify_attributes }}>
+              <summary>
+                <span>{{ block.settings.question }}</span>
+                <span class="faq-toggle">+</span>
+              </summary>
+              <p class="answer">{{ block.settings.answer }}</p>
+            </details>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div
+        class="faq-image{% if section.settings.faq_image != blank or elaris_regrowth_gallery or elaris_keratin_gallery %} has-image{% endif %}"
+        {% if section.settings.faq_image != blank %}
+          style="background-image: url('{{ section.settings.faq_image | image_url: width: 1200 }}');"
+        {% elsif elaris_regrowth_gallery %}
+          style="background-image: url('{{ 'hair-regrowth-faq.jpg' | asset_url }}');"
+        {% elsif elaris_keratin_gallery %}
+          style="background-image: url('{{ 'anti-frizz-faq.jpg' | asset_url }}');"
+        {% endif %}
+      >
+        {% if section.settings.faq_image == blank and elaris_regrowth_gallery == false and elaris_keratin_gallery == false %}
+          <span>FAQ image area</span>
+        {% endif %}
+      </div>
+    </section>
+
+    {% render 'elaris-footer' %}
+  </div>
+
+  <script type="application/json" id="ElarisProductJson-{{ section.id }}">
+    {{ product | json }}
+  </script>
+  <script>
+    (function () {
+      var sectionId = '{{ section.id }}';
+      var form = document.getElementById('ElarisProductForm-' + sectionId);
+      if (!form) return;
+
+      var productJsonEl = document.getElementById('ElarisProductJson-' + sectionId);
+      var productData = productJsonEl ? JSON.parse(productJsonEl.textContent) : null;
+
+      function formatMoney(cents) {
+        if (typeof Shopify !== 'undefined' && Shopify.formatMoney) {
+          return Shopify.formatMoney(cents, {{ shop.money_format | json }});
+        }
+        return (cents / 100).toFixed(2);
+      }
+
+      function variantById(id) {
+        if (!productData || !productData.variants) return null;
+        var vid = parseInt(id, 10);
+        for (var i = 0; i < productData.variants.length; i++) {
+          if (productData.variants[i].id === vid) return productData.variants[i];
+        }
+        return null;
+      }
+
+      function syncVariantUi(variant) {
+        if (!variant) return;
+        var onetime = document.getElementById('ElarisPriceOnetime-' + sectionId);
+        var subPrice = document.getElementById('ElarisPriceSubscribe-' + sectionId);
+        var subStrike = document.getElementById('ElarisCompareSubscribe-' + sectionId);
+        if (onetime) onetime.textContent = formatMoney(variant.price);
+        if (subStrike) subStrike.textContent = formatMoney(variant.price);
+        var addBtn = document.getElementById('ElarisAddCart-' + sectionId);
+        if (addBtn) {
+          addBtn.disabled = !variant.available;
+          addBtn.textContent = variant.available ? 'add to cart' : 'sold out';
+        }
+      }
+
+      var variantInput = document.getElementById('ElarisVariantId-' + sectionId);
+      var variantSelect = document.getElementById('ElarisVariantSelect-' + sectionId);
+      var qtyInput = document.getElementById('ElarisQtyInput-' + sectionId);
+      var qtyDisplay = document.getElementById('ElarisQtyDisplay-' + sectionId);
+      var sellingPlanInput = document.getElementById('ElarisSellingPlan-' + sectionId);
+      var btnOnetime = document.getElementById('ElarisPurchaseOnetime-' + sectionId);
+      var btnSubscribe = document.getElementById('ElarisPurchaseSubscribe-' + sectionId);
+      var mainBox = document.getElementById('ElarisMainImage-' + sectionId);
+      var mainImg = document.getElementById('ElarisMainImgTag-' + sectionId);
+
+      function setQty(n) {
+        n = Math.max(1, parseInt(n, 10) || 1);
+        qtyInput.value = n;
+        qtyDisplay.textContent = String(n);
+      }
+
+      var minus = document.getElementById('ElarisQtyMinus-' + sectionId);
+      var plus = document.getElementById('ElarisQtyPlus-' + sectionId);
+      if (minus)
+        minus.addEventListener('click', function () {
+          setQty((parseInt(qtyInput.value, 10) || 1) - 1);
+        });
+      if (plus)
+        plus.addEventListener('click', function () {
+          setQty((parseInt(qtyInput.value, 10) || 1) + 1);
+        });
+
+      if (variantSelect && variantInput) {
+        variantSelect.addEventListener('change', function () {
+          variantInput.value = variantSelect.value;
+          syncVariantUi(variantById(variantSelect.value));
+        });
+      }
+
+      function setPurchaseMode(mode) {
+        if (!btnOnetime || !btnSubscribe) return;
+        btnOnetime.classList.toggle('active', mode === 'onetime');
+        btnSubscribe.classList.toggle('active', mode === 'subscribe');
+        if (sellingPlanInput) {
+          if (mode === 'subscribe' && btnSubscribe.getAttribute('data-selling-plan-id')) {
+            sellingPlanInput.value = btnSubscribe.getAttribute('data-selling-plan-id');
+          } else {
+            sellingPlanInput.value = '';
+          }
+        }
+      }
+
+      if (btnOnetime) btnOnetime.addEventListener('click', function () { setPurchaseMode('onetime'); });
+      if (btnSubscribe) {
+        btnSubscribe.addEventListener('click', function () {
+          if (btnSubscribe.getAttribute('data-mode') === 'subscribe-placeholder') {
+            if (btnOnetime) btnOnetime.classList.remove('active');
+            btnSubscribe.classList.add('active');
+            if (sellingPlanInput) sellingPlanInput.value = '';
+            return;
+          }
+          setPurchaseMode('subscribe');
+        });
+      }
+
+      var thumbs = document.querySelectorAll('#ElarisThumbs-' + sectionId + ' .thumb');
+      thumbs.forEach(function (t) {
+        t.addEventListener('click', function () {
+          var src = t.getAttribute('data-image-src');
+          var alt = t.getAttribute('data-image-alt') || '';
+          if (!mainBox || !src) return;
+          thumbs.forEach(function (x) { x.classList.remove('is-active'); });
+          t.classList.add('is-active');
+          if (mainImg) {
+            mainImg.src = src;
+            mainImg.alt = alt;
+          } else {
+            mainBox.innerHTML = '<img id="ElarisMainImgTag-' + sectionId + '" src="' + src + '" alt="' + alt.replace(/"/g, '&quot;') + '" loading="lazy" style="width:100%;height:100%;object-fit:contain;">';
+            mainImg = document.getElementById('ElarisMainImgTag-' + sectionId);
+            mainBox.classList.add('has-image');
+          }
+        });
+      });
+
+      var regrowthStrip = document.getElementById('ElarisRegrowthStrip-' + sectionId);
+      var regrowthPrev = document.getElementById('ElarisRegrowthPrev-' + sectionId);
+      var regrowthNext = document.getElementById('ElarisRegrowthNext-' + sectionId);
+      function scrollRegrowthThumbStrip(dir) {
+        if (!regrowthStrip) return;
+        var step = Math.max(120, Math.floor(regrowthStrip.clientWidth * 0.35));
+        regrowthStrip.scrollBy({ left: dir === 'next' ? step : -step, behavior: 'smooth' });
+      }
+      if (regrowthPrev) regrowthPrev.addEventListener('click', function () { scrollRegrowthThumbStrip('prev'); });
+      if (regrowthNext) regrowthNext.addEventListener('click', function () { scrollRegrowthThumbStrip('next'); });
+
+      if (window.innerWidth > 1024) {
+        document.querySelectorAll('.elaris-product-page .footer-accordion').forEach(function (el) {
+          el.setAttribute('open', '');
+        });
+      } else {
+        document.querySelectorAll('.elaris-product-page .footer-accordion').forEach(function (el) {
+          el.removeAttribute('open');
+        });
+      }
+    })();
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Elaris product",
+  "tag": "section",
+  "class": "elaris-product-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Assign template “product.elaris” to products in Admin → Products → Theme template."
+    },
+    {
+      "type": "text",
+      "id": "top_bar_text",
+      "label": "Announcement bar",
+      "default": "buy 1 get 1 free"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "privée"
+    },
+    {
+      "type": "text",
+      "id": "promo_strip_text",
+      "label": "Promo strip text",
+      "default": "buy 1 get 1 free"
+    },
+    {
+      "type": "header",
+      "content": "Navigation URLs"
+    },
+    {
+      "type": "url",
+      "id": "nav_shop_url",
+      "label": "Shop link"
+    },
+    {
+      "type": "url",
+      "id": "nav_offers_url",
+      "label": "Offers link"
+    },
+    {
+      "type": "url",
+      "id": "nav_learn_url",
+      "label": "Learn link"
+    },
+    {
+      "type": "url",
+      "id": "nav_quiz_url",
+      "label": "Hair Quiz link"
+    },
+    {
+      "type": "url",
+      "id": "nav_pros_url",
+      "label": "Pros link"
+    },
+    {
+      "type": "header",
+      "content": "Product copy"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle (if no metafield)",
+      "default": "privé luxurious body crème cleanser"
+    },
+    {
+      "type": "checkbox",
+      "id": "force_new_badge",
+      "label": "Always show NEW badge",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "reviews_label",
+      "label": "Reviews fallback text",
+      "default": "1 review"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_price_placeholder",
+      "label": "Subscribe price (no subscription app)",
+      "default": "$19.60"
+    },
+    {
+      "type": "header",
+      "content": "Collections band"
+    },
+    {
+      "type": "text",
+      "id": "collections_heading",
+      "label": "Heading",
+      "default": "shop our collections"
+    },
+    {
+      "type": "image_picker",
+      "id": "collections_image",
+      "label": "Side image"
+    },
+    {
+      "type": "header",
+      "content": "FAQ"
+    },
+    {
+      "type": "text",
+      "id": "faq_heading",
+      "label": "Heading",
+      "default": "FAQ"
+    },
+    {
+      "type": "image_picker",
+      "id": "faq_image",
+      "label": "FAQ image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_row",
+      "name": "Collection row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "default": "🧴"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "shampoo & conditioner"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "explore privé's clean haircare solutions with shampoos and conditioners tailored for moisture, volume, repair, and protection."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "can i use this face wash twice a day?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "yes, this gentle cleanser is suitable for morning and night use."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elaris product",
+      "blocks": [
+        {
+          "type": "collection_row",
+          "settings": {
+            "icon": "🧴",
+            "title": "shampoo & conditioner",
+            "text": "explore privé's clean haircare solutions with shampoos and conditioners tailored for moisture, volume, repair, and protection."
+          }
+        },
+        {
+          "type": "collection_row",
+          "settings": {
+            "icon": "🧪",
+            "title": "styling, finishing & treatments",
+            "text": "discover styling must-haves, finishing sprays, and targeted treatments made to shape, protect, and perfect your everyday look."
+          }
+        },
+        {
+          "type": "collection_row",
+          "settings": {
+            "icon": "♡",
+            "title": "our favorites",
+            "text": "shop community-loved picks and salon favorites curated for shine, softness, and all-day healthy hair confidence."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "can i use this face wash twice a day?",
+            "answer": "yes, this gentle cleanser is suitable for morning and night use."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "is it suitable for sensitive skin?",
+            "answer": "yes, it is formulated to be mild and comfortable for sensitive skin."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "will it help with acne or breakouts?",
+            "answer": "it helps remove excess oil and dirt that can contribute to breakouts."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "does it remove makeup?",
+            "answer": "it removes light makeup well; for heavy makeup, use a remover first."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "will my skin feel dry after washing?",
+            "answer": "no, it is designed to cleanse while helping skin stay soft and hydrated."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,504 @@
+{{ 'elaris-home.css' | asset_url | stylesheet_tag }}
+{{ 'elaris-footer.css' | asset_url | stylesheet_tag }}
+
+<div class="elaris-home-root">
+  <div class="top-bar" role="region" aria-label="Announcement">
+    <div class="top-bar-marquee">
+      <div class="top-bar-track">
+        <span class="top-bar-group">{{ section.settings.top_bar_text }}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+        <span class="top-bar-group" aria-hidden="true">{{ section.settings.top_bar_text }}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+      </div>
+    </div>
+  </div>
+
+  <header class="navbar">
+    <div class="left-nav">
+      <button type="button" aria-label="menu" class="menu-btn">&#9776;</button>
+      <div class="logo">
+        <a href="{{ routes.root_url }}">{{ section.settings.logo_text }}</a>
+      </div>
+    </div>
+    <nav class="desktop-nav">
+      <a href="{{ section.settings.nav_shop_url | default: routes.all_products_collection_url }}">Shop</a>
+      <a href="{{ section.settings.nav_offers_url | default: '#' }}">Offers</a>
+      <a href="{{ section.settings.nav_learn_url | default: '#' }}">Learn</a>
+      <a href="{{ section.settings.nav_quiz_url | default: '#' }}">Hair Quiz</a>
+      <a href="{{ section.settings.nav_pros_url | default: '#' }}">Pros</a>
+    </nav>
+    <div class="icons">
+      <a href="{{ routes.search_url }}" aria-label="search">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
+      <a href="{{ routes.account_login_url }}" class="profile" aria-label="account">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+      <a href="{{ routes.cart_url }}" aria-label="cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <picture>
+        {% if section.settings.hero_mobile_image != blank %}
+          <source media="(max-width: 1024px)" srcset="{{ section.settings.hero_mobile_image | image_url: width: 1600 }}">
+        {% else %}
+          <source media="(max-width: 1024px)" srcset="{{ 'hero-mobile.jpeg' | asset_url }}">
+        {% endif %}
+        {% if section.settings.hero_desktop_image != blank %}
+          <img
+            class="hero-banner-img"
+            src="{{ section.settings.hero_desktop_image | image_url: width: 2400 }}"
+            alt=""
+            width="3840"
+            height="2160"
+            loading="eager"
+            decoding="async"
+          >
+        {% else %}
+          <img
+            class="hero-banner-img"
+            src="{{ 'hero-desktop.jpeg' | asset_url }}"
+            alt=""
+            width="3840"
+            height="2160"
+            loading="eager"
+            decoding="async"
+          >
+        {% endif %}
+      </picture>
+    </div>
+
+    {% liquid
+      assign hero_heading = section.settings.hero_heading | strip
+      assign hero_subheading = section.settings.hero_subheading | strip
+      assign hero_cta = section.settings.hero_cta_label | strip
+      assign show_hero_copy = false
+      if hero_heading != blank or hero_subheading != blank or hero_cta != blank
+        assign show_hero_copy = true
+      endif
+    %}
+    {% if show_hero_copy %}
+      <div class="hero-left">
+        <div class="hero-copy">
+          {% if hero_heading != blank %}
+            <h1>{{ section.settings.hero_heading }}</h1>
+          {% endif %}
+          {% if hero_subheading != blank %}
+            <p>{{ section.settings.hero_subheading }}</p>
+          {% endif %}
+          {% if hero_cta != blank %}
+            <a href="{{ section.settings.hero_cta_link | default: '#' }}">{{ section.settings.hero_cta_label }}</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  </section>
+
+  {% assign card_blocks_count = 0 %}
+  {% for block in section.blocks %}
+    {% if block.type == 'card' %}
+      {% assign card_blocks_count = card_blocks_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+
+  <section class="product-cards">
+    {% for block in section.blocks %}
+      {% if block.type == 'card' %}
+        {% assign block_card_url = '' %}
+        {% if block.settings.product != blank %}
+          {% assign block_card_url = block.settings.product.url %}
+        {% elsif block.settings.link != blank %}
+          {% assign block_card_url = block.settings.link %}
+        {% endif %}
+        {% assign card_default_asset = '' %}
+        {% if block.settings.product != blank %}
+          {% case block.settings.product.handle %}
+            {% when 'hair-regrowth-spray' %}
+              {% assign card_default_asset = 'card-hair-regrowth-spray.jpg' %}
+            {% when 'anti-frizz-keratin-serum' %}
+              {% assign card_default_asset = 'card-anti-frizz-keratin-serum.jpg' %}
+            {% when 'floral-blossom-hair-mist' %}
+              {% assign card_default_asset = 'card-floral-blossom-hair-mist.jpg' %}
+          {% endcase %}
+        {% endif %}
+        <div class="card"{% if block_card_url != blank %} data-card-url="{{ block_card_url }}"{% endif %} {{ block.shopify_attributes }}>
+          <div
+            class="card-image"
+            {% if block.settings.image != blank %}
+              style="background-image: url('{{ block.settings.image | image_url: width: 800 }}');"
+            {% elsif card_default_asset != blank %}
+              style="background-image: url('{{ card_default_asset | asset_url }}');"
+            {% endif %}
+          ></div>
+          <div class="card-info">
+            <h3>{{ block.settings.title }}</h3>
+            {% if block.settings.product != blank %}
+              {% assign card_product = block.settings.product %}
+              <a class="card-btn" href="{{ card_product.url }}">
+                {{- block.settings.button_label | default: 'BUY' }} - {{ card_product.price | money -}}
+              </a>
+            {% elsif block.settings.link != blank %}
+              <a class="card-btn" href="{{ block.settings.link }}">{{ block.settings.button_label }}</a>
+            {% else %}
+              <button type="button" class="card-btn">{{ block.settings.button_label }}</button>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    {% if card_blocks_count == 0 %}
+      {% assign fallback_handles = 'hair-regrowth-spray,anti-frizz-keratin-serum,floral-blossom-hair-mist' | split: ',' %}
+      {% for fallback_handle in fallback_handles %}
+        {% assign fallback_product = all_products[fallback_handle] %}
+        {% assign card_default_asset = '' %}
+        {% case fallback_handle %}
+          {% when 'hair-regrowth-spray' %}
+            {% assign card_default_asset = 'card-hair-regrowth-spray.jpg' %}
+          {% when 'anti-frizz-keratin-serum' %}
+            {% assign card_default_asset = 'card-anti-frizz-keratin-serum.jpg' %}
+          {% when 'floral-blossom-hair-mist' %}
+            {% assign card_default_asset = 'card-floral-blossom-hair-mist.jpg' %}
+        {% endcase %}
+        <div class="card" data-card-url="/products/{{ fallback_handle }}">
+          <div class="card-image" style="background-image: url('{{ card_default_asset | asset_url }}');"></div>
+          <div class="card-info">
+            <h3>
+              {% if fallback_product != blank %}
+                {{ fallback_product.title }}
+              {% else %}
+                {{ fallback_handle | replace: '-', ' ' | upcase }}
+              {% endif %}
+            </h3>
+            {% if fallback_product != blank %}
+              <a class="card-btn" href="{{ fallback_product.url }}">BUY - {{ fallback_product.price | money }}</a>
+            {% else %}
+              <a class="card-btn" href="/products/{{ fallback_handle }}">BUY - RS. 0</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </section>
+
+  <section class="product-feature">
+    <div
+      class="feature-image"
+      {% if section.settings.feature_image != blank %}
+        style="background-image: url('{{ section.settings.feature_image | image_url: width: 1200 }}');"
+      {% else %}
+        style="background-image: url('{{ 'feature-bundle.jpeg' | asset_url }}');"
+      {% endif %}
+    ></div>
+    <div class="feature-content">
+      <div class="badge">{{ section.settings.feature_badge }}</div>
+      <h2>{{ section.settings.feature_heading }}</h2>
+      <p>{{ section.settings.feature_text }}</p>
+      {% if section.settings.feature_cta_label != blank %}
+        <a href="{{ section.settings.feature_cta_link | default: '#' }}" class="btn-black">{{ section.settings.feature_cta_label }}</a>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <div class="faq-content">
+      <h2>{{ section.settings.faq_heading }}</h2>
+      <div class="accordion">
+        {% for block in section.blocks %}
+          {% if block.type == 'faq_item' %}
+            <details class="accordion-item" name="faq-home-{{ section.id }}" {{ block.shopify_attributes }}>
+              <summary class="accordion-header">
+                {{ block.settings.question }}
+                <span class="icon">+</span>
+              </summary>
+              <div class="accordion-body">{{ block.settings.answer }}</div>
+            </details>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div
+      class="faq-image"
+      {% if section.settings.faq_image != blank %}
+        style="background-image: url('{{ section.settings.faq_image | image_url: width: 1200 }}');"
+      {% else %}
+        style="background-image: url('{{ 'faq-image-100.jpg' | asset_url }}');"
+      {% endif %}
+    ></div>
+  </section>
+
+  {% render 'elaris-footer' %}
+</div>
+
+<script>
+  (function () {
+    if (window.innerWidth > 1024) {
+      document.querySelectorAll('.elaris-home-root .footer-accordion').forEach(function (el) {
+        el.setAttribute('open', '');
+      });
+    }
+
+    document.querySelectorAll('.elaris-home-root .card[data-card-url]').forEach(function (card) {
+      card.addEventListener('click', function (event) {
+        if (event.target.closest('a')) return;
+        var to = card.getAttribute('data-card-url');
+        if (to) window.location.href = to;
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Elaris home",
+  "tag": "section",
+  "class": "elaris-home-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "top_bar_text",
+      "label": "Announcement bar",
+      "default": "buy 1 get 1 free"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "Elaris 7"
+    },
+    {
+      "type": "header",
+      "content": "Navigation URLs"
+    },
+    {
+      "type": "url",
+      "id": "nav_shop_url",
+      "label": "Shop link"
+    },
+    {
+      "type": "url",
+      "id": "nav_offers_url",
+      "label": "Offers link"
+    },
+    {
+      "type": "url",
+      "id": "nav_learn_url",
+      "label": "Learn link"
+    },
+    {
+      "type": "url",
+      "id": "nav_quiz_url",
+      "label": "Hair Quiz link"
+    },
+    {
+      "type": "url",
+      "id": "nav_pros_url",
+      "label": "Pros link"
+    },
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_desktop_image",
+      "label": "Hero background (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_mobile_image",
+      "label": "Hero image (mobile top)"
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Heading",
+      "default": ""
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subheading",
+      "label": "Subheading",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "hero_cta_label",
+      "label": "Button label",
+      "default": ""
+    },
+    {
+      "type": "url",
+      "id": "hero_cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Featured row"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_image",
+      "label": "Feature image"
+    },
+    {
+      "type": "text",
+      "id": "feature_badge",
+      "label": "Badge",
+      "default": "NEW!"
+    },
+    {
+      "type": "text",
+      "id": "feature_heading",
+      "label": "Heading",
+      "default": "body crème cleanser"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_text",
+      "label": "Text",
+      "default": "Restore your skin's natural glow with aloe, coconut oil, shea butter, hyaluronic acid, niacinamide, baobab, and green tea—working together to hydrate, nourish, and protect."
+    },
+    {
+      "type": "text",
+      "id": "feature_cta_label",
+      "label": "Button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "feature_cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "FAQ"
+    },
+    {
+      "type": "text",
+      "id": "faq_heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "image_picker",
+      "id": "faq_image",
+      "label": "FAQ image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Product card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "HAIR REGROW SPRAY"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label prefix",
+          "default": "BUY"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product (uses live price)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Manual link (if no product)"
+        }
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What are the key ingredients?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Our products use natural ingredients like aloe, coconut oil, shea butter, and green tea to hydrate and protect your hair."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elaris home",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "HAIR REGROW SPRAY",
+            "button_label": "BUY - RS. 2,790"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "ANTI FRIZZ KERATIN SERUM",
+            "button_label": "BUY - RS. 2,680"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "FLORAL BLOSSOM HAIR MIST",
+            "button_label": "BUY - RS. 2,960"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are the key ingredients?",
+            "answer": "Our products use natural ingredients like aloe, coconut oil, shea butter, and green tea to hydrate and protect your hair."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How often should I use the cleanser?",
+            "answer": "For best results, use 2-3 times a week depending on your hair type."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is this safe for color-treated hair?",
+            "answer": "Yes! All our formulas are sulfate-free and completely safe for color-treated hair."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
