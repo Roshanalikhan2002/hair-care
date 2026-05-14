@@ -1,0 +1,414 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+{{ 'elaris-home.css' | asset_url | stylesheet_tag }}
+{{ 'elaris-hair-care-bundle.css' | asset_url | stylesheet_tag }}
+{{ 'elaris-footer.css' | asset_url | stylesheet_tag }}
+
+<div class="elaris-home-root elaris-bundle-wrapper" id="BundlePage-{{ section.id }}">
+  <header class="navbar">
+    <div class="left-nav">
+      <button type="button" aria-label="menu" class="menu-btn">&#9776;</button>
+      <div class="logo">
+        <a href="{{ routes.root_url }}">{% render 'elaris-logo-text', section: section %}</a>
+      </div>
+    </div>
+    <nav class="desktop-nav">
+      <a href="{{ section.settings.nav_shop_url | default: routes.all_products_collection_url }}">Shop</a>
+      <a href="{{ section.settings.nav_offers_url | default: '#' }}">Offers</a>
+      <a href="{{ section.settings.nav_learn_url | default: '#' }}">Learn</a>
+      <a href="{{ section.settings.nav_quiz_url | default: '#' }}">Hair Quiz</a>
+      <a href="{{ section.settings.nav_pros_url | default: '#' }}">Pros</a>
+    </nav>
+    <div class="icons">
+      <a href="{{ routes.search_url }}" aria-label="search">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
+      <a href="{{ routes.account_login_url }}" class="profile" aria-label="account">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+      <a href="{{ routes.cart_url }}" aria-label="cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <section class="bundle-hero">
+    <div class="bundle-image-col">
+      <div class="bundle-image-col__inner">
+        {% if section.settings.hero_media_image != blank %}
+          <img
+            src="{{ section.settings.hero_media_image | image_url: width: 1600 }}"
+            alt="{{ section.settings.hero_heading | escape }}"
+            width="{{ section.settings.hero_media_image.width }}"
+            height="{{ section.settings.hero_media_image.height }}"
+            loading="eager"
+          >
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="bundle-info-col">
+      {% if section.settings.hero_badge != blank %}
+        <p class="bundle-badge">{{ section.settings.hero_badge }}</p>
+      {% endif %}
+
+      <h1 class="bundle-title">{{ section.settings.hero_heading }}</h1>
+
+      <div class="bundle-stars">
+        <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        {% if section.settings.rating_count != blank %}
+          <span class="count">{{ section.settings.rating_count }}</span>
+        {% endif %}
+      </div>
+
+      {% if section.settings.hero_description != blank %}
+        <div class="bundle-desc">{{ section.settings.hero_description | newline_to_br }}</div>
+      {% endif %}
+
+      {% if section.settings.cta_label != blank %}
+        <a class="bundle-cta" href="{{ section.settings.cta_url | default: '#' }}">{{ section.settings.cta_label }}</a>
+      {% endif %}
+
+      <hr class="bundle-divider">
+
+      {% if section.settings.acc1_title != blank %}
+        <details class="bundle-acc">
+          <summary>
+            <span class="bundle-acc__label">{{ section.settings.acc1_title }}</span>
+            <span class="bundle-acc__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="bundle-acc__panel">
+            {% if section.settings.acc1_body != blank %}
+              {{ section.settings.acc1_body | newline_to_br }}
+            {% else %}
+              <ul>
+                <li>🧴 E7 Hair Growth Serum — 50ml</li>
+                <li>🧴 E7 Repair &amp; Nourish Shampoo — 200ml</li>
+                <li>🧴 E7 Deep Conditioning Mask — 150ml</li>
+              </ul>
+            {% endif %}
+          </div>
+        </details>
+      {% endif %}
+
+      {% if section.settings.acc2_title != blank %}
+        <details class="bundle-acc">
+          <summary>
+            <span class="bundle-acc__label">{{ section.settings.acc2_title }}</span>
+            <span class="bundle-acc__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="bundle-acc__panel">
+            {% if section.settings.acc2_body != blank %}
+              {{ section.settings.acc2_body | newline_to_br }}
+            {% else %}
+              <p><strong>Step 1:</strong> Apply the Hair Growth Serum directly to scalp, massage gently for 2–3 minutes.</p>
+              <p><strong>Step 2:</strong> Shampoo with the Repair Shampoo, lather and rinse thoroughly.</p>
+              <p><strong>Step 3:</strong> Apply the Deep Conditioning Mask to lengths, leave for 5–10 minutes, rinse.</p>
+            {% endif %}
+          </div>
+        </details>
+      {% endif %}
+
+      {% if section.settings.acc3_title != blank %}
+        <details class="bundle-acc">
+          <summary>
+            <span class="bundle-acc__label">{{ section.settings.acc3_title }}</span>
+            <span class="bundle-acc__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="bundle-acc__panel">
+            {% if section.settings.acc3_body != blank %}
+              {{ section.settings.acc3_body | newline_to_br }}
+            {% else %}
+              <p>Free shipping on orders above Rs.10,000. Standard delivery 3–5 business days. Returns accepted within 7 days of delivery for unopened items.</p>
+            {% endif %}
+          </div>
+        </details>
+      {% endif %}
+
+      <div class="bundle-info-spacer"></div>
+    </div>
+  </section>
+
+  <section class="bundle-ingredients">
+    <div class="bundle-ingredients__list">
+      {% if section.settings.ingredients_kicker != blank %}
+        <p class="bundle-ingredients__kicker">{{ section.settings.ingredients_kicker }}</p>
+      {% endif %}
+      {% if section.settings.ingredients_heading != blank %}
+        <h2 class="bundle-ingredients__title">{{ section.settings.ingredients_heading }}</h2>
+      {% endif %}
+
+      {% assign ingredient_blocks = section.blocks | where: 'type', 'ingredient' %}
+      {% if ingredient_blocks.size > 0 %}
+        <div class="bundle-ingredient-rows">
+          {% for block in ingredient_blocks %}
+            <div class="bundle-ingredient-row" {{ block.shopify_attributes }}>
+              <span class="bundle-ingredient-row__label">{{ block.settings.label }}</span>
+              <span class="bundle-ingredient-row__value">{{ block.settings.value }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="bundle-ingredients__visual">
+      {% if section.settings.ingredients_image != blank %}
+        <img
+          src="{{ section.settings.ingredients_image | image_url: width: 1400 }}"
+          alt=""
+          width="{{ section.settings.ingredients_image.width }}"
+          height="{{ section.settings.ingredients_image.height }}"
+          loading="lazy"
+        >
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="bundle-faq-wrap">
+    {% if section.settings.faq_kicker != blank %}
+      <p class="bundle-faq__kicker">{{ section.settings.faq_kicker }}</p>
+    {% endif %}
+    {% if section.settings.faq_heading != blank %}
+      <h2 class="bundle-faq__title">{{ section.settings.faq_heading }}</h2>
+    {% endif %}
+
+    {% assign faq_blocks = section.blocks | where: 'type', 'bundle_faq' %}
+    {% for block in faq_blocks %}
+      <details class="bundle-faq-item" {{ block.shopify_attributes }}>
+        <summary>
+          <span class="bundle-faq-item__q">{{ block.settings.question }}</span>
+          <span class="bundle-faq-item__icon" aria-hidden="true"></span>
+        </summary>
+        <div class="bundle-faq-item__a">{{ block.settings.answer | newline_to_br }}</div>
+      </details>
+    {% endfor %}
+  </section>
+
+  {% render 'elaris-footer' %}
+</div>
+
+{% schema %}
+{
+  "name": "Hair Care Bundle",
+  "tag": "section",
+  "class": "elaris-bundle-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Use as a Page template (Pages → template: hair-care-bundle) or as a Product template (Products → Theme template: hair-care-bundle). For products, create a product (e.g. “Hair Care Bundle”) and assign this template."
+    },
+    {
+      "type": "header",
+      "content": "Header navigation"
+    },
+    {
+      "type": "url",
+      "id": "nav_shop_url",
+      "label": "Shop link"
+    },
+    {
+      "type": "url",
+      "id": "nav_offers_url",
+      "label": "Offers link"
+    },
+    {
+      "type": "url",
+      "id": "nav_learn_url",
+      "label": "Learn link"
+    },
+    {
+      "type": "url",
+      "id": "nav_quiz_url",
+      "label": "Hair Quiz link"
+    },
+    {
+      "type": "url",
+      "id": "nav_pros_url",
+      "label": "Pros link"
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "Elaris7",
+      "info": "Shown in the header. Leave as default or match your theme settings."
+    },
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_media_image",
+      "label": "Hero image (left column)"
+    },
+    {
+      "type": "text",
+      "id": "hero_badge",
+      "label": "Badge",
+      "default": "Complete System"
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Heading",
+      "default": "Hair Care Bundle"
+    },
+    {
+      "type": "text",
+      "id": "rating_count",
+      "label": "Rating line (e.g. review count)",
+      "default": "(1,430)"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_description",
+      "label": "Description",
+      "default": "Transform your hair routine with the E7 Hair Care Set. This three-product collection is designed to control frizz, strengthen roots, and leave your hair feeling soft, shiny, and beautifully scented. Each product works on its own or together—perfect for home or on-the-go use."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Buy the Kit – Rs.4,215.00"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Hero accordions"
+    },
+    {
+      "type": "text",
+      "id": "acc1_title",
+      "label": "Accordion 1 title",
+      "default": "What's Inside"
+    },
+    {
+      "type": "textarea",
+      "id": "acc1_body",
+      "label": "Accordion 1 content (optional, plain text)"
+    },
+    {
+      "type": "text",
+      "id": "acc2_title",
+      "label": "Accordion 2 title",
+      "default": "The Routine"
+    },
+    {
+      "type": "textarea",
+      "id": "acc2_body",
+      "label": "Accordion 2 content (optional, plain text)"
+    },
+    {
+      "type": "text",
+      "id": "acc3_title",
+      "label": "Accordion 3 title",
+      "default": "Shipping & Returns"
+    },
+    {
+      "type": "textarea",
+      "id": "acc3_body",
+      "label": "Accordion 3 content (optional, plain text)"
+    },
+    {
+      "type": "header",
+      "content": "Ingredients band"
+    },
+    {
+      "type": "text",
+      "id": "ingredients_kicker",
+      "label": "Kicker",
+      "default": "Key Ingredients"
+    },
+    {
+      "type": "text",
+      "id": "ingredients_heading",
+      "label": "Heading",
+      "default": "Powered by Nature & Science"
+    },
+    {
+      "type": "image_picker",
+      "id": "ingredients_image",
+      "label": "Right column image"
+    },
+    {
+      "type": "header",
+      "content": "FAQ"
+    },
+    {
+      "type": "text",
+      "id": "faq_kicker",
+      "label": "FAQ kicker",
+      "default": "Got Questions?"
+    },
+    {
+      "type": "text",
+      "id": "faq_heading",
+      "label": "FAQ heading",
+      "default": "Frequently Asked Questions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Name",
+          "default": "Almond Oil"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Description",
+          "default": "Softness and strength"
+        }
+      ]
+    },
+    {
+      "type": "bundle_faq",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How long does one bundle last?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "With regular use (3–4 times per week), the bundle typically lasts 6–8 weeks."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hair Care Bundle"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,139 @@
+{
+  "sections": {
+    "main": {
+      "type": "elaris-hair-care-bundle",
+      "settings": {
+        "logo_text": "Elaris7",
+        "hero_badge": "Complete System",
+        "hero_heading": "Hair Care Bundle",
+        "rating_count": "(1,430)",
+        "hero_description": "Transform your hair routine with the E7 Hair Care Set. This three-product collection is designed to control frizz, strengthen roots, and leave your hair feeling soft, shiny, and beautifully scented. Each product works on its own or together—perfect for home or on-the-go use.",
+        "cta_label": "Buy the Kit – Rs.4,215.00",
+        "acc1_title": "What's Inside",
+        "acc2_title": "The Routine",
+        "acc3_title": "Shipping & Returns",
+        "ingredients_kicker": "Key Ingredients",
+        "ingredients_heading": "Powered by Nature & Science",
+        "faq_kicker": "Got Questions?",
+        "faq_heading": "Frequently Asked Questions"
+      },
+      "blocks": {
+        "ing_1": {
+          "type": "ingredient",
+          "settings": {
+            "label": "Almond Oil:",
+            "value": "Softness and strength"
+          }
+        },
+        "ing_2": {
+          "type": "ingredient",
+          "settings": {
+            "label": "Olive Oil:",
+            "value": "Natural conditioning"
+          }
+        },
+        "ing_3": {
+          "type": "ingredient",
+          "settings": {
+            "label": "Coconut Oil:",
+            "value": "Moisture retention"
+          }
+        },
+        "ing_4": {
+          "type": "ingredient",
+          "settings": {
+            "label": "Flaxseed Oil:",
+            "value": "Omega-3 for hair health"
+          }
+        },
+        "ing_5": {
+          "type": "ingredient",
+          "settings": {
+            "label": "Shea Butter:",
+            "value": "Intense hydration"
+          }
+        },
+        "ing_6": {
+          "type": "ingredient",
+          "settings": {
+            "label": "Squalene:",
+            "value": "Weightless moisture"
+          }
+        },
+        "ing_7": {
+          "type": "ingredient",
+          "settings": {
+            "label": "Niacinamide:",
+            "value": "Scalp health support"
+          }
+        },
+        "ing_8": {
+          "type": "ingredient",
+          "settings": {
+            "label": "Anagain™:",
+            "value": "Stimulates hair growth"
+          }
+        },
+        "faq_1": {
+          "type": "bundle_faq",
+          "settings": {
+            "question": "How long does one bundle last?",
+            "answer": "With regular use (3–4 times per week), the bundle typically lasts 6–8 weeks, giving you a full two-month hair transformation experience."
+          }
+        },
+        "faq_2": {
+          "type": "bundle_faq",
+          "settings": {
+            "question": "Is it suitable for all hair types?",
+            "answer": "Yes! The E7 bundle is formulated for all hair types — straight, wavy, curly, and coily. It's especially effective for damaged, thinning, or frizzy hair."
+          }
+        },
+        "faq_3": {
+          "type": "bundle_faq",
+          "settings": {
+            "question": "Are the products free from harmful chemicals?",
+            "answer": "Absolutely. All E7 products are free from sulfates, parabens, and artificial dyes. We use only clean, science-backed ingredients."
+          }
+        },
+        "faq_4": {
+          "type": "bundle_faq",
+          "settings": {
+            "question": "Can I use the serum without the shampoo?",
+            "answer": "Yes, each product is designed to work independently. However, using the full bundle together delivers the best, fastest results as the products are synergistically formulated."
+          }
+        },
+        "faq_5": {
+          "type": "bundle_faq",
+          "settings": {
+            "question": "When will I see results?",
+            "answer": "Most customers notice softer, shinier hair after the first 2 weeks of consistent use. Significant growth results are typically visible within 6–8 weeks."
+          }
+        },
+        "faq_6": {
+          "type": "bundle_faq",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "We offer a 7-day return policy for unopened, unused products in original packaging. Please contact our support team to initiate a return."
+          }
+        }
+      },
+      "block_order": [
+        "ing_1",
+        "ing_2",
+        "ing_3",
+        "ing_4",
+        "ing_5",
+        "ing_6",
+        "ing_7",
+        "ing_8",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6"
+      ]
+    }
+  },
+  "order": ["main"]
+}
