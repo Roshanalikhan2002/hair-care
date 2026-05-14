@@ -1,49 +1,7 @@
 {{ 'elaris-home.css' | asset_url | stylesheet_tag }}
 {{ 'elaris-footer.css' | asset_url | stylesheet_tag }}
 
-<style>
-  .elaris-home-root .top-bar-marquee {
-    overflow: hidden;
-    width: 100%;
-  }
-  .elaris-home-root .top-bar-track {
-    display: flex;
-    width: max-content;
-    animation: elaris-announce-marquee 14s linear infinite;
-    will-change: transform;
-  }
-  .elaris-home-root .top-bar-group {
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
-  @keyframes elaris-announce-marquee {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      transform: translate3d(-50%, 0, 0);
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .elaris-home-root .top-bar-track {
-      animation: none;
-      justify-content: center;
-      width: 100%;
-      transform: none;
-    }
-    .elaris-home-root .top-bar-group[aria-hidden='true'] {
-      display: none;
-    }
-  }
-</style>
-
 {% liquid
-  assign elaris_top_bar = section.settings.top_bar_text | strip
-  assign elaris_bar_down = elaris_top_bar | downcase
-  if elaris_bar_down contains 'free shipping' or elaris_bar_down contains 'smoothing solution' or elaris_bar_down contains 'orders $'
-    assign elaris_top_bar = 'buy 1 get 1 free'
-  endif
-
   assign hero_heading = section.settings.hero_heading | strip
   assign hero_subheading = section.settings.hero_subheading | strip
   assign hero_cta = section.settings.hero_cta_label | strip
@@ -62,15 +20,6 @@
 %}
 
 <div class="elaris-home-root">
-  <div class="top-bar" role="region" aria-label="Announcement">
-    <div class="top-bar-marquee">
-      <div class="top-bar-track">
-        <span class="top-bar-group">{{ elaris_top_bar }}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
-        <span class="top-bar-group" aria-hidden="true">{{ elaris_top_bar }}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
-      </div>
-    </div>
-  </div>
-
   <header class="navbar">
     <div class="left-nav">
       <button type="button" aria-label="menu" class="menu-btn">&#9776;</button>
@@ -323,12 +272,6 @@
   "tag": "section",
   "class": "elaris-home-section",
   "settings": [
-    {
-      "type": "text",
-      "id": "top_bar_text",
-      "label": "Announcement bar",
-      "default": "buy 1 get 1 free"
-    },
     {
       "type": "text",
       "id": "logo_text",

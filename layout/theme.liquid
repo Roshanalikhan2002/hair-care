@@ -31,6 +31,7 @@
   </style>
 </head>
 <body class="template-{{ template.name | handle }}">
+  {% render 'elaris-announcement-bar' %}
   {{ content_for_layout }}
   {{ content_for_footer }}
 </body>

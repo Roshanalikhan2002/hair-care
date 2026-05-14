@@ -10,54 +10,6 @@
   color: #222;
 }
 
-.top-bar {
-  background: #b5828c;
-  color: #fff;
-  padding: 10px 0;
-  font-size: 14px;
-  font-weight: 600;
-  overflow: hidden;
-}
-
-.top-bar-marquee {
-  width: 100%;
-  overflow: hidden;
-}
-
-.top-bar-track {
-  display: flex;
-  width: max-content;
-  animation: elaris-top-bar-marquee 14s linear infinite;
-  will-change: transform;
-}
-
-.top-bar-group {
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-
-@keyframes elaris-top-bar-marquee {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .top-bar-track {
-    animation: none;
-    justify-content: center;
-    width: 100%;
-    transform: none;
-  }
-
-  .top-bar-group[aria-hidden='true'] {
-    display: none;
-  }
-}
-
 .navbar {
   display: flex;
   align-items: center;
@@ -515,10 +467,6 @@
 }
 
 @media (max-width: 560px) {
-  .top-bar {
-    font-size: 12px;
-  }
-
   .logo {
     font-size: 44px;
   }

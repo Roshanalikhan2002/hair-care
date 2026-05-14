@@ -1,0 +1,64 @@
+{% liquid
+  assign ann = settings.elaris_announcement_text | default: 'buy 1 get 1 free' | strip
+  assign ann_d = ann | downcase
+  if ann_d contains 'free shipping' or ann_d contains 'smoothing solution' or ann_d contains 'orders $'
+    assign ann = 'buy 1 get 1 free'
+  endif
+%}
+<div class="elaris-announcement" role="region" aria-label="Announcement">
+  <div class="elaris-announcement__marquee">
+    <div class="elaris-announcement__track">
+      <span class="elaris-announcement__group">{{ ann }}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+      <span class="elaris-announcement__group" aria-hidden="true">{{ ann }}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+    </div>
+  </div>
+</div>
+<style>
+  .elaris-announcement {
+    background: #b5828c;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 600;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .elaris-announcement__marquee {
+    overflow: hidden;
+    width: 100%;
+  }
+  .elaris-announcement__track {
+    display: flex;
+    width: max-content;
+    animation: elaris-announcement-scroll 14s linear infinite;
+    will-change: transform;
+  }
+  .elaris-announcement__group {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  @keyframes elaris-announcement-scroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .elaris-announcement__track {
+      animation: none;
+      justify-content: center;
+      width: 100%;
+      transform: none;
+    }
+    .elaris-announcement__group[aria-hidden='true'] {
+      display: none;
+    }
+  }
+  @media (max-width: 560px) {
+    .elaris-announcement {
+      font-size: 12px;
+    }
+  }
+</style>

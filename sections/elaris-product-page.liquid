@@ -39,8 +39,6 @@
   {% assign first_selling_plan = product.selling_plan_groups.first.selling_plans.first %}
 
   <div class="elaris-product-page" style="color:#161616;font-family:Arial,Helvetica,sans-serif;">
-    <div class="top-bar">{{ section.settings.top_bar_text }}</div>
-
     <header class="navbar">
       <div class="left-nav">
         <button type="button" aria-label="menu" class="menu-btn">&#9776;</button>
@@ -551,12 +549,6 @@
     {
       "type": "paragraph",
       "content": "Assign template “product.elaris” to products in Admin → Products → Theme template."
-    },
-    {
-      "type": "text",
-      "id": "top_bar_text",
-      "label": "Announcement bar",
-      "default": "buy 1 get 1 free"
     },
     {
       "type": "text",

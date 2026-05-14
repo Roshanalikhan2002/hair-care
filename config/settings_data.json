@@ -9,11 +9,11 @@
  */
 {
   "current": {
+    "elaris_announcement_text": "buy 1 get 1 free",
     "sections": {
       "elaris-home": {
         "type": "elaris-home",
         "settings": {
-          "top_bar_text": "buy 1 get 1 free",
           "logo_text": "Elaris 7",
           "nav_shop_url": "",
           "nav_offers_url": "",

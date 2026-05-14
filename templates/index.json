@@ -3,7 +3,6 @@
     "elaris_home": {
       "type": "elaris-home",
       "settings": {
-        "top_bar_text": "buy 1 get 1 free",
         "hero_heading": "",
         "hero_subheading": "",
         "hero_cta_label": ""
