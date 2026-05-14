@@ -331,15 +331,19 @@
             </div>
           {% endunless %}
 
-          <div class="qty-block">
-            <div class="label">quantity</div>
-            <div class="qty-controls">
-              <button type="button" id="ElarisQtyMinus-{{ section.id }}" aria-label="Decrease quantity">-</button>
-              <span id="ElarisQtyDisplay-{{ section.id }}">1</span>
-              <button type="button" id="ElarisQtyPlus-{{ section.id }}" aria-label="Increase quantity">+</button>
-            </div>
+          {% if elaris_b1g1 %}
             <input type="hidden" name="quantity" id="ElarisQtyInput-{{ section.id }}" value="1" min="1">
-          </div>
+          {% else %}
+            <div class="qty-block">
+              <div class="label">quantity</div>
+              <div class="qty-controls">
+                <button type="button" id="ElarisQtyMinus-{{ section.id }}" aria-label="Decrease quantity">-</button>
+                <span id="ElarisQtyDisplay-{{ section.id }}">1</span>
+                <button type="button" id="ElarisQtyPlus-{{ section.id }}" aria-label="Increase quantity">+</button>
+              </div>
+              <input type="hidden" name="quantity" id="ElarisQtyInput-{{ section.id }}" value="1" min="1">
+            </div>
+          {% endif %}
 
           {% if elaris_b1g1 %}
             <div class="purchase-label">Buy 1 Get 1</div>
@@ -563,6 +567,7 @@
   <script>
     (function () {
       var sectionId = '{{ section.id }}';
+      var elarisB1g1Page = {% if elaris_b1g1 %}true{% else %}false{% endif %};
       var form = document.getElementById('ElarisProductForm-' + sectionId);
       if (!form) return;
 
@@ -595,7 +600,11 @@
         var addBtn = document.getElementById('ElarisAddCart-' + sectionId);
         if (addBtn) {
           addBtn.disabled = !variant.available;
-          addBtn.textContent = variant.available ? 'add to cart' : 'sold out';
+          if (variant.available) {
+            addBtn.textContent = elarisB1g1Page ? 'add to cart — buy 1 get 1' : 'add to cart';
+          } else {
+            addBtn.textContent = 'sold out';
+          }
         }
       }
 
@@ -611,8 +620,8 @@
 
       function setQty(n) {
         n = Math.max(1, parseInt(n, 10) || 1);
-        qtyInput.value = n;
-        qtyDisplay.textContent = String(n);
+        if (qtyInput) qtyInput.value = n;
+        if (qtyDisplay) qtyDisplay.textContent = String(n);
       }
 
       var minus = document.getElementById('ElarisQtyMinus-' + sectionId);
