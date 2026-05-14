@@ -7,7 +7,12 @@
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: #fff;
-  color: #222;
+  color: #580514;
+}
+
+/* Older copies of this section included a .top-bar strip; hide if still present */
+.elaris-home-root > .top-bar {
+  display: none !important;
 }
 
 .navbar {
@@ -15,7 +20,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 22px 44px;
-  border-bottom: 1px solid #ececec;
+  border-bottom: 1px solid rgba(88, 5, 20, 0.15);
 }
 
 .left-nav {
@@ -30,7 +35,7 @@
   background: transparent;
   font-size: 26px;
   cursor: pointer;
-  color: #555;
+  color: #580514;
 }
 
 .logo {
@@ -53,7 +58,7 @@
 
 .desktop-nav a {
   text-decoration: none;
-  color: #222;
+  color: #580514;
   font-size: 15px;
 }
 
@@ -123,11 +128,12 @@
 .hero-copy a {
   display: inline-block;
   text-decoration: none;
-  background: #f5f5f3;
-  color: #222;
+  background: #fff;
+  color: #580514;
   padding: 14px 28px;
   font-size: 16px;
   font-weight: 500;
+  border: 1px solid #fff;
 }
 
 .product-cards {
@@ -140,11 +146,12 @@
 }
 
 .card {
-  background-color: #f4f4f4;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   border-radius: 6px;
   overflow: hidden;
+  border: 1px solid rgba(88, 5, 20, 0.12);
 }
 
 .card[data-card-url] {
@@ -154,7 +161,7 @@
 .card-image {
   width: 100%;
   aspect-ratio: 4 / 5;
-  background-color: #e0e0e0;
+  background-color: rgba(88, 5, 20, 0.06);
   background-size: cover;
   background-position: center;
 }
@@ -171,7 +178,7 @@
   font-size: 13px;
   font-weight: 700;
   margin: 0 0 20px;
-  color: #333;
+  color: #580514;
   text-transform: uppercase;
 }
 
@@ -179,13 +186,13 @@
 .card-info a.card-btn,
 .card-info button.card-btn {
   background: transparent;
-  border: 1px solid #333;
+  border: 1px solid #580514;
   padding: 14px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1px;
   cursor: pointer;
-  color: #333;
+  color: #580514;
   border-radius: 30px;
   text-transform: uppercase;
   transition: all 0.2s ease;
@@ -200,7 +207,7 @@
 .card-info .card-btn:hover,
 .card-info a.card-btn:hover,
 .card-info button.card-btn:hover {
-  background: #333;
+  background: #580514;
   color: #fff;
 }
 
@@ -216,7 +223,7 @@
 .feature-image {
   flex: 1;
   aspect-ratio: 1 / 1;
-  background-color: #d0d0d0;
+  background-color: rgba(88, 5, 20, 0.06);
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -232,24 +239,26 @@
   font-weight: 700;
   letter-spacing: 1px;
   margin-bottom: 20px;
+  color: #580514;
 }
 
 .feature-content h2 {
   font-size: 42px;
   margin: 0 0 20px;
   font-weight: 700;
+  color: #580514;
 }
 
 .feature-content p {
   font-size: 16px;
   line-height: 1.6;
-  color: #555;
+  color: rgba(88, 5, 20, 0.85);
   margin: 0 0 30px;
 }
 
 .btn-black {
   display: inline-block;
-  background: #000;
+  background: #580514;
   color: #fff;
   padding: 16px 44px;
   text-decoration: none;
@@ -275,19 +284,20 @@
   font-size: 36px;
   margin: 0 0 30px;
   font-weight: 700;
+  color: #580514;
 }
 
 .faq-section .faq-image {
   flex: 1;
   aspect-ratio: 4 / 3;
-  background-color: #d0d0d0;
+  background-color: rgba(88, 5, 20, 0.06);
   background-size: cover;
   background-position: center;
   width: 100%;
 }
 
 .accordion-item {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid rgba(88, 5, 20, 0.15);
 }
 
 .accordion-header {
@@ -298,7 +308,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #222;
+  color: #580514;
   list-style: none;
 }
 
@@ -321,7 +331,7 @@
   padding: 0 0 20px;
   font-size: 15px;
   line-height: 1.6;
-  color: #555;
+  color: rgba(88, 5, 20, 0.82);
 }
 
 @media (max-width: 1024px) {
@@ -377,7 +387,7 @@
     margin: 0;
     max-width: none;
     text-align: center;
-    color: #222;
+    color: #580514;
     padding: 0;
   }
 
@@ -399,6 +409,7 @@
     max-width: 300px;
     margin: 0 auto;
     box-sizing: border-box;
+    border: 1px solid #580514;
   }
 
   .product-cards {

@@ -38,7 +38,7 @@
   {% endif %}
   {% assign first_selling_plan = product.selling_plan_groups.first.selling_plans.first %}
 
-  <div class="elaris-product-page" style="color:#161616;font-family:Arial,Helvetica,sans-serif;">
+  <div class="elaris-product-page" style="color:#580514;font-family:Arial,Helvetica,sans-serif;">
     <header class="navbar">
       <div class="left-nav">
         <button type="button" aria-label="menu" class="menu-btn">&#9776;</button>
@@ -232,7 +232,7 @@
               <label for="ElarisVariantSelect-{{ section.id }}" class="label" style="display:block;">Options</label>
               <select
                 id="ElarisVariantSelect-{{ section.id }}"
-                style="width:100%;padding:10px;font-size:16px;border:1px solid #a7a7a7;border-radius:8px;"
+                style="width:100%;padding:10px;font-size:16px;border:1px solid rgba(88,5,20,0.35);border-radius:8px;"
               >
                 {% for variant in product.variants %}
                   <option
