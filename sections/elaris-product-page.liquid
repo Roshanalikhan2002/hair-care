@@ -43,7 +43,7 @@
       <div class="left-nav">
         <button type="button" aria-label="menu" class="menu-btn">&#9776;</button>
         <div class="logo">
-          <a href="{{ routes.root_url }}">{{ section.settings.logo_text }}</a>
+          <a href="{{ routes.root_url }}">{% render 'elaris-logo-text', section: section %}</a>
         </div>
       </div>
       <nav class="desktop-nav">
@@ -209,13 +209,13 @@
 
         <h1>{{ product.title }}</h1>
         {% if product.metafields.custom.subtitle != blank %}
-          <h3>{{ product.metafields.custom.subtitle }}</h3>
+          <h3>{% render 'elaris-brandize', text: product.metafields.custom.subtitle %}</h3>
         {% elsif section.settings.subtitle != blank %}
-          <h3>{{ section.settings.subtitle }}</h3>
+          <h3>{% render 'elaris-brandize', text: section.settings.subtitle %}</h3>
         {% endif %}
 
         <div class="rte">
-          {{ product.description }}
+          {% render 'elaris-brandize', text: product.description %}
         </div>
 
         <div class="rating">
@@ -346,7 +346,7 @@
                   <span class="item-icon">{{ block.settings.icon }}</span>
                   <h3>{{ block.settings.title }}</h3>
                 </div>
-                <p>{{ block.settings.text }}</p>
+                <p>{% render 'elaris-brandize', text: block.settings.text %}</p>
               </div>
               <a class="item-arrow" href="{{ block.settings.link | default: '#' }}" aria-label="open collection">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l7 7-7 7"></path></svg>
@@ -554,7 +554,7 @@
       "type": "text",
       "id": "logo_text",
       "label": "Logo text",
-      "default": "privée"
+      "default": "Elaris7"
     },
     {
       "type": "text",
@@ -599,7 +599,7 @@
       "type": "text",
       "id": "subtitle",
       "label": "Subtitle (if no metafield)",
-      "default": "privé luxurious body crème cleanser"
+      "default": "Elaris7 — luxurious hair care"
     },
     {
       "type": "checkbox",
@@ -671,7 +671,7 @@
           "type": "textarea",
           "id": "text",
           "label": "Description",
-          "default": "explore privé's clean haircare solutions with shampoos and conditioners tailored for moisture, volume, repair, and protection."
+          "default": "explore Elaris7 clean haircare solutions with shampoos and conditioners tailored for moisture, volume, repair, and protection."
         },
         {
           "type": "url",
@@ -708,7 +708,7 @@
           "settings": {
             "icon": "🧴",
             "title": "shampoo & conditioner",
-            "text": "explore privé's clean haircare solutions with shampoos and conditioners tailored for moisture, volume, repair, and protection."
+            "text": "explore Elaris7 clean haircare solutions with shampoos and conditioners tailored for moisture, volume, repair, and protection."
           }
         },
         {

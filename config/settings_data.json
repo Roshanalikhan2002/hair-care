@@ -14,8 +14,7 @@
       "elaris-home": {
         "type": "elaris-home",
         "settings": {
-          "top_bar_text": "",
-          "logo_text": "Elaris 7",
+          "logo_text": "Elaris7",
           "nav_shop_url": "",
           "nav_offers_url": "",
           "nav_learn_url": "",

@@ -24,7 +24,7 @@
     <div class="left-nav">
       <button type="button" aria-label="menu" class="menu-btn">&#9776;</button>
       <div class="logo">
-        <a href="{{ routes.root_url }}">{{ section.settings.logo_text }}</a>
+        <a href="{{ routes.root_url }}">{% render 'elaris-logo-text', section: section %}</a>
       </div>
     </div>
     <nav class="desktop-nav">

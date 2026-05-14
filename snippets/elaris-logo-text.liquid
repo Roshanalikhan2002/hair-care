@@ -1,0 +1,13 @@
+{%- assign _t = section.settings.logo_text | strip -%}
+{%- if _t == blank -%}
+  Elaris7
+{%- else -%}
+  {%- assign _d = _t | downcase | replace: 'é', 'e' | replace: 'è', 'e' -%}
+  {%- if _d == 'privee' or _d == 'prive' -%}
+    Elaris7
+  {%- elsif _d == 'elaris 7' or _d == 'elaris7' -%}
+    Elaris7
+  {%- else -%}
+    {{- _t -}}
+  {%- endif -%}
+{%- endif -%}

@@ -1,0 +1,15 @@
+{%- assign out = text | default: '' -%}
+{{- out
+  | replace: "privée's", "Elaris7's"
+  | replace: "Privée's", "Elaris7's"
+  | replace: "privé's", "Elaris7's"
+  | replace: "Privé's", "Elaris7's"
+  | replace: "privee's", "Elaris7's"
+  | replace: 'privée', 'Elaris7'
+  | replace: 'Privée', 'Elaris7'
+  | replace: 'PRIVEE', 'Elaris7'
+  | replace: 'privé', 'Elaris7'
+  | replace: 'Privé', 'Elaris7'
+  | replace: 'privee', 'Elaris7'
+  | replace: 'Privee', 'Elaris7'
+-}}
