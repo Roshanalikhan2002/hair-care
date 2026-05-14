@@ -36,21 +36,24 @@
             "type": "card",
             "settings": {
               "title": "HAIR REGROW SPRAY",
-              "button_label": "BUY - RS. 2,790"
+              "button_label": "BUY - RS. 2,790",
+              "link": "/products/hair-regrowth-spray"
             }
           },
           "card_2": {
             "type": "card",
             "settings": {
               "title": "ANTI FRIZZ KERATIN SERUM",
-              "button_label": "BUY - RS. 2,680"
+              "button_label": "BUY - RS. 2,680",
+              "link": "/products/anti-frizz-keratin-serum"
             }
           },
           "card_3": {
             "type": "card",
             "settings": {
               "title": "FLORAL BLOSSOM HAIR MIST",
-              "button_label": "BUY - RS. 2,960"
+              "button_label": "BUY - RS. 2,960",
+              "link": "/products/floral-blossom-hair-mist"
             }
           },
           "card_bundle": {
