@@ -6,59 +6,46 @@
   endif
 %}
 <div class="elaris-announcement" role="region" aria-label="Announcement">
-  <div class="elaris-announcement__marquee">
-    <div class="elaris-announcement__track">
-      <span class="elaris-announcement__group">{{ ann }}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
-      <span class="elaris-announcement__group" aria-hidden="true">{{ ann }}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
-    </div>
+  <div class="elaris-announcement__strip">
+    {%- assign ann_label = '• ' | append: ann | append: ' •' -%}
+    {%- for i in (1..3) -%}
+      <span class="elaris-announcement__cell" {% if i > 1 %}aria-hidden="true"{% endif %}>{{ ann_label }}</span>
+    {%- endfor -%}
   </div>
 </div>
 <style>
   .elaris-announcement {
     background: #580514;
     color: #fff;
-    padding: 10px 0;
+    padding: 10px 12px;
     font-size: 14px;
     font-weight: 600;
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
   }
-  .elaris-announcement__marquee {
-    overflow: hidden;
-    width: 100%;
-  }
-  .elaris-announcement__track {
+  .elaris-announcement__strip {
     display: flex;
-    width: max-content;
-    animation: elaris-announcement-scroll 14s linear infinite;
-    will-change: transform;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
   }
-  .elaris-announcement__group {
-    flex-shrink: 0;
+  .elaris-announcement__cell {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: center;
     white-space: nowrap;
-  }
-  @keyframes elaris-announcement-scroll {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      transform: translate3d(-50%, 0, 0);
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .elaris-announcement__track {
-      animation: none;
-      justify-content: center;
-      width: 100%;
-      transform: none;
-    }
-    .elaris-announcement__group[aria-hidden='true'] {
-      display: none;
-    }
   }
   @media (max-width: 560px) {
     .elaris-announcement {
       font-size: 12px;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+    .elaris-announcement__strip {
+      gap: 4px;
     }
   }
 </style>
