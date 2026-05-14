@@ -1,0 +1,337 @@
+/* Elaris7 cart drawer — #580514 + white */
+.elaris-cart-trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.elaris-cart-count {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #580514;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  display: none;
+}
+
+.elaris-cart-count:not(:empty) {
+  display: block;
+}
+
+.elaris-cart-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.elaris-cart-drawer.is-open {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.elaris-cart-drawer__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(88, 5, 20, 0.28);
+  opacity: 0;
+  transition: opacity 0.32s ease;
+}
+
+.elaris-cart-drawer.is-open .elaris-cart-drawer__overlay {
+  opacity: 1;
+}
+
+.elaris-cart-drawer__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(100%, 420px);
+  max-width: 100vw;
+  background: #fff;
+  box-shadow: -12px 0 40px rgba(88, 5, 20, 0.12);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+  color: #580514;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.elaris-cart-drawer.is-open .elaris-cart-drawer__panel {
+  transform: translateX(0);
+}
+
+.elaris-cart-drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 22px 16px;
+  border-bottom: 1px solid rgba(88, 5, 20, 0.12);
+  flex-shrink: 0;
+}
+
+.elaris-cart-drawer__title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.elaris-cart-drawer__close {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(88, 5, 20, 0.06);
+  color: #580514;
+  border-radius: 50%;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.elaris-cart-drawer__close:hover {
+  background: #580514;
+  color: #fff;
+}
+
+.elaris-cart-drawer__scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 0 16px;
+}
+
+.elaris-cart-drawer__empty {
+  padding: 48px 28px;
+  text-align: center;
+  color: rgba(88, 5, 20, 0.65);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.elaris-cart-drawer__empty[hidden] {
+  display: none;
+}
+
+.elaris-cart-drawer__link {
+  display: inline-block;
+  margin-top: 16px;
+  color: #580514;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.elaris-cart-drawer__lines {
+  list-style: none;
+  margin: 0;
+  padding: 0 18px;
+}
+
+.elaris-cart-drawer__line {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 14px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(88, 5, 20, 0.1);
+  align-items: start;
+}
+
+.elaris-cart-drawer__thumb {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(88, 5, 20, 0.06);
+  aspect-ratio: 1;
+}
+
+.elaris-cart-drawer__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.elaris-cart-drawer__thumb-fallback {
+  display: block;
+  width: 100%;
+  padding-bottom: 100%;
+}
+
+.elaris-cart-drawer__line-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #580514;
+  text-decoration: none;
+  line-height: 1.35;
+}
+
+.elaris-cart-drawer__line-title:hover {
+  text-decoration: underline;
+}
+
+.elaris-cart-drawer__line-variant {
+  font-size: 12px;
+  color: rgba(88, 5, 20, 0.55);
+  margin-top: 4px;
+}
+
+.elaris-cart-drawer__line-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.elaris-cart-drawer__qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(88, 5, 20, 0.25);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.elaris-cart-drawer__qty button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #fff;
+  color: #580514;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.elaris-cart-drawer__qty button:hover {
+  background: rgba(88, 5, 20, 0.08);
+}
+
+.elaris-cart-drawer__qty span {
+  min-width: 28px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.elaris-cart-drawer__remove {
+  border: none;
+  background: none;
+  color: rgba(88, 5, 20, 0.45);
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.elaris-cart-drawer__remove:hover {
+  color: #580514;
+}
+
+.elaris-cart-drawer__line-price {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  padding-top: 2px;
+}
+
+.elaris-cart-drawer__foot {
+  flex-shrink: 0;
+  padding: 20px 22px 28px;
+  border-top: 1px solid rgba(88, 5, 20, 0.12);
+  background: linear-gradient(180deg, rgba(250, 250, 248, 0.5) 0%, #fafaf8 18%);
+}
+
+.elaris-cart-drawer__foot[hidden] {
+  display: none;
+}
+
+.elaris-cart-drawer__subtotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.elaris-cart-drawer__subtotal strong {
+  font-size: 17px;
+}
+
+.elaris-cart-drawer__note {
+  margin: 0 0 18px;
+  font-size: 12px;
+  color: rgba(88, 5, 20, 0.5);
+  line-height: 1.45;
+}
+
+.elaris-cart-drawer__checkout {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 16px 20px;
+  background: #580514;
+  color: #fff !important;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 2px solid #580514;
+  transition: background 0.25s, color 0.25s;
+}
+
+.elaris-cart-drawer__checkout:hover {
+  background: #fff;
+  color: #580514 !important;
+}
+
+.elaris-cart-drawer__viewcart {
+  display: block;
+  text-align: center;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #580514;
+  text-decoration: none;
+  border: 2px solid rgba(88, 5, 20, 0.35);
+  padding: 12px 16px;
+  border-radius: 999px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.elaris-cart-drawer__viewcart:hover {
+  border-color: #580514;
+  background: rgba(88, 5, 20, 0.04);
+}
+
+body.elaris-cart-drawer-open {
+  overflow: hidden;
+}
+
+@media (max-width: 480px) {
+  .elaris-cart-drawer__panel {
+    width: 100%;
+  }
+}

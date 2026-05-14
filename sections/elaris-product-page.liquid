@@ -66,12 +66,13 @@
             <path d="M4.5 20c0-4 3.2-6.5 7.5-6.5s7.5 2.5 7.5 6.5"></path>
           </svg>
         </a>
-        <a href="{{ routes.cart_url }}" class="icon-btn" aria-label="cart">
+        <a href="{{ routes.cart_url }}" class="icon-btn elaris-cart-trigger" aria-label="cart">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="10" cy="19" r="1.6"></circle>
             <circle cx="17" cy="19" r="1.6"></circle>
             <path d="M3 4h2l2 10h10l2-7H7"></path>
           </svg>
+          <span class="elaris-cart-count" data-elaris-cart-count>{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span>
         </a>
       </div>
     </header>

@@ -1,0 +1,68 @@
+<div
+  id="ElarisCartDrawer"
+  class="elaris-cart-drawer"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="ElarisCartDrawerTitle"
+>
+  <div class="elaris-cart-drawer__overlay" data-elaris-cart-close tabindex="-1"></div>
+  <div class="elaris-cart-drawer__panel">
+    <div class="elaris-cart-drawer__head">
+      <h2 id="ElarisCartDrawerTitle" class="elaris-cart-drawer__title">Your bag</h2>
+      <button type="button" class="elaris-cart-drawer__close" data-elaris-cart-close aria-label="Close cart">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="elaris-cart-drawer__scroll">
+      <div class="elaris-cart-drawer__empty" data-elaris-cart-empty {% if cart.item_count > 0 %}hidden{% endif %}>
+        <p>Your bag is empty.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="elaris-cart-drawer__link">Continue shopping</a>
+      </div>
+      <ul class="elaris-cart-drawer__lines" id="ElarisCartDrawerLines" data-elaris-cart-lines>
+        {% for item in cart.items %}
+          <li class="elaris-cart-drawer__line" data-line-key="{{ item.key }}">
+            <a href="{{ item.url }}" class="elaris-cart-drawer__thumb" tabindex="-1">
+              {% if item.image %}
+                <img src="{{ item.image | image_url: width: 180 }}" alt="{{ item.image.alt | default: item.title | escape }}" width="90" height="90" loading="lazy">
+              {% else %}
+                <span class="elaris-cart-drawer__thumb-fallback"></span>
+              {% endif %}
+            </a>
+            <div class="elaris-cart-drawer__line-body">
+              <a href="{{ item.url }}" class="elaris-cart-drawer__line-title">{{ item.product.title | escape }}</a>
+              {% unless item.product.has_only_default_variant %}
+                <div class="elaris-cart-drawer__line-variant">{{ item.variant.title | escape }}</div>
+              {% endunless %}
+              <div class="elaris-cart-drawer__line-meta">
+                <div class="elaris-cart-drawer__qty">
+                  <button type="button" data-line-key="{{ item.key }}" data-qty-change="-1" aria-label="Decrease quantity">−</button>
+                  <span data-line-qty>{{ item.quantity }}</span>
+                  <button type="button" data-line-key="{{ item.key }}" data-qty-change="1" aria-label="Increase quantity">+</button>
+                </div>
+                <button type="button" class="elaris-cart-drawer__remove" data-line-key="{{ item.key }}" data-remove-line aria-label="Remove">Remove</button>
+              </div>
+            </div>
+            <div class="elaris-cart-drawer__line-price">{{ item.final_line_price | money }}</div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="elaris-cart-drawer__foot" data-elaris-cart-foot {% if cart.item_count == 0 %}hidden{% endif %}>
+      <div class="elaris-cart-drawer__subtotal">
+        <span>Subtotal</span>
+        <strong data-elaris-cart-subtotal>{{ cart.total_price | money }}</strong>
+      </div>
+      <p class="elaris-cart-drawer__note">Shipping &amp; taxes calculated at checkout.</p>
+      <a href="/checkout" class="elaris-cart-drawer__checkout">Checkout</a>
+      <a href="{{ routes.cart_url }}" class="elaris-cart-drawer__viewcart">View full cart</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.__ELARIS = window.__ELARIS || {};
+  window.__ELARIS.moneyFormat = {{ shop.money_format | json }};
+</script>
