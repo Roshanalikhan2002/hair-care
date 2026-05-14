@@ -161,9 +161,9 @@
               <img
                 class="card-image__img"
                 src="{{ block.settings.image | image_url: width: 800 }}"
+                srcset="{{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 800 }} 800w, {{ block.settings.image | image_url: width: 1000 }} 1000w"
+                sizes="(max-width: 1024px) 85vw, 25vw"
                 alt="{{ block.settings.title | escape }}"
-                width="800"
-                height="1000"
                 loading="lazy"
                 decoding="async"
               >
@@ -172,8 +172,6 @@
                 class="card-image__img"
                 src="{{ card_default_asset | asset_url }}"
                 alt="{{ block.settings.title | escape }}"
-                width="800"
-                height="1000"
                 loading="lazy"
                 decoding="async"
               >
@@ -215,8 +213,6 @@
               class="card-image__img"
               src="{{ card_default_asset | asset_url }}"
               alt="{{ fallback_handle | replace: '-', ' ' | escape }}"
-              width="800"
-              height="1000"
               loading="lazy"
               decoding="async"
             >
