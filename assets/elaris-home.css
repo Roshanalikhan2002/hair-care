@@ -27,7 +27,7 @@
 .top-bar-track {
   display: flex;
   width: max-content;
-  animation: elaris-top-bar-marquee 9s linear infinite;
+  animation: elaris-top-bar-marquee 8s linear infinite;
   will-change: transform;
 }
 
