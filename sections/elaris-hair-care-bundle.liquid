@@ -492,7 +492,16 @@ details.bundle-faq-item[open] > summary .bundle-faq-item__icon::after {
       {% endif %}
 
       {% if section.settings.cta_label != blank %}
-        <a class="bundle-cta" href="{{ bundle_cta }}">{{ section.settings.cta_label }}</a>
+        {% liquid
+          assign cta_display = section.settings.cta_label
+          if product != blank
+            assign price_fmt = product.selected_or_first_available_variant.price | money
+            assign cta_display = cta_display | replace: '{price}', price_fmt
+          else
+            assign cta_display = cta_display | replace: '{price}', '' | strip
+          endif
+        %}
+        <a class="bundle-cta" href="{{ bundle_cta }}">{{ cta_display }}</a>
       {% endif %}
 
       <hr class="bundle-divider">
@@ -700,7 +709,8 @@ details.bundle-faq-item[open] > summary .bundle-faq-item__icon::after {
       "type": "text",
       "id": "cta_label",
       "label": "Button label",
-      "default": "Buy the Kit – Rs.4,215.00"
+      "default": "Buy the Kit – {price}",
+      "info": "Use {price} where the product price should appear (updates from Shopify). On a Page (no product), {price} is removed."
     },
     {
       "type": "url",

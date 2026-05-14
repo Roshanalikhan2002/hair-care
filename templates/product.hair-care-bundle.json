@@ -8,7 +8,7 @@
         "hero_heading": "Hair Care Bundle",
         "rating_count": "(1,430)",
         "hero_description": "Transform your hair routine with the E7 Hair Care Set. This three-product collection is designed to control frizz, strengthen roots, and leave your hair feeling soft, shiny, and beautifully scented. Each product works on its own or together—perfect for home or on-the-go use.",
-        "cta_label": "Buy the Kit – Rs.4,215.00",
+        "cta_label": "Buy the Kit – {price}",
         "acc1_title": "What's Inside",
         "acc2_title": "The Routine",
         "acc3_title": "Shipping & Returns",
