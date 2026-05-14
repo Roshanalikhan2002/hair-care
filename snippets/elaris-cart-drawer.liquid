@@ -56,7 +56,10 @@
         <strong data-elaris-cart-subtotal>{{ cart.total_price | money }}</strong>
       </div>
       <p class="elaris-cart-drawer__note">Shipping &amp; taxes calculated at checkout.</p>
-      <a href="/checkout" class="elaris-cart-drawer__checkout">Checkout</a>
+      {% comment %}GET /checkout often 404s; checkout must start via POST to cart (works on mobile too).{% endcomment %}
+      {% form 'cart', cart, class: 'elaris-cart-drawer__checkout-form' %}
+        <button type="submit" name="checkout" class="elaris-cart-drawer__checkout">Checkout</button>
+      {% endform %}
       <a href="{{ routes.cart_url }}" class="elaris-cart-drawer__viewcart">View full cart</a>
     </div>
   </div>
