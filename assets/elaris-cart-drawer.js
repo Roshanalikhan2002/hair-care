@@ -12,6 +12,28 @@
     return String(moneyFormat).replace(/\{\{\s*amount\s*\}\}/gi, amount);
   }
 
+  /** When product title in admin matches the URL handle, cart.js shows hyphens — make it readable. */
+  function prettifyHandleLikeTitle(t) {
+    if (!t || typeof t !== 'string') return t;
+    var s = t.trim();
+    if (!/-/.test(s) || s !== s.toLowerCase()) return s;
+    if (/[A-Z\u00C0-\u024F]/.test(s)) return s;
+    return s
+      .split(/-+/g)
+      .filter(Boolean)
+      .map(function (w) {
+        return w.charAt(0).toUpperCase() + w.slice(1);
+      })
+      .join(' ');
+  }
+
+  function lineItemDisplayTitle(item) {
+    var raw =
+      (item && (item.untranslated_product_title || item.product_title || item.title)) || '';
+    raw = String(raw).trim();
+    return prettifyHandleLikeTitle(raw) || raw;
+  }
+
   function qs(sel, root) {
     return (root || document).querySelector(sel);
   }
@@ -57,7 +79,7 @@
 
     linesEl.innerHTML = items
       .map(function (item) {
-        var title = escapeHtml(item.product_title || item.title || '');
+        var title = escapeHtml(lineItemDisplayTitle(item));
         var variant =
           item.variant_title && item.variant_title !== 'Default Title'
             ? '<div class="elaris-cart-drawer__line-variant">' +
