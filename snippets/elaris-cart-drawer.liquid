@@ -44,7 +44,13 @@
                 <button type="button" class="elaris-cart-drawer__remove" data-line-key="{{ item.key }}" data-remove-line aria-label="Remove">Remove</button>
               </div>
             </div>
-            <div class="elaris-cart-drawer__line-price">{{ item.final_line_price | money }}</div>
+            <div class="elaris-cart-drawer__line-price{% if item.final_line_price == 0 %} elaris-cart-drawer__line-price--free{% endif %}">
+              {% if item.final_line_price == 0 %}
+                FREE
+              {% else %}
+                {{ item.final_line_price | money }}
+              {% endif %}
+            </div>
           </li>
         {% endfor %}
       </ul>

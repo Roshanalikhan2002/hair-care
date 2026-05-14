@@ -27,6 +27,14 @@
       .join(' ');
   }
 
+  function lineItemLinePriceHtml(item) {
+    var cents = parseInt(item && item.final_line_price, 10) || 0;
+    if (cents === 0) {
+      return '<span class="elaris-cart-drawer__line-price elaris-cart-drawer__line-price--free">FREE</span>';
+    }
+    return '<span class="elaris-cart-drawer__line-price">' + escapeHtml(formatMoney(cents)) + '</span>';
+  }
+
   function lineItemDisplayTitle(item) {
     var raw =
       (item && (item.untranslated_product_title || item.product_title || item.title)) || '';
@@ -124,9 +132,8 @@
           escapeAttr(item.key) +
           '" data-remove-line aria-label="Remove">Remove</button>' +
           '</div></div>' +
-          '<div class="elaris-cart-drawer__line-price">' +
-          formatMoney(item.final_line_price) +
-          '</div></li>'
+          lineItemLinePriceHtml(item) +
+          '</li>'
         );
       })
       .join('');

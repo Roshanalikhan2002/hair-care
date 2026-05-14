@@ -257,6 +257,13 @@
   padding-top: 2px;
 }
 
+.elaris-cart-drawer__line-price--free {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #580514;
+}
+
 .elaris-cart-drawer__foot {
   flex-shrink: 0;
   padding: 20px 22px 28px;
