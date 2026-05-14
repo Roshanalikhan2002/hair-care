@@ -1,12 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "elaris-product-page",
-      "settings": {
-        "logo_text": "Elaris7",
-        "subtitle": "Elaris7 — luxurious hair care",
-        "b1g1_enable": false
-      },
       "blocks": {
         "col_1": {
           "type": "collection_row",
@@ -68,8 +72,23 @@
           }
         }
       },
-      "block_order": ["col_1", "col_2", "col_3", "faq_1", "faq_2", "faq_3", "faq_4", "faq_5"]
+      "block_order": [
+        "col_1",
+        "col_2",
+        "col_3",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {
+        "logo_text": "Elaris7",
+        "subtitle": "Elaris7 — luxurious hair care"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

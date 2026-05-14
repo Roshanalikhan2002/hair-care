@@ -13,54 +13,44 @@
     "sections": {
       "elaris-home": {
         "type": "elaris-home",
-        "settings": {
-          "logo_text": "Elaris7",
-          "nav_shop_url": "",
-          "nav_offers_url": "",
-          "nav_learn_url": "",
-          "nav_quiz_url": "",
-          "nav_pros_url": "",
-          "hero_heading": "",
-          "hero_subheading": "",
-          "hero_cta_label": "",
-          "hero_cta_link": "",
-          "feature_badge": "NEW!",
-          "feature_heading": "E7 Hair Care Set",
-          "feature_text": "Transform your hair routine with the E7 Hair Care Set. This three-product collection is designed to control frizz, strengthen roots, and leave your hair feeling soft, shiny, and beautifully scented. Each product works on its own or together, making styling, protection, and daily care effortless—perfect for home or on-the-go use.",
-          "feature_cta_label": "Shop Now",
-          "feature_cta_link": "/products/hair-care-bundle",
-          "faq_heading": "Frequently Asked Questions"
-        },
         "blocks": {
           "card_1": {
             "type": "card",
             "settings": {
+              "image": "shopify://shop_images/hairreqrowthspray_5efeaca6-e306-4cc6-add2-abe854baedcc.jpg",
               "title": "HAIR REGROW SPRAY",
               "button_label": "BUY - RS. 2,790",
+              "product": "",
               "link": "/products/hair-regrowth-spray"
             }
           },
           "card_2": {
             "type": "card",
             "settings": {
+              "image": "shopify://shop_images/antifrizzkeratinserum.jpg",
               "title": "ANTI FRIZZ KERATIN SERUM",
               "button_label": "BUY - RS. 2,680",
+              "product": "",
               "link": "/products/anti-frizz-keratin-serum"
             }
           },
           "card_3": {
             "type": "card",
             "settings": {
+              "image": "shopify://shop_images/floralblossomhairmist_6bd259cf-f3d1-4172-9ca8-556347107e09.jpg",
               "title": "FLORAL BLOSSOM HAIR MIST",
               "button_label": "BUY - RS. 2,960",
+              "product": "",
               "link": "/products/floral-blossom-hair-mist"
             }
           },
           "card_bundle": {
             "type": "card",
             "settings": {
+              "image": "shopify://shop_images/Bundle.jpg",
               "title": "HAIR CARE BUNDLE",
               "button_label": "VIEW BUNDLE",
+              "product": "",
               "link": "/products/hair-care-bundle"
             }
           },
@@ -110,7 +100,26 @@
           "faq_3",
           "faq_4",
           "faq_5"
-        ]
+        ],
+        "settings": {
+          "top_bar_text": "free shipping & 3oz smoothing solution on orders $75+",
+          "logo_text": "Elaris7",
+          "nav_shop_url": "",
+          "nav_offers_url": "",
+          "nav_learn_url": "",
+          "nav_quiz_url": "",
+          "nav_pros_url": "",
+          "hero_heading": "",
+          "hero_subheading": "",
+          "hero_cta_label": "",
+          "hero_cta_link": "",
+          "feature_badge": "NEW!",
+          "feature_heading": "body crème cleanser",
+          "feature_text": "Restore your skin's natural glow with aloe, coconut oil, shea butter, hyaluronic acid, niacinamide, baobab, and green tea—working together to hydrate, nourish, and protect.",
+          "feature_cta_label": "Shop Now",
+          "feature_cta_link": "/products/hair-care-bundle",
+          "faq_heading": "Frequently Asked Questions"
+        }
       }
     },
     "content_for_index": []
