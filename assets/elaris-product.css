@@ -421,6 +421,76 @@
   color: rgba(88, 5, 20, 0.55);
 }
 
+.elaris-b1g1-note {
+  margin: 0 0 14px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(88, 5, 20, 0.78);
+}
+
+.elaris-b1g1-pill {
+  cursor: default;
+}
+
+.elaris-free-gift {
+  border: none;
+  margin: 18px 0 0;
+  padding: 0;
+}
+
+.elaris-free-gift__legend {
+  font-weight: 700;
+  font-size: 22px;
+  color: #580514;
+  margin-bottom: 12px;
+  padding: 0;
+}
+
+.elaris-free-gift__warn {
+  margin: 0 0 12px;
+  font-size: 15px;
+  color: #8b2940;
+  line-height: 1.45;
+}
+
+.elaris-free-gift__row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 14px 16px;
+  border: 1px solid rgba(88, 5, 20, 0.35);
+  border-radius: 14px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  color: #580514;
+  box-sizing: border-box;
+}
+
+.elaris-free-gift__row:has(input:checked) {
+  border-color: #580514;
+  box-shadow: 0 0 0 1px #580514;
+}
+
+.elaris-free-gift__row--disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.elaris-free-gift__row input {
+  width: 20px;
+  height: 20px;
+  accent-color: #580514;
+  flex-shrink: 0;
+}
+
+.elaris-free-gift__text {
+  flex: 1;
+  line-height: 1.35;
+}
+
 .add-cart {
   margin-top: 8px;
   width: 100%;

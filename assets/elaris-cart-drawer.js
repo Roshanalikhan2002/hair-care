@@ -277,6 +277,62 @@
     if (!form.closest('.elaris-product-page')) return;
 
     e.preventDefault();
+
+    if (form.classList.contains('elaris-product-form--b1g1')) {
+      var idInput = form.querySelector('[name="id"]');
+      var qtyInputEl = form.querySelector('[name="quantity"]');
+      var mainId = idInput ? parseInt(idInput.value, 10) : 0;
+      var qty = qtyInputEl ? Math.max(1, parseInt(qtyInputEl.value, 10) || 1) : 1;
+      var giftRadio = form.querySelector('input[name="elaris_free_gift"]:checked');
+      if (!mainId) {
+        window.alert('Could not read the product variant. Please refresh and try again.');
+        return;
+      }
+      if (!giftRadio) {
+        window.alert('Please choose your free gift.');
+        return;
+      }
+      var giftId = parseInt(giftRadio.value, 10);
+      if (!giftId) {
+        window.alert('Please choose your free gift.');
+        return;
+      }
+      fetch('/cart/add.js', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          items: [
+            { id: mainId, quantity: qty, properties: { _B1G1: 'Paid item' } },
+            { id: giftId, quantity: qty, properties: { _B1G1: 'Free gift' } },
+          ],
+        }),
+      })
+        .then(function (r) {
+          return r.json().then(function (data) {
+            if (!r.ok) {
+              var msg = (data && (data.description || data.message)) || 'Could not add to cart';
+              throw new Error(msg);
+            }
+            return data;
+          });
+        })
+        .then(function () {
+          return refresh();
+        })
+        .then(function () {
+          open();
+          document.dispatchEvent(new CustomEvent('elaris:cart:added'));
+        })
+        .catch(function (err) {
+          window.alert(err.message || 'Could not add to cart');
+        });
+      return;
+    }
+
     addFromForm(form)
       .then(function () {
         return refresh();

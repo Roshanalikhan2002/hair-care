@@ -30,6 +30,25 @@
     {% assign elaris_gallery_src_1 = 'floral-blossom-hair-mist.jpg' | asset_url %}
     {% assign elaris_gallery_src_2 = 'floral-blossom-hair-mist-before-after.jpg' | asset_url %}
   {% endif %}
+  {% liquid
+    assign elaris_b1g1 = false
+    if product.handle == 'hair-regrowth-spray' or product.handle == 'anti-frizz-keratin-serum' or product.handle == 'floral-blossom-hair-mist'
+      assign elaris_b1g1 = true
+    endif
+  %}
+  {% assign gift_floral = all_products['floral-blossom-hair-mist'] %}
+  {% assign gift_regrowth = all_products['hair-regrowth-spray'] %}
+  {% assign gift_keratin = all_products['anti-frizz-keratin-serum'] %}
+  {% liquid
+    assign gift_default_variant_id = ''
+    if gift_floral != blank and gift_floral.selected_or_first_available_variant.available
+      assign gift_default_variant_id = gift_floral.selected_or_first_available_variant.id
+    elsif gift_regrowth != blank and gift_regrowth.selected_or_first_available_variant.available
+      assign gift_default_variant_id = gift_regrowth.selected_or_first_available_variant.id
+    elsif gift_keratin != blank and gift_keratin.selected_or_first_available_variant.available
+      assign gift_default_variant_id = gift_keratin.selected_or_first_available_variant.id
+    endif
+  %}
   {% assign current_variant = product.selected_or_first_available_variant %}
   {% if current_variant.featured_media %}
     {% assign featured = current_variant.featured_media %}
@@ -224,9 +243,21 @@
           <span>{{ section.settings.reviews_label }}</span>
         </div>
 
-        {% form 'product', product, id: elaris_form_id, novalidate: 'novalidate' %}
+        {% liquid
+          assign elaris_form_class = 'elaris-product-form'
+          if elaris_b1g1
+            assign elaris_form_class = elaris_form_class | append: ' elaris-product-form--b1g1'
+          endif
+          assign elaris_b1g1_add_disabled = false
+          if elaris_b1g1 and gift_default_variant_id == blank
+            assign elaris_b1g1_add_disabled = true
+          endif
+        %}
+        {% form 'product', product, id: elaris_form_id, class: elaris_form_class, novalidate: 'novalidate' %}
           <input type="hidden" name="id" id="ElarisVariantId-{{ section.id }}" value="{{ current_variant.id }}">
-          <input type="hidden" name="selling_plan" id="ElarisSellingPlan-{{ section.id }}" value="">
+          {% unless elaris_b1g1 %}
+            <input type="hidden" name="selling_plan" id="ElarisSellingPlan-{{ section.id }}" value="">
+          {% endunless %}
 
           {% unless product.has_only_default_variant %}
             <div class="variant-select" style="margin-bottom:14px;">
@@ -262,45 +293,102 @@
             <input type="hidden" name="quantity" id="ElarisQtyInput-{{ section.id }}" value="1" min="1">
           </div>
 
-          <div class="purchase-label">purchase options</div>
+          {% if elaris_b1g1 %}
+            <div class="purchase-label">Buy 1 Get 1</div>
+            {% if section.settings.b1g1_note != blank %}
+              <p class="elaris-b1g1-note">{{ section.settings.b1g1_note }}</p>
+            {% endif %}
+            <div class="buy-option active elaris-b1g1-pill" aria-current="true">
+              <span>{{ section.settings.b1g1_box_label }}</span>
+              <span id="ElarisPriceOnetime-{{ section.id }}">{{ current_variant.price | money }}</span>
+            </div>
 
-          <button
-            type="button"
-            class="buy-option active"
-            id="ElarisPurchaseOnetime-{{ section.id }}"
-            data-mode="onetime"
-          >
-            <span>one time purchase</span>
-            <span id="ElarisPriceOnetime-{{ section.id }}">{{ current_variant.price | money }}</span>
-          </button>
+            <fieldset class="elaris-free-gift">
+              <legend class="elaris-free-gift__legend">Choose your free gift</legend>
+              {% if gift_default_variant_id == blank %}
+                <p class="elaris-free-gift__warn">Publish all three gift products with at least one available variant so customers can choose a free gift.</p>
+              {% endif %}
+              {% if gift_floral != blank %}
+                {% assign gv = gift_floral.selected_or_first_available_variant %}
+                <label class="elaris-free-gift__row{% unless gv.available %} elaris-free-gift__row--disabled{% endunless %}">
+                  <input
+                    type="radio"
+                    name="elaris_free_gift"
+                    value="{{ gv.id }}"
+                    {% if gv.id == gift_default_variant_id %}checked{% endif %}
+                    {% unless gv.available %}disabled{% endunless %}
+                  >
+                  <span class="elaris-free-gift__text">{{ gift_floral.title }}</span>
+                </label>
+              {% endif %}
+              {% if gift_regrowth != blank %}
+                {% assign gv = gift_regrowth.selected_or_first_available_variant %}
+                <label class="elaris-free-gift__row{% unless gv.available %} elaris-free-gift__row--disabled{% endunless %}">
+                  <input
+                    type="radio"
+                    name="elaris_free_gift"
+                    value="{{ gv.id }}"
+                    {% if gv.id == gift_default_variant_id %}checked{% endif %}
+                    {% unless gv.available %}disabled{% endunless %}
+                  >
+                  <span class="elaris-free-gift__text">{{ gift_regrowth.title }}</span>
+                </label>
+              {% endif %}
+              {% if gift_keratin != blank %}
+                {% assign gv = gift_keratin.selected_or_first_available_variant %}
+                <label class="elaris-free-gift__row{% unless gv.available %} elaris-free-gift__row--disabled{% endunless %}">
+                  <input
+                    type="radio"
+                    name="elaris_free_gift"
+                    value="{{ gv.id }}"
+                    {% if gv.id == gift_default_variant_id %}checked{% endif %}
+                    {% unless gv.available %}disabled{% endunless %}
+                  >
+                  <span class="elaris-free-gift__text">{{ gift_keratin.title }}</span>
+                </label>
+              {% endif %}
+            </fieldset>
+          {% else %}
+            <div class="purchase-label">purchase options</div>
 
-          {% if first_selling_plan != nil %}
             <button
               type="button"
-              class="buy-option"
-              id="ElarisPurchaseSubscribe-{{ section.id }}"
-              data-mode="subscribe"
-              data-selling-plan-id="{{ first_selling_plan.id }}"
+              class="buy-option active"
+              id="ElarisPurchaseOnetime-{{ section.id }}"
+              data-mode="onetime"
             >
-              <span>subscribe and save</span>
-              <span>
-                <span id="ElarisPriceSubscribe-{{ section.id }}">{{ section.settings.subscribe_price_placeholder }}</span>
-                <s id="ElarisCompareSubscribe-{{ section.id }}">{{ current_variant.price | money }}</s>
-              </span>
+              <span>one time purchase</span>
+              <span id="ElarisPriceOnetime-{{ section.id }}">{{ current_variant.price | money }}</span>
             </button>
-          {% else %}
-            <button type="button" class="buy-option" id="ElarisPurchaseSubscribe-{{ section.id }}" data-mode="subscribe-placeholder">
-              <span>subscribe and save</span>
-              <span>
-                {% if current_variant.compare_at_price > current_variant.price %}
-                  <span id="ElarisPriceSubscribe-{{ section.id }}">{{ current_variant.price | money }}</span>
-                  <s id="ElarisCompareSubscribe-{{ section.id }}">{{ current_variant.compare_at_price | money }}</s>
-                {% else %}
+
+            {% if first_selling_plan != nil %}
+              <button
+                type="button"
+                class="buy-option"
+                id="ElarisPurchaseSubscribe-{{ section.id }}"
+                data-mode="subscribe"
+                data-selling-plan-id="{{ first_selling_plan.id }}"
+              >
+                <span>subscribe and save</span>
+                <span>
                   <span id="ElarisPriceSubscribe-{{ section.id }}">{{ section.settings.subscribe_price_placeholder }}</span>
                   <s id="ElarisCompareSubscribe-{{ section.id }}">{{ current_variant.price | money }}</s>
-                {% endif %}
-              </span>
-            </button>
+                </span>
+              </button>
+            {% else %}
+              <button type="button" class="buy-option" id="ElarisPurchaseSubscribe-{{ section.id }}" data-mode="subscribe-placeholder">
+                <span>subscribe and save</span>
+                <span>
+                  {% if current_variant.compare_at_price > current_variant.price %}
+                    <span id="ElarisPriceSubscribe-{{ section.id }}">{{ current_variant.price | money }}</span>
+                    <s id="ElarisCompareSubscribe-{{ section.id }}">{{ current_variant.compare_at_price | money }}</s>
+                  {% else %}
+                    <span id="ElarisPriceSubscribe-{{ section.id }}">{{ section.settings.subscribe_price_placeholder }}</span>
+                    <s id="ElarisCompareSubscribe-{{ section.id }}">{{ current_variant.price | money }}</s>
+                  {% endif %}
+                </span>
+              </button>
+            {% endif %}
           {% endif %}
 
           <button
@@ -308,12 +396,16 @@
             name="add"
             class="add-cart"
             id="ElarisAddCart-{{ section.id }}"
-            {% unless current_variant.available %}
+            {% if elaris_b1g1_add_disabled or current_variant.available == false %}
               disabled
-            {% endunless %}
+            {% endif %}
           >
             {% if current_variant.available %}
-              add to cart
+              {% if elaris_b1g1 %}
+                add to cart — buy 1 get 1
+              {% else %}
+                add to cart
+              {% endif %}
             {% else %}
               sold out
             {% endif %}
@@ -619,6 +711,26 @@
       "id": "subscribe_price_placeholder",
       "label": "Subscribe price (no subscription app)",
       "default": "$19.60"
+    },
+    {
+      "type": "header",
+      "content": "Buy 1 Get 1 (Hair Regrowth, Keratin Serum, Floral Mist)"
+    },
+    {
+      "type": "paragraph",
+      "content": "On those three products, Subscribe is hidden and customers pick a free gift. Add both lines to the cart. Use Admin → Discounts (e.g. Buy X Get Y) so the gift line is free, or adjust pricing as you prefer."
+    },
+    {
+      "type": "text",
+      "id": "b1g1_box_label",
+      "label": "B1G1 price row label",
+      "default": "Buy 1 Get 1 — you pay today"
+    },
+    {
+      "type": "textarea",
+      "id": "b1g1_note",
+      "label": "B1G1 short note under heading",
+      "default": "Pick one free gift below. Both items are added to your cart together."
     },
     {
       "type": "header",
