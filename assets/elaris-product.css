@@ -521,6 +521,7 @@
   font-weight: 700;
   text-transform: lowercase;
   cursor: pointer;
+  border-radius: 30px;
 }
 
 .add-cart:disabled {
