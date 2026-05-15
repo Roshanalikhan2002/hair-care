@@ -1,0 +1,334 @@
+{{ 'elaris-home.css' | asset_url | stylesheet_tag }}
+{{ 'elaris-footer.css' | asset_url | stylesheet_tag }}
+{{ 'elaris-contact.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign page_heading = section.settings.heading | strip
+  if page_heading == blank
+    if page.title != blank
+      assign page_heading = page.title
+    else
+      assign page_heading = 'Contact Us'
+    endif
+  endif
+
+  assign page_intro = section.settings.intro | strip
+  if page_intro == blank
+    assign page_intro = 'Have a question about your order, our products, or partnerships? Send us a message and we will get back to you as soon as we can.'
+  endif
+
+  assign contact_email = section.settings.email | strip
+  if contact_email == blank
+    assign contact_email = shop.email
+  endif
+
+  assign contact_phone = section.settings.phone | strip
+  assign contact_hours = section.settings.hours | strip
+  assign contact_address = section.settings.address | strip
+%}
+
+<div class="elaris-contact-root elaris-home-root">
+  <header class="navbar">
+    <div class="left-nav">
+      <button type="button" aria-label="menu" class="menu-btn">&#9776;</button>
+      <div class="logo">
+        <a href="{{ routes.root_url }}">{% render 'elaris-logo-text', section: section %}</a>
+      </div>
+    </div>
+    <nav class="desktop-nav">
+      <a href="{{ section.settings.nav_shop_url | default: routes.all_products_collection_url }}">Shop</a>
+      <a href="{{ section.settings.nav_offers_url | default: '#' }}">Offers</a>
+      <a href="{{ section.settings.nav_learn_url | default: '#' }}">Learn</a>
+      <a href="{{ section.settings.nav_quiz_url | default: '#' }}">Hair Quiz</a>
+      <a href="{{ section.settings.nav_pros_url | default: '#' }}">Pros</a>
+    </nav>
+    <div class="icons">
+      <a href="{{ routes.search_url }}" aria-label="search">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
+      <a href="{{ routes.account_login_url }}" class="profile" aria-label="account">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+      <a href="{{ routes.cart_url }}" class="elaris-cart-trigger" aria-label="cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span class="elaris-cart-count" data-elaris-cart-count>{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="elaris-contact-main">
+    <div class="elaris-contact-hero">
+      <h1>{{ page_heading }}</h1>
+      <p class="elaris-contact-intro">{{ page_intro }}</p>
+      {% if page.content != blank %}
+        <div class="page-content rte">{{ page.content }}</div>
+      {% endif %}
+    </div>
+
+    <div class="elaris-contact-grid">
+      <aside class="elaris-contact-info">
+        <h2>{{ section.settings.info_heading | default: 'Get in touch' }}</h2>
+
+        {% if contact_email != blank %}
+          <div class="elaris-contact-detail">
+            <h3>Email</h3>
+            <p><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></p>
+          </div>
+        {% endif %}
+
+        {% if contact_phone != blank %}
+          <div class="elaris-contact-detail">
+            <h3>Phone</h3>
+            <p><a href="tel:{{ contact_phone | replace: ' ', '' | replace: '-', '' }}">{{ contact_phone }}</a></p>
+          </div>
+        {% endif %}
+
+        {% if contact_hours != blank %}
+          <div class="elaris-contact-detail">
+            <h3>Hours</h3>
+            <p>{{ contact_hours | newline_to_br }}</p>
+          </div>
+        {% endif %}
+
+        {% if contact_address != blank %}
+          <div class="elaris-contact-detail">
+            <h3>Address</h3>
+            <p>{{ contact_address | newline_to_br }}</p>
+          </div>
+        {% endif %}
+      </aside>
+
+      <div class="elaris-contact-form-wrap">
+        <h2>{{ section.settings.form_heading | default: 'Send a message' }}</h2>
+
+        {% form 'contact', class: 'elaris-contact-form' %}
+          {% if form.posted_successfully? %}
+            <div class="elaris-contact-alert elaris-contact-alert--success" role="status">
+              {{ section.settings.success_message | default: 'Thanks for reaching out. We will reply to your email shortly.' }}
+            </div>
+          {% endif %}
+
+          {% if form.errors %}
+            <div class="elaris-contact-alert elaris-contact-alert--error" role="alert">
+              <p>{{ section.settings.error_message | default: 'Please fix the errors below and try again.' }}</p>
+              <ul>
+                {% for field in form.errors %}
+                  <li>{{ form.errors.messages[field] }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          {% unless form.posted_successfully? %}
+            <div class="field-row">
+              <div class="field">
+                <label for="ContactForm-name-{{ section.id }}">Name</label>
+                <input
+                  type="text"
+                  id="ContactForm-name-{{ section.id }}"
+                  name="contact[name]"
+                  autocomplete="name"
+                  value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                  placeholder="Your name"
+                  required
+                >
+              </div>
+              <div class="field">
+                <label for="ContactForm-email-{{ section.id }}">Email</label>
+                <input
+                  type="email"
+                  id="ContactForm-email-{{ section.id }}"
+                  name="contact[email]"
+                  autocomplete="email"
+                  value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                  placeholder="you@example.com"
+                  required
+                  {% if form.errors contains 'email' %}
+                    aria-invalid="true"
+                  {% endif %}
+                >
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="ContactForm-phone-{{ section.id }}">Phone <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+              <input
+                type="tel"
+                id="ContactForm-phone-{{ section.id }}"
+                name="contact[phone]"
+                autocomplete="tel"
+                value="{% if form.phone %}{{ form.phone }}{% endif %}"
+                placeholder="+92 ..."
+              >
+            </div>
+
+            <div class="field">
+              <label for="ContactForm-body-{{ section.id }}">Message</label>
+              <textarea
+                id="ContactForm-body-{{ section.id }}"
+                name="contact[body]"
+                placeholder="How can we help?"
+                required
+                {% if form.errors contains 'body' %}
+                  aria-invalid="true"
+                {% endif %}
+              >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+            </div>
+
+            <button type="submit" class="elaris-contact-submit">
+              {{ section.settings.submit_label | default: 'Send message' }}
+            </button>
+          {% endunless %}
+        {% endform %}
+      </div>
+    </div>
+  </main>
+
+  {% render 'elaris-footer' %}
+</div>
+
+<script>
+  (function () {
+    if (window.innerWidth > 1024) {
+      document.querySelectorAll('.elaris-contact-root .footer-accordion').forEach(function (el) {
+        el.setAttribute('open', '');
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Elaris contact",
+  "tag": "section",
+  "class": "elaris-contact-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "Elaris7"
+    },
+    {
+      "type": "header",
+      "content": "Navigation URLs"
+    },
+    {
+      "type": "url",
+      "id": "nav_shop_url",
+      "label": "Shop link"
+    },
+    {
+      "type": "url",
+      "id": "nav_offers_url",
+      "label": "Offers link"
+    },
+    {
+      "type": "url",
+      "id": "nav_learn_url",
+      "label": "Learn link"
+    },
+    {
+      "type": "url",
+      "id": "nav_quiz_url",
+      "label": "Hair Quiz link"
+    },
+    {
+      "type": "url",
+      "id": "nav_pros_url",
+      "label": "Pros link"
+    },
+    {
+      "type": "header",
+      "content": "Page header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Leave empty to use the page title from Shopify."
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "Have a question about your order, our products, or partnerships? Send us a message and we will get back to you as soon as we can."
+    },
+    {
+      "type": "header",
+      "content": "Contact details"
+    },
+    {
+      "type": "text",
+      "id": "info_heading",
+      "label": "Info column heading",
+      "default": "Get in touch"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "info": "Leave empty to use your store email."
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone"
+    },
+    {
+      "type": "textarea",
+      "id": "hours",
+      "label": "Business hours",
+      "default": "Monday – Friday: 9am – 6pm\nSaturday: 10am – 4pm"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Address"
+    },
+    {
+      "type": "header",
+      "content": "Form"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "Send a message"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button label",
+      "default": "Send message"
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for reaching out. We will reply to your email shortly."
+    },
+    {
+      "type": "textarea",
+      "id": "error_message",
+      "label": "Error message",
+      "default": "Please fix the errors below and try again."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elaris contact"
+    }
+  ]
+}
+{% endschema %}
