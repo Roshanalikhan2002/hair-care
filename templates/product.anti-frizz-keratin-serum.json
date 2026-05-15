@@ -15,31 +15,32 @@
         "logo_text": "Elaris7",
         "subtitle": "Elaris7 — luxurious hair care",
         "description_override": "A smoothing hair serum designed to control frizz, protect against heat, and restore softness without weighing hair down. It seals moisture, enhances shine, and leaves hair silky, manageable, and smooth with every use.",
-        "b1g1_enable": true
+        "b1g1_enable": true,
+        "collections_heading": "smooth hair. zero frizz."
       },
       "blocks": {
         "col_1": {
           "type": "collection_row",
           "settings": {
-            "icon": "🧴",
-            "title": "shampoo & conditioner",
-            "text": "explore Elaris7 clean haircare solutions with shampoos and conditioners tailored for moisture, volume, repair, and protection."
+            "icon": "✦",
+            "title": "benefits",
+            "text": "controls frizz for a smoother look, helps reduce breakage and split ends, protects against heat styling, locks in moisture, and adds shine and softness without heaviness—keeps hair manageable with long-lasting hydration."
           }
         },
         "col_2": {
           "type": "collection_row",
           "settings": {
-            "icon": "🧪",
-            "title": "styling, finishing & treatments",
-            "text": "discover styling must-haves, finishing sprays, and targeted treatments made to shape, protect, and perfect your everyday look."
+            "icon": "◎",
+            "title": "application",
+            "text": "after washing or styling, apply a small amount through damp or dry hair on mid-lengths and ends—avoid the roots—and style as desired."
           }
         },
         "col_3": {
           "type": "collection_row",
           "settings": {
-            "icon": "♡",
-            "title": "our favorites",
-            "text": "shop community-loved picks and salon favorites curated for shine, softness, and all-day healthy hair confidence."
+            "icon": "🌿",
+            "title": "key ingredients",
+            "text": "argan oil, keratin complex, wheat germ, almond and olive oils, grapeseed and coconut oils, flaxseed and safflower oils, shea butter, squalene, and niacinamide—for frizz control and smoother, shinier strands."
           }
         },
         "faq_1": {
