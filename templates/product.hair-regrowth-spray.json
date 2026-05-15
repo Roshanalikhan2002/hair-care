@@ -15,33 +15,10 @@
         "logo_text": "Elaris7",
         "subtitle": "Elaris7 — luxurious hair care",
         "description_override": "A fast-absorbing scalp spray designed to reduce hair fall and support healthy regrowth without leaving residue. It helps strengthen roots, improve density, and restore hair vitality with consistent use.",
-        "b1g1_enable": true
+        "b1g1_enable": true,
+        "collections_heading": "grow stronger. feel fuller."
       },
       "blocks": {
-        "col_1": {
-          "type": "collection_row",
-          "settings": {
-            "icon": "🧴",
-            "title": "shampoo & conditioner",
-            "text": "explore Elaris7 clean haircare solutions with shampoos and conditioners tailored for moisture, volume, repair, and protection."
-          }
-        },
-        "col_2": {
-          "type": "collection_row",
-          "settings": {
-            "icon": "🧪",
-            "title": "styling, finishing & treatments",
-            "text": "discover styling must-haves, finishing sprays, and targeted treatments made to shape, protect, and perfect your everyday look."
-          }
-        },
-        "col_3": {
-          "type": "collection_row",
-          "settings": {
-            "icon": "♡",
-            "title": "our favorites",
-            "text": "shop community-loved picks and salon favorites curated for shine, softness, and all-day healthy hair confidence."
-          }
-        },
         "faq_1": {
           "type": "faq_item",
           "settings": {
@@ -79,9 +56,6 @@
         }
       },
       "block_order": [
-        "col_1",
-        "col_2",
-        "col_3",
         "faq_1",
         "faq_2",
         "faq_3",
