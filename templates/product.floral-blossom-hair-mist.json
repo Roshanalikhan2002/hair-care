@@ -15,31 +15,32 @@
         "logo_text": "Elaris7",
         "subtitle": "Elaris7 — luxurious hair care",
         "description_override": "A refreshing hair mist designed to instantly revive your hair with a soft floral scent. It helps add a natural shine, refresh between washes, and keep your hair feeling clean and beautifully scented all day.",
-        "b1g1_enable": true
+        "b1g1_enable": true,
+        "collections_heading": "bloom with every move."
       },
       "blocks": {
         "col_1": {
           "type": "collection_row",
           "settings": {
-            "icon": "🧴",
-            "title": "shampoo & conditioner",
-            "text": "explore Elaris7 clean haircare solutions with shampoos and conditioners tailored for moisture, volume, repair, and protection."
+            "icon": "✦",
+            "title": "benefits",
+            "text": "leaves hair with a long-lasting soft floral fragrance, refreshes between washes, adds natural shine, and keeps hair feeling fresh and clean all day—helps eliminate odors and suits daily use on all hair types."
           }
         },
         "col_2": {
           "type": "collection_row",
           "settings": {
-            "icon": "🧪",
-            "title": "styling, finishing & treatments",
-            "text": "discover styling must-haves, finishing sprays, and targeted treatments made to shape, protect, and perfect your everyday look."
+            "icon": "◎",
+            "title": "application",
+            "text": "spray evenly onto dry hair from a short distance. use anytime during the day to refresh your hair and enhance its fragrance."
           }
         },
         "col_3": {
           "type": "collection_row",
           "settings": {
-            "icon": "♡",
-            "title": "our favorites",
-            "text": "shop community-loved picks and salon favorites curated for shine, softness, and all-day healthy hair confidence."
+            "icon": "🌿",
+            "title": "key ingredients",
+            "text": "panthenol hydrates and adds healthy-looking shine; propanediol refreshes hair and helps the scent last—plus subtle floral extracts for a delicate, long-lasting fragrance."
           }
         },
         "faq_1": {
