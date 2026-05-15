@@ -300,11 +300,6 @@
           </div>
         {% endif %}
 
-        <div class="rating">
-          &#9733;&#9733;&#9733;&#9733;&#9733;
-          <span>{{ section.settings.reviews_label }}</span>
-        </div>
-
         {% liquid
           assign elaris_form_class = 'elaris-product-form'
           if elaris_b1g1
@@ -797,12 +792,6 @@
       "id": "force_new_badge",
       "label": "Always show NEW badge",
       "default": false
-    },
-    {
-      "type": "text",
-      "id": "reviews_label",
-      "label": "Reviews fallback text",
-      "default": "1 review"
     },
     {
       "type": "text",
