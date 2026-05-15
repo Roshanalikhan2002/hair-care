@@ -288,6 +288,8 @@
             assign elaris_product_description = section.settings.description_override
           elsif elaris_product_description == blank and product.handle == 'hair-regrowth-spray'
             assign elaris_product_description = 'A fast-absorbing scalp spray designed to reduce hair fall and support healthy regrowth without leaving residue. It helps strengthen roots, improve density, and restore hair vitality with consistent use.'
+          elsif elaris_product_description == blank and product.handle == 'anti-frizz-keratin-serum'
+            assign elaris_product_description = 'A smoothing hair serum designed to control frizz, protect against heat, and restore softness without weighing hair down. It seals moisture, enhances shine, and leaves hair silky, manageable, and smooth with every use.'
           endif
         %}
         {% if elaris_product_description != blank %}
