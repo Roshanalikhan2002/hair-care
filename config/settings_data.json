@@ -47,7 +47,6 @@
           "card_bundle": {
             "type": "card",
             "settings": {
-              "image": "shopify://shop_images/Bundle.jpg",
               "title": "HAIR CARE BUNDLE",
               "button_label": "VIEW BUNDLE",
               "product": "",
