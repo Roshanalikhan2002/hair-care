@@ -282,9 +282,23 @@
           <h3>{% render 'elaris-brandize', text: section.settings.subtitle %}</h3>
         {% endif %}
 
-        <div class="rte">
-          {% render 'elaris-brandize', text: product.description %}
-        </div>
+        {% liquid
+          assign elaris_product_description = product.description
+          if section.settings.description_override != blank
+            assign elaris_product_description = section.settings.description_override
+          elsif elaris_product_description == blank and product.handle == 'hair-regrowth-spray'
+            assign elaris_product_description = 'A fast-absorbing scalp spray designed to reduce hair fall and support healthy regrowth without leaving residue. It helps strengthen roots, improve density, and restore hair vitality with consistent use.'
+          endif
+        %}
+        {% if elaris_product_description != blank %}
+          <div class="rte product-description">
+            {% if elaris_product_description contains '<' %}
+              {% render 'elaris-brandize', text: elaris_product_description %}
+            {% else %}
+              <p>{% render 'elaris-brandize', text: elaris_product_description %}</p>
+            {% endif %}
+          </div>
+        {% endif %}
 
         <div class="rating">
           &#9733;&#9733;&#9733;&#9733;&#9733;
@@ -771,6 +785,12 @@
       "id": "subtitle",
       "label": "Subtitle (if no metafield)",
       "default": "Elaris7 — luxurious hair care"
+    },
+    {
+      "type": "textarea",
+      "id": "description_override",
+      "label": "Product description",
+      "info": "Shown under the subtitle. Leave empty to use the product description from Shopify admin."
     },
     {
       "type": "checkbox",
