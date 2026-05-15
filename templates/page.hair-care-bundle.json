@@ -88,43 +88,29 @@
         "faq_1": {
           "type": "bundle_faq",
           "settings": {
-            "question": "How long does one bundle last?",
-            "answer": "With regular use (3–4 times per week), the bundle typically lasts 6–8 weeks, giving you a full two-month hair transformation experience."
+            "question": "Can I use the Anti Frizz Keratin Serum on damp and dry hair?",
+            "answer": "Yes! On damp hair it locks in moisture and smooths strands, and on dry hair it instantly tames flyaways."
           }
         },
         "faq_2": {
           "type": "bundle_faq",
           "settings": {
-            "question": "Is it suitable for all hair types?",
-            "answer": "Yes! The E7 bundle is formulated for all hair types — straight, wavy, curly, and coily. It's especially effective for damaged, thinning, or frizzy hair."
+            "question": "How long until I see results with the Hair Regrowth Spray?",
+            "answer": "Consistent daily use usually shows noticeable improvement in hair strength and density within 6–8 weeks."
           }
         },
         "faq_3": {
           "type": "bundle_faq",
           "settings": {
-            "question": "Are the products free from harmful chemicals?",
-            "answer": "Absolutely. All E7 products are free from sulfates, parabens, and artificial dyes. We use only clean, science-backed ingredients."
+            "question": "Is the Hair Mist suitable for colored or treated hair?",
+            "answer": "Absolutely. It is lightweight, non-greasy, and safe for all hair types, including color-treated hair."
           }
         },
         "faq_4": {
           "type": "bundle_faq",
           "settings": {
-            "question": "Can I use the serum without the shampoo?",
-            "answer": "Yes, each product is designed to work independently. However, using the full bundle together delivers the best, fastest results as the products are synergistically formulated."
-          }
-        },
-        "faq_5": {
-          "type": "bundle_faq",
-          "settings": {
-            "question": "When will I see results?",
-            "answer": "Most customers notice softer, shinier hair after the first 2 weeks of consistent use. Significant growth results are typically visible within 6–8 weeks."
-          }
-        },
-        "faq_6": {
-          "type": "bundle_faq",
-          "settings": {
-            "question": "What is your return policy?",
-            "answer": "We offer a 7-day return policy for unopened, unused products in original packaging. Please contact our support team to initiate a return."
+            "question": "Can I use all three products together in one routine?",
+            "answer": "Yes! Start with the serum after washing, follow with the spray on the scalp, and finish with the hair mist for a refreshed fragrance."
           }
         }
       },
@@ -140,9 +126,7 @@
         "faq_1",
         "faq_2",
         "faq_3",
-        "faq_4",
-        "faq_5",
-        "faq_6"
+        "faq_4"
       ]
     }
   },
