@@ -517,7 +517,11 @@ details.bundle-faq-item[open] > summary .bundle-faq-item__icon::after {
             {% if section.settings.acc1_body != blank %}
               {{ section.settings.acc1_body | newline_to_br }}
             {% else %}
-              <p>The E7 Hair Care Set includes three full-size products in a sleek Elaris pouch: E7 Anti Frizz Keratin Serum, E7 Hair Regrowth Spray, and E7 Floral Blossom Hair Mist.</p>
+              <ul>
+                <li>🧴 E7 Hair Growth Serum — 50ml</li>
+                <li>🧴 E7 Repair &amp; Nourish Shampoo — 200ml</li>
+                <li>🧴 E7 Deep Conditioning Mask — 150ml</li>
+              </ul>
             {% endif %}
           </div>
         </details>
@@ -533,10 +537,9 @@ details.bundle-faq-item[open] > summary .bundle-faq-item__icon::after {
             {% if section.settings.acc2_body != blank %}
               {{ section.settings.acc2_body | newline_to_br }}
             {% else %}
-              <p>Your complete hair care ritual:</p>
-              <p><strong>E7 ANTI FRIZZ KERATIN SERUM — Smooth Control</strong><br>Apply a small amount to damp or dry hair, focusing on mid-lengths and ends. Avoid roots and style as desired. Use before heat styling for added protection.</p>
-              <p><strong>E7 HAIR REGROWTH SPRAY — Stronger Roots</strong><br>Spray directly onto a clean, dry scalp. Massage gently to aid absorption and leave overnight. Use daily for best results.</p>
-              <p><strong>E7 FLORAL BLOSSOM HAIR MIST — Fresh Floral Touch</strong><br>Spray evenly onto dry hair from a short distance. Refresh hair anytime during the day and enjoy a subtle, long-lasting floral fragrance.</p>
+              <p><strong>Step 1:</strong> Apply the Hair Growth Serum directly to scalp, massage gently for 2–3 minutes.</p>
+              <p><strong>Step 2:</strong> Shampoo with the Repair Shampoo, lather and rinse thoroughly.</p>
+              <p><strong>Step 3:</strong> Apply the Deep Conditioning Mask to lengths, leave for 5–10 minutes, rinse.</p>
             {% endif %}
           </div>
         </details>
@@ -752,8 +755,8 @@ details.bundle-faq-item[open] > summary .bundle-faq-item__icon::after {
     {
       "type": "text",
       "id": "acc3_title",
-      "label": "Accordion 3 title (leave empty to hide)",
-      "default": ""
+      "label": "Accordion 3 title",
+      "default": "Shipping & Returns"
     },
     {
       "type": "textarea",
