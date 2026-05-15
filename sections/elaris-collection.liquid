@@ -1,0 +1,188 @@
+{{ 'elaris-home.css' | asset_url | stylesheet_tag }}
+{{ 'elaris-footer.css' | asset_url | stylesheet_tag }}
+{{ 'elaris-collection.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign collection_heading = section.settings.heading | strip
+  if collection_heading == blank
+    if collection.title != blank
+      assign collection_heading = collection.title
+    else
+      assign collection_heading = 'Shop All'
+    endif
+  endif
+
+  assign collection_subheading = section.settings.subheading | strip
+  if collection_subheading == blank and collection.description != blank
+    assign collection_subheading = collection.description | strip_html | truncate: 200
+  endif
+
+  assign fallback_handles = 'hair-care-bundle,floral-blossom-hair-mist,anti-frizz-keratin-serum,hair-regrowth-spray' | split: ','
+%}
+
+<div class="elaris-collection-root elaris-home-root">
+  <header class="navbar">
+    <div class="left-nav">
+      <button type="button" aria-label="menu" class="menu-btn">&#9776;</button>
+      <div class="logo">
+        <a href="{{ routes.root_url }}">{% render 'elaris-logo-text', section: section %}</a>
+      </div>
+    </div>
+    <nav class="desktop-nav">
+      <a href="{{ section.settings.nav_shop_url | default: routes.all_products_collection_url }}">Shop</a>
+      <a href="{{ section.settings.nav_offers_url | default: '#' }}">Offers</a>
+      <a href="{{ section.settings.nav_learn_url | default: '#' }}">Learn</a>
+      <a href="{{ section.settings.nav_quiz_url | default: '#' }}">Hair Quiz</a>
+      <a href="{{ section.settings.nav_pros_url | default: '#' }}">Pros</a>
+    </nav>
+    <div class="icons">
+      <a href="{{ routes.search_url }}" aria-label="search">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
+      <a href="{{ routes.account_login_url }}" class="profile" aria-label="account">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+      <a href="{{ routes.cart_url }}" class="elaris-cart-trigger" aria-label="cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span class="elaris-cart-count" data-elaris-cart-count>{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="elaris-collection-hero">
+    <h1>{{ collection_heading }}</h1>
+    {% if collection_subheading != blank %}
+      <p>{{ collection_subheading }}</p>
+    {% endif %}
+  </div>
+
+  {% if collection.products_count > 0 %}
+    <section class="product-cards" aria-label="{{ collection_heading | escape }}">
+      {% for product in collection.products %}
+        {% render 'elaris-collection-product-card', product: product, button_label: section.settings.button_label_prefix %}
+      {% endfor %}
+    </section>
+  {% else %}
+    <section class="product-cards" aria-label="{{ collection_heading | escape }}">
+      {% for fallback_handle in fallback_handles %}
+        {% assign fallback_product = all_products[fallback_handle] %}
+        {% if fallback_product != blank %}
+          {% render 'elaris-collection-product-card', product: fallback_product, button_label: section.settings.button_label_prefix %}
+        {% endif %}
+      {% endfor %}
+    </section>
+    {% if fallback_handles.size > 0 %}
+      {% assign any_fallback = false %}
+      {% for fallback_handle in fallback_handles %}
+        {% if all_products[fallback_handle] != blank %}
+          {% assign any_fallback = true %}
+        {% endif %}
+      {% endfor %}
+      {% unless any_fallback %}
+        <p class="elaris-collection-empty">No products in this collection yet.</p>
+      {% endunless %}
+    {% endif %}
+  {% endif %}
+
+  {% render 'elaris-footer' %}
+</div>
+
+<script>
+  (function () {
+    if (window.innerWidth > 1024) {
+      document.querySelectorAll('.elaris-collection-root .footer-accordion').forEach(function (el) {
+        el.setAttribute('open', '');
+      });
+    }
+
+    document.querySelectorAll('.elaris-collection-root .card[data-card-url]').forEach(function (card) {
+      card.addEventListener('click', function (event) {
+        if (event.target.closest('a')) return;
+        var to = card.getAttribute('data-card-url');
+        if (to) window.location.href = to;
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Elaris collection",
+  "tag": "section",
+  "class": "elaris-collection-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "Elaris7"
+    },
+    {
+      "type": "header",
+      "content": "Navigation URLs"
+    },
+    {
+      "type": "url",
+      "id": "nav_shop_url",
+      "label": "Shop link"
+    },
+    {
+      "type": "url",
+      "id": "nav_offers_url",
+      "label": "Offers link"
+    },
+    {
+      "type": "url",
+      "id": "nav_learn_url",
+      "label": "Learn link"
+    },
+    {
+      "type": "url",
+      "id": "nav_quiz_url",
+      "label": "Hair Quiz link"
+    },
+    {
+      "type": "url",
+      "id": "nav_pros_url",
+      "label": "Pros link"
+    },
+    {
+      "type": "header",
+      "content": "Collection header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Leave empty to use the collection title from Shopify."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "info": "Leave empty to use the collection description."
+    },
+    {
+      "type": "text",
+      "id": "button_label_prefix",
+      "label": "Button label prefix",
+      "default": "BUY"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elaris collection"
+    }
+  ]
+}
+{% endschema %}

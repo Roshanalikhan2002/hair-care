@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "elaris_collection": {
+      "type": "elaris-collection",
+      "settings": {
+        "heading": "Shop All",
+        "subheading": "",
+        "button_label_prefix": "BUY"
+      }
+    }
+  },
+  "order": ["elaris_collection"]
+}
