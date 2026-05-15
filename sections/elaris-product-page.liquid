@@ -290,6 +290,8 @@
             assign elaris_product_description = 'A fast-absorbing scalp spray designed to reduce hair fall and support healthy regrowth without leaving residue. It helps strengthen roots, improve density, and restore hair vitality with consistent use.'
           elsif elaris_product_description == blank and product.handle == 'anti-frizz-keratin-serum'
             assign elaris_product_description = 'A smoothing hair serum designed to control frizz, protect against heat, and restore softness without weighing hair down. It seals moisture, enhances shine, and leaves hair silky, manageable, and smooth with every use.'
+          elsif elaris_product_description == blank and product.handle == 'floral-blossom-hair-mist'
+            assign elaris_product_description = 'A refreshing hair mist designed to instantly revive your hair with a soft floral scent. It helps add a natural shine, refresh between washes, and keep your hair feeling clean and beautifully scented all day.'
           endif
         %}
         {% if elaris_product_description != blank %}
