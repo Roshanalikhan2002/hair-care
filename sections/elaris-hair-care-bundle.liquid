@@ -596,6 +596,14 @@ details.bundle-faq-item[open] > summary .bundle-faq-item__icon::after {
           height="{{ section.settings.ingredients_image.height }}"
           loading="lazy"
         >
+      {% else %}
+        <img
+          src="{{ 'bundle-ingredients-image.jpg' | asset_url }}"
+          alt="Elaris7 hair care bundle ingredients"
+          width="1400"
+          height="1400"
+          loading="lazy"
+        >
       {% endif %}
     </div>
   </section>
