@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
@@ -16,9 +7,33 @@
         "subtitle": "Elaris7 — luxurious hair care",
         "description_override": "A fast-absorbing scalp spray designed to reduce hair fall and support healthy regrowth without leaving residue. It helps strengthen roots, improve density, and restore hair vitality with consistent use.",
         "b1g1_enable": true,
-        "collections_heading": "grow stronger. feel fuller."
+        "collections_heading": "discover the formula"
       },
       "blocks": {
+        "col_1": {
+          "type": "collection_row",
+          "settings": {
+            "icon": "✦",
+            "title": "benefits",
+            "text": "helps reduce hair fall over time, supports healthy regrowth and thickness, strengthens weak roots, and improves density and volume for dull, thinning hair."
+          }
+        },
+        "col_2": {
+          "type": "collection_row",
+          "settings": {
+            "icon": "◎",
+            "title": "application",
+            "text": "apply a few sprays to a clean, dry scalp, massage gently, and leave overnight. use daily, morning and night, for best results."
+          }
+        },
+        "col_3": {
+          "type": "collection_row",
+          "settings": {
+            "icon": "🌿",
+            "title": "key ingredients",
+            "text": "anagain™, procapil®, rosemary extract, acetyl tetrapeptide-3, d-panthenol, and niacinamide—made to strengthen roots and support thicker, fuller-looking hair."
+          }
+        },
         "faq_1": {
           "type": "faq_item",
           "settings": {
@@ -56,6 +71,9 @@
         }
       },
       "block_order": [
+        "col_1",
+        "col_2",
+        "col_3",
         "faq_1",
         "faq_2",
         "faq_3",
@@ -64,7 +82,5 @@
       ]
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main"]
 }

@@ -517,12 +517,9 @@
         {% endif %}
       ></div>
 
-      <div class="collections-content{% if elaris_regrowth_gallery %} collections-content--details{% endif %}">
-        {% if elaris_regrowth_gallery %}
-          {% render 'elaris-hair-regrowth-details' %}
-        {% endif %}
+      <div class="collections-content">
         {% for block in section.blocks %}
-          {% if block.type == 'collection_row' and elaris_regrowth_gallery == false %}
+          {% if block.type == 'collection_row' %}
             <div class="collection-item" {{ block.shopify_attributes }}>
               <div class="item-main">
                 <div class="item-title-row">
