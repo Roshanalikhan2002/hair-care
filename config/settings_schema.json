@@ -28,18 +28,9 @@
       },
       {
         "type": "url",
-        "id": "social_facebook_link",
-        "label": "Facebook"
-      },
-      {
-        "type": "url",
         "id": "social_instagram_link",
-        "label": "Instagram"
-      },
-      {
-        "type": "url",
-        "id": "social_youtube_link",
-        "label": "YouTube"
+        "label": "Instagram",
+        "default": "https://www.instagram.com/e7haircare0.01?igsh=enQ4MWhyOXI2ZXZn"
       }
     ]
   }
