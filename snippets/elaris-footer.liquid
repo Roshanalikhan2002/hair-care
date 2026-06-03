@@ -35,6 +35,9 @@
           <li><a href="#">Cookies Policy</a></li>
           <li><a href="#">FAQ</a></li>
           <li>
+            <a href="{% if pages['about-us'] %}{{ pages['about-us'].url }}{% elsif pages.about %}{{ pages.about.url }}{% else %}/pages/about-us{% endif %}">About Us</a>
+          </li>
+          <li>
             <a href="{% if pages.contact %}{{ pages.contact.url }}{% else %}#{% endif %}">Contact Us</a>
           </li>
         </ul>
