@@ -86,6 +86,56 @@
   align-items: center;
 }
 
+/* Legacy header (old .left-nav + .desktop-nav) until theme files sync to Shopify */
+.elaris-home-root .navbar:has(.desktop-nav) {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
+}
+
+.elaris-home-root .navbar:has(.desktop-nav) .left-nav {
+  grid-column: 1;
+  grid-row: 1;
+  z-index: 2;
+}
+
+.elaris-home-root .navbar:has(.desktop-nav) .left-nav .logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.elaris-home-root .navbar:has(.desktop-nav) .desktop-nav {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0;
+  padding-left: 44px;
+  z-index: 2;
+}
+
+.elaris-home-root .navbar:has(.desktop-nav) .desktop-nav a {
+  text-decoration: none;
+  color: #580514;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.elaris-home-root .navbar:has(.desktop-nav) .desktop-nav a:not(:first-child) {
+  display: none !important;
+}
+
+.elaris-home-root .navbar:has(.desktop-nav) .icons {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+}
+
 .hero {
   position: relative;
   width: 100%;
