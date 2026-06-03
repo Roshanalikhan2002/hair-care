@@ -1,10 +1,10 @@
 {%- assign _t = section.settings.logo_text | strip -%}
 {%- if _t == blank -%}
-  elaréhair
+  ELARÉHAIR
 {%- else -%}
   {%- assign _d = _t | downcase | replace: 'é', 'e' | replace: 'è', 'e' -%}
-  {%- if _d == 'privee' or _d == 'prive' or _d == 'elaris 7' or _d == 'elaris7' -%}
-    elaréhair
+  {%- if _d == 'privee' or _d == 'prive' or _d == 'elaris 7' or _d == 'elaris7' or _d == 'elarehair' or _d == 'elare hair' -%}
+    ELARÉHAIR
   {%- else -%}
     {{- _t -}}
   {%- endif -%}

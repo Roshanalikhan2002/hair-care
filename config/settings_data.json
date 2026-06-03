@@ -85,7 +85,7 @@
           "faq_5": {
             "type": "faq_item",
             "settings": {
-              "question": "Are elaréhair hair products suitable for all hair types?",
+              "question": "Are ELARÉHAIR hair products suitable for all hair types?",
               "answer": "Yes. They suit different textures and needs—from frizz control and shine to support for thinning or weaker hair. Each product page has tailored FAQs if you want more detail."
             }
           }
@@ -103,7 +103,7 @@
         ],
         "settings": {
           "top_bar_text": "free shipping & 3oz smoothing solution on orders $75+",
-          "logo_text": "elaréhair",
+          "logo_text": "ELARÉHAIR",
           "nav_shop_url": "",
           "nav_offers_url": "",
           "nav_learn_url": "",
@@ -114,8 +114,8 @@
           "hero_cta_label": "",
           "hero_cta_link": "",
           "feature_badge": "NEW!",
-          "feature_heading": "E7 Hair Care Set",
-          "feature_text": "Transform your hair routine with the E7 Hair Care Set. This three-product collection is designed to control frizz, strengthen roots, and leave your hair feeling soft, shiny, and beautifully scented. Each product works on its own or together, making styling, protection, and daily care effortless—perfect for home or on-the-go use.",
+          "feature_heading": "ELARÉHAIR Hair Care Set",
+          "feature_text": "Transform your hair routine with the ELARÉHAIR Hair Care Set. This three-product collection is designed to control frizz, strengthen roots, and leave your hair feeling soft, shiny, and beautifully scented. Each product works on its own or together, making styling, protection, and daily care effortless—perfect for home or on-the-go use.",
           "feature_cta_label": "Shop Now",
           "feature_cta_link": "/products/hair-care-bundle",
           "faq_heading": "Frequently Asked Questions"
