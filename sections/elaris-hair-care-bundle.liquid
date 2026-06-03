@@ -517,11 +517,7 @@ details.bundle-faq-item[open] > summary .bundle-faq-item__icon::after {
             {% if section.settings.acc1_body != blank %}
               {{ section.settings.acc1_body | newline_to_br }}
             {% else %}
-              <ul>
-                <li>🧴 E7 Hair Growth Serum — 50ml</li>
-                <li>🧴 E7 Repair &amp; Nourish Shampoo — 200ml</li>
-                <li>🧴 E7 Deep Conditioning Mask — 150ml</li>
-              </ul>
+              <p>The E7 Hair Care Set includes three full-size products in a sleek elaréhair pouch: E7 Anti Frizz Keratin Serum, E7 Hair Regrowth Spray, and E7 Floral Blossom Hair Mist.</p>
             {% endif %}
           </div>
         </details>
@@ -599,7 +595,7 @@ details.bundle-faq-item[open] > summary .bundle-faq-item__icon::after {
       {% else %}
         <img
           src="{{ 'bundle-ingredients-image.jpg' | asset_url }}"
-          alt="Elaris7 hair care bundle ingredients"
+          alt="elaréhair hair care bundle ingredients"
           width="1400"
           height="1400"
           loading="lazy"
@@ -678,7 +674,7 @@ details.bundle-faq-item[open] > summary .bundle-faq-item__icon::after {
       "type": "text",
       "id": "logo_text",
       "label": "Logo text",
-      "default": "Elaris7",
+      "default": "elaréhair",
       "info": "Shown in the header. Leave as default or match your theme settings."
     },
     {
