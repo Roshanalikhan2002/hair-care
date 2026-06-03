@@ -106,43 +106,7 @@
   {% assign first_selling_plan = product.selling_plan_groups.first.selling_plans.first %}
 
   <div class="elaris-product-page" style="color:#580514;font-family:Arial,Helvetica,sans-serif;">
-    <header class="navbar">
-      <div class="left-nav">
-        <button type="button" aria-label="menu" class="menu-btn">&#9776;</button>
-        <div class="logo">
-          <a href="{{ routes.root_url }}">{% render 'elaris-logo-text', section: section %}</a>
-        </div>
-      </div>
-      <nav class="desktop-nav">
-        <a href="{{ section.settings.nav_shop_url | default: routes.all_products_collection_url }}">Shop</a>
-        <a href="{{ section.settings.nav_offers_url | default: '#' }}">Offers</a>
-        <a href="{{ section.settings.nav_learn_url | default: '#' }}">Learn</a>
-        <a href="{{ section.settings.nav_quiz_url | default: '#' }}">Hair Quiz</a>
-        <a href="{{ section.settings.nav_pros_url | default: '#' }}">Pros</a>
-      </nav>
-      <div class="icons">
-        <a href="{{ routes.search_url }}" class="icon-btn" aria-label="search">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="11" cy="11" r="6.5"></circle>
-            <line x1="16" y1="16" x2="21" y2="21"></line>
-          </svg>
-        </a>
-        <a href="{{ routes.account_login_url }}" class="icon-btn profile" aria-label="account">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="8" r="3.6"></circle>
-            <path d="M4.5 20c0-4 3.2-6.5 7.5-6.5s7.5 2.5 7.5 6.5"></path>
-          </svg>
-        </a>
-        <a href="{{ routes.cart_url }}" class="icon-btn elaris-cart-trigger" aria-label="cart">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="10" cy="19" r="1.6"></circle>
-            <circle cx="17" cy="19" r="1.6"></circle>
-            <path d="M3 4h2l2 10h10l2-7H7"></path>
-          </svg>
-          <span class="elaris-cart-count" data-elaris-cart-count>{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span>
-        </a>
-      </div>
-    </header>
+    {% render 'elaris-navbar', section: section %}
 
     <div class="promo-strip">
       {% for i in (1..4) %}
