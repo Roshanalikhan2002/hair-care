@@ -14,17 +14,31 @@
 
   assign page_intro = section.settings.intro | strip
   if page_intro == blank
-    assign page_intro = 'Have a question about your order, our products, or partnerships? Send us a message and we will get back to you as soon as we can.'
+    assign page_intro = "We're always here for you — with care, clarity, and a warm heart. Whether you have a question, need help with an order, or just want to say Salam — reach out anytime."
   endif
 
   assign contact_email = section.settings.email | strip
   if contact_email == blank
-    assign contact_email = shop.email
+    assign contact_email = 'iibdaeielaris7@gmail.com'
   endif
 
-  assign contact_phone = section.settings.phone | strip
+  assign email_note = section.settings.email_note | strip
+  assign whatsapp = section.settings.whatsapp | strip
+  assign whatsapp_note = section.settings.whatsapp_note | strip
   assign contact_hours = section.settings.hours | strip
-  assign contact_address = section.settings.address | strip
+  assign registered_brand = section.settings.registered_brand | strip
+  assign brand_note = section.settings.brand_note | strip
+  assign thank_you = section.settings.thank_you | strip
+
+  if whatsapp != blank
+    assign whatsapp_digits = whatsapp | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', '' | replace: '+', ''
+    assign wa_first_digit = whatsapp_digits | slice: 0, 1
+    if whatsapp_digits.size >= 11 and wa_first_digit == '0'
+      assign whatsapp_href = 'https://wa.me/92' | append: whatsapp_digits | slice: 1, 20
+    else
+      assign whatsapp_href = 'https://wa.me/' | append: whatsapp_digits
+    endif
+  endif
 %}
 
 <div class="elaris-contact-root elaris-home-root">
@@ -33,42 +47,52 @@
   <main class="elaris-contact-main">
     <div class="elaris-contact-hero">
       <h1>{{ page_heading }}</h1>
-      <p class="elaris-contact-intro">{{ page_intro }}</p>
-      {% if page.content != blank %}
-        <div class="page-content rte">{{ page.content }}</div>
-      {% endif %}
+      <p class="elaris-contact-intro">{% render 'elaris-brandize', text: page_intro %}</p>
     </div>
 
     <div class="elaris-contact-grid">
       <aside class="elaris-contact-info">
-        <h2>{{ section.settings.info_heading | default: 'Get in touch' }}</h2>
-
         {% if contact_email != blank %}
           <div class="elaris-contact-detail">
-            <h3>Email</h3>
-            <p><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></p>
+            <h3>{{ section.settings.email_heading | default: 'Email Support' }}</h3>
+            <p class="elaris-contact-value"><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></p>
+            {% if email_note != blank %}
+              <p class="elaris-contact-note">{% render 'elaris-brandize', text: email_note %}</p>
+            {% endif %}
           </div>
         {% endif %}
 
-        {% if contact_phone != blank %}
+        {% if whatsapp != blank %}
           <div class="elaris-contact-detail">
-            <h3>Phone</h3>
-            <p><a href="tel:{{ contact_phone | replace: ' ', '' | replace: '-', '' }}">{{ contact_phone }}</a></p>
+            <h3>{{ section.settings.whatsapp_heading | default: 'WhatsApp Support' }}</h3>
+            <p class="elaris-contact-value">
+              <a href="{{ whatsapp_href }}" rel="noopener noreferrer" target="_blank">{{ whatsapp }}</a>
+            </p>
+            {% if whatsapp_note != blank %}
+              <p class="elaris-contact-note">{% render 'elaris-brandize', text: whatsapp_note %}</p>
+            {% endif %}
           </div>
         {% endif %}
 
         {% if contact_hours != blank %}
           <div class="elaris-contact-detail">
-            <h3>Hours</h3>
-            <p>{{ contact_hours | newline_to_br }}</p>
+            <h3>{{ section.settings.hours_heading | default: 'Support Hours' }}</h3>
+            <p class="elaris-contact-value">{% render 'elaris-brandize', text: contact_hours %}</p>
           </div>
         {% endif %}
 
-        {% if contact_address != blank %}
+        {% if registered_brand != blank %}
           <div class="elaris-contact-detail">
-            <h3>Address</h3>
-            <p>{{ contact_address | newline_to_br }}</p>
+            <h3>{{ section.settings.registered_heading | default: 'Registered Brand' }}</h3>
+            <p class="elaris-contact-value">{% render 'elaris-brandize', text: registered_brand %}</p>
+            {% if brand_note != blank %}
+              <p class="elaris-contact-note">{% render 'elaris-brandize', text: brand_note %}</p>
+            {% endif %}
           </div>
+        {% endif %}
+
+        {% if thank_you != blank %}
+          <p class="elaris-contact-thanks">{% render 'elaris-brandize', text: thank_you %}</p>
         {% endif %}
       </aside>
 
@@ -226,7 +250,7 @@
       "type": "textarea",
       "id": "intro",
       "label": "Introduction",
-      "default": "Have a question about your order, our products, or partnerships? Send us a message and we will get back to you as soon as we can."
+      "default": "We're always here for you — with care, clarity, and a warm heart. Whether you have a question, need help with an order, or just want to say Salam — reach out anytime."
     },
     {
       "type": "header",
@@ -234,31 +258,75 @@
     },
     {
       "type": "text",
-      "id": "info_heading",
-      "label": "Info column heading",
-      "default": "Get in touch"
+      "id": "email_heading",
+      "label": "Email section title",
+      "default": "Email Support"
     },
     {
       "type": "text",
       "id": "email",
-      "label": "Email",
-      "info": "Leave empty to use your store email."
+      "label": "Email address",
+      "default": "iibdaeielaris7@gmail.com"
+    },
+    {
+      "type": "textarea",
+      "id": "email_note",
+      "label": "Email description",
+      "default": "For order inquiries, product questions, or general support"
     },
     {
       "type": "text",
-      "id": "phone",
-      "label": "Phone"
+      "id": "whatsapp_heading",
+      "label": "WhatsApp section title",
+      "default": "WhatsApp Support"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp",
+      "label": "WhatsApp number",
+      "default": "03291934583"
+    },
+    {
+      "type": "textarea",
+      "id": "whatsapp_note",
+      "label": "WhatsApp description",
+      "default": "Quick replies, friendly help — because hair care should never feel stressful"
+    },
+    {
+      "type": "text",
+      "id": "hours_heading",
+      "label": "Hours section title",
+      "default": "Support Hours"
     },
     {
       "type": "textarea",
       "id": "hours",
-      "label": "Business hours",
-      "default": "Monday – Friday: 9am – 6pm\nSaturday: 10am – 4pm"
+      "label": "Support hours",
+      "default": "Monday to Saturday — 10:00 AM to 6:00 PM (PKT)"
+    },
+    {
+      "type": "text",
+      "id": "registered_heading",
+      "label": "Registered brand title",
+      "default": "Registered Brand"
+    },
+    {
+      "type": "text",
+      "id": "registered_brand",
+      "label": "Registered brand name",
+      "default": "ELARÉHAIR Enterprises"
     },
     {
       "type": "textarea",
-      "id": "address",
-      "label": "Address"
+      "id": "brand_note",
+      "label": "Brand note",
+      "default": "We believe hair care is personal — and your trust is priceless."
+    },
+    {
+      "type": "textarea",
+      "id": "thank_you",
+      "label": "Closing message",
+      "default": "Thank you for choosing ELARÉHAIR, where every message is heard, and every order is sent with care and dua."
     },
     {
       "type": "header",

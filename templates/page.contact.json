@@ -1,23 +1,22 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
       "type": "elaris-contact",
       "settings": {
         "heading": "Contact Us",
-        "intro": "Have a question about your order, our products, or partnerships? Send us a message and we will get back to you as soon as we can.",
-        "info_heading": "Get in touch",
-        "phone": "",
-        "hours": "Monday – Friday: 9am – 6pm\nSaturday: 10am – 4pm",
-        "address": "",
+        "intro": "We're always here for you — with care, clarity, and a warm heart. Whether you have a question, need help with an order, or just want to say Salam — reach out anytime.",
+        "email_heading": "Email Support",
+        "email": "iibdaeielaris7@gmail.com",
+        "email_note": "For order inquiries, product questions, or general support",
+        "whatsapp_heading": "WhatsApp Support",
+        "whatsapp": "03291934583",
+        "whatsapp_note": "Quick replies, friendly help — because hair care should never feel stressful",
+        "hours_heading": "Support Hours",
+        "hours": "Monday to Saturday — 10:00 AM to 6:00 PM (PKT)",
+        "registered_heading": "Registered Brand",
+        "registered_brand": "ELARÉHAIR Enterprises",
+        "brand_note": "We believe hair care is personal — and your trust is priceless.",
+        "thank_you": "Thank you for choosing ELARÉHAIR, where every message is heard, and every order is sent with care and dua.",
         "form_heading": "Send a message",
         "submit_label": "Send message"
       }
