@@ -1,0 +1,22 @@
+{%- if template.name == 'index' -%}
+  {{ 'elaris-home.css' | asset_url | stylesheet_tag }}
+{%- elsif template.name == 'product' -%}
+  {{ 'elaris-product.css' | asset_url | stylesheet_tag }}
+{%- elsif template.name == 'collection' -%}
+  {{ 'elaris-home.css' | asset_url | stylesheet_tag }}
+  {{ 'elaris-collection.css' | asset_url | stylesheet_tag }}
+{%- elsif template.name == 'page' -%}
+  {{ 'elaris-home.css' | asset_url | stylesheet_tag }}
+  {%- case template.suffix -%}
+    {%- when 'contact' -%}
+      {{ 'elaris-contact.css' | asset_url | stylesheet_tag }}
+    {%- when 'about-us' -%}
+      {{ 'elaris-about.css' | asset_url | stylesheet_tag }}
+    {%- when 'privacy-policy', 'term-of-services', 'return-and-refund', 'shipping-policy' -%}
+      {{ 'elaris-policy.css' | asset_url | stylesheet_tag }}
+    {%- when 'hair-care-bundle' -%}
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  {%- endcase -%}
+{%- endif -%}

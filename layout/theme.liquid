@@ -13,6 +13,11 @@
   {% if page_description %}
     <meta name="description" content="{{ page_description | escape }}">
   {% endif %}
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.shopify.com">
+  {% if template.name == 'index' %}
+    <link rel="preload" href="{{ 'hero-desktop.jpeg' | asset_url }}" as="image" fetchpriority="high">
+  {% endif %}
   {{ content_for_header }}
   <style>
     /* Prevent horizontal page shift on narrow viewports */
@@ -29,8 +34,11 @@
       box-sizing: border-box;
     }
   </style>
+  {{ 'elaris-announcement.css' | asset_url | stylesheet_tag }}
   {{ 'elaris-cart-drawer.css' | asset_url | stylesheet_tag }}
   {{ 'elaris-navbar.css' | asset_url | stylesheet_tag }}
+  {{ 'elaris-footer.css' | asset_url | stylesheet_tag }}
+  {% render 'elaris-theme-styles' %}
 </head>
 <body class="template-{{ template.name | handle }}">
   {% render 'elaris-announcement-bar' %}
@@ -39,5 +47,6 @@
   {{ content_for_footer }}
   <script src="{{ 'elaris-cart-drawer.js' | asset_url }}" defer></script>
   <script src="{{ 'elaris-navbar.js' | asset_url }}" defer></script>
+  <script src="{{ 'elaris-footer.js' | asset_url }}" defer></script>
 </body>
 </html>

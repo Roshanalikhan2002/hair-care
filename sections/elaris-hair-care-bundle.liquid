@@ -1,7 +1,3 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-{{ 'elaris-home.css' | asset_url | stylesheet_tag }}
 {% style %}
 /* Hair Care Bundle page — scoped layout; brand #580514 + cream (match bundle.html) */
 .elaris-bundle-wrapper {
@@ -400,7 +396,6 @@ details.bundle-faq-item[open] > summary .bundle-faq-item__icon::after {
   }
 }
 {% endstyle %}
-{{ 'elaris-footer.css' | asset_url | stylesheet_tag }}
 
 <div class="elaris-home-root elaris-bundle-wrapper" id="BundlePage-{{ section.id }}">
   {% render 'elaris-navbar', section: section %}
@@ -420,19 +415,21 @@ details.bundle-faq-item[open] > summary .bundle-faq-item__icon::after {
       <div class="bundle-image-col__inner">
         {% if section.settings.hero_media_image != blank %}
           <img
-            src="{{ section.settings.hero_media_image | image_url: width: 1600 }}"
+            src="{{ section.settings.hero_media_image | image_url: width: 900 }}"
             alt="{{ section.settings.hero_heading | escape }}"
             width="{{ section.settings.hero_media_image.width }}"
             height="{{ section.settings.hero_media_image.height }}"
             loading="eager"
+            fetchpriority="high"
           >
         {% elsif product != blank and product.featured_media %}
           <img
-            src="{{ product.featured_media | image_url: width: 1600 }}"
+            src="{{ product.featured_media | image_url: width: 900 }}"
             alt="{{ product.title | escape }}"
             width="{{ product.featured_media.width }}"
             height="{{ product.featured_media.height }}"
             loading="eager"
+            fetchpriority="high"
           >
         {% endif %}
       </div>
@@ -550,7 +547,7 @@ details.bundle-faq-item[open] > summary .bundle-faq-item__icon::after {
     <div class="bundle-ingredients__visual">
       {% if section.settings.ingredients_image != blank %}
         <img
-          src="{{ section.settings.ingredients_image | image_url: width: 1400 }}"
+          src="{{ section.settings.ingredients_image | image_url: width: 900 }}"
           alt=""
           width="{{ section.settings.ingredients_image.width }}"
           height="{{ section.settings.ingredients_image.height }}"

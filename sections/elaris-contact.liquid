@@ -1,7 +1,3 @@
-{{ 'elaris-home.css' | asset_url | stylesheet_tag }}
-{{ 'elaris-footer.css' | asset_url | stylesheet_tag }}
-{{ 'elaris-contact.css' | asset_url | stylesheet_tag }}
-
 {% liquid
   assign page_heading = section.settings.heading | strip
   if page_heading == blank
@@ -184,16 +180,6 @@
 
   {% render 'elaris-footer' %}
 </div>
-
-<script>
-  (function () {
-    if (window.innerWidth > 1024) {
-      document.querySelectorAll('.elaris-contact-root .footer-accordion').forEach(function (el) {
-        el.setAttribute('open', '');
-      });
-    }
-  })();
-</script>
 
 {% schema %}
 {

@@ -23,7 +23,7 @@
 
   assign card_bg_url = ''
   if card_product.featured_image != blank
-    assign card_bg_url = card_product.featured_image | image_url: width: 1200
+    assign card_bg_url = card_product.featured_image | image_url: width: 800
   elsif card_default_asset != blank
     assign card_bg_url = card_default_asset | asset_url
   endif

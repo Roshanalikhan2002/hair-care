@@ -1,5 +1,3 @@
-{{ 'elaris-product.css' | asset_url | stylesheet_tag }}
-{{ 'elaris-footer.css' | asset_url | stylesheet_tag }}
 {% comment %}B1G1 build: free gift + no subscribe when elaris_b1g1 true. Sync this file from GitHub if store shows old UI.{% endcomment %}
 
 {% assign elaris_form_id = 'ElarisProductForm-' | append: section.id %}
@@ -189,11 +187,14 @@
               {% if featured != blank %}
                 <img
                   id="ElarisMainImgTag-{{ section.id }}"
-                  src="{{ featured | image_url: width: 1200 }}"
+                  src="{{ featured | image_url: width: 900 }}"
+                  srcset="{{ featured | image_url: width: 480 }} 480w, {{ featured | image_url: width: 720 }} 720w, {{ featured | image_url: width: 900 }} 900w, {{ featured | image_url: width: 1200 }} 1200w"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   alt="{{ featured.alt | escape }}"
                   width="{{ featured.width }}"
                   height="{{ featured.height }}"
                   loading="eager"
+                  fetchpriority="high"
                 >
               {% else %}
                 <span>Main product image</span>
@@ -470,7 +471,7 @@
       <div
         class="collections-image has-image"
         {% if section.settings.collections_image != blank %}
-          style="background-image: url('{{ section.settings.collections_image | image_url: width: 1400 }}');"
+          style="background-image: url('{{ section.settings.collections_image | image_url: width: 900 }}');"
         {% elsif elaris_keratin_gallery %}
           style="background-image: url('{{ 'anti-frizz-our-collection.jpg' | asset_url }}');"
         {% elsif elaris_floral_gallery %}
@@ -532,7 +533,7 @@
       <div
         class="faq-image{% if section.settings.faq_image != blank or elaris_regrowth_gallery or elaris_keratin_gallery or elaris_floral_gallery %} has-image{% endif %}"
         {% if section.settings.faq_image != blank %}
-          style="background-image: url('{{ section.settings.faq_image | image_url: width: 1200 }}');"
+          style="background-image: url('{{ section.settings.faq_image | image_url: width: 800 }}');"
         {% elsif elaris_regrowth_gallery %}
           style="background-image: url('{{ 'hair-regrowth-faq.jpg' | asset_url }}');"
         {% elsif elaris_keratin_gallery %}
@@ -686,16 +687,6 @@
       }
       if (regrowthPrev) regrowthPrev.addEventListener('click', function () { scrollRegrowthThumbStrip('prev'); });
       if (regrowthNext) regrowthNext.addEventListener('click', function () { scrollRegrowthThumbStrip('next'); });
-
-      if (window.innerWidth > 1024) {
-        document.querySelectorAll('.elaris-product-page .footer-accordion').forEach(function (el) {
-          el.setAttribute('open', '');
-        });
-      } else {
-        document.querySelectorAll('.elaris-product-page .footer-accordion').forEach(function (el) {
-          el.removeAttribute('open');
-        });
-      }
 
       document.querySelectorAll('.elaris-product-page .collection-item--toggle').forEach(function (item) {
         var toggle = item.querySelector('[data-collection-toggle]');
