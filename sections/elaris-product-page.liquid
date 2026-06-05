@@ -483,7 +483,13 @@
       <div class="collections-content">
         {% for block in section.blocks %}
           {% if block.type == 'collection_row' %}
-            <div class="collection-item" {{ block.shopify_attributes }}>
+            {% liquid
+              assign row_link = block.settings.link | strip
+              if row_link == blank or row_link == '#'
+                assign row_link = ''
+              endif
+            %}
+            <div class="collection-item{% if row_link == blank %} collection-item--toggle{% endif %}" {{ block.shopify_attributes }}>
               <div class="item-main">
                 <div class="item-title-row">
                   <span class="item-icon">{{ block.settings.icon }}</span>
@@ -491,9 +497,15 @@
                 </div>
                 <p>{% render 'elaris-brandize', text: block.settings.text %}</p>
               </div>
-              <a class="item-arrow" href="{{ block.settings.link | default: '#' }}" aria-label="open collection">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l7 7-7 7"></path></svg>
-              </a>
+              {% if row_link != blank %}
+                <a class="item-arrow" href="{{ row_link }}" aria-label="open collection">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l7 7-7 7"></path></svg>
+                </a>
+              {% else %}
+                <button type="button" class="item-arrow" data-collection-toggle aria-expanded="false" aria-label="Show details">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l7 7-7 7"></path></svg>
+                </button>
+              {% endif %}
             </div>
           {% endif %}
         {% endfor %}
@@ -684,6 +696,27 @@
           el.removeAttribute('open');
         });
       }
+
+      document.querySelectorAll('.elaris-product-page .collection-item--toggle').forEach(function (item) {
+        var toggle = item.querySelector('[data-collection-toggle]');
+        if (!toggle) return;
+
+        function setOpen(open) {
+          item.classList.toggle('is-open', open);
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+
+        function handleToggle(event) {
+          event.preventDefault();
+          setOpen(!item.classList.contains('is-open'));
+        }
+
+        toggle.addEventListener('click', handleToggle);
+        item.addEventListener('click', function (event) {
+          if (event.target === toggle || toggle.contains(event.target)) return;
+          handleToggle(event);
+        });
+      });
     })();
   </script>
 {% endif %}

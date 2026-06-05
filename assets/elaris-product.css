@@ -746,8 +746,9 @@
     transform 0.35s ease;
 }
 
-.collection-item:hover .item-main p {
-  max-height: 180px;
+.collection-item:hover .item-main p,
+.collection-item.is-open .item-main p {
+  max-height: 280px;
   opacity: 1;
   transform: translateY(0);
 }
@@ -764,6 +765,8 @@
   justify-content: center;
   cursor: pointer;
   color: #580514;
+  font-family: inherit;
+  padding: 0;
   transition:
     transform 0.35s ease,
     background-color 0.35s ease,
@@ -771,10 +774,19 @@
   text-decoration: none;
 }
 
-.collection-item:hover .item-arrow {
+.collection-item:hover .item-arrow,
+.collection-item.is-open .item-arrow {
   transform: translateX(2px);
   border-color: rgba(88, 5, 20, 0.28);
   background: rgba(88, 5, 20, 0.04);
+}
+
+.collection-item.is-open .item-arrow {
+  transform: rotate(90deg);
+}
+
+.collection-item--toggle {
+  cursor: pointer;
 }
 
 .item-arrow svg {
@@ -1205,6 +1217,11 @@
     font-size: 12px;
     line-height: 1.5;
     max-width: 94%;
+  }
+
+  .collection-item.is-open .item-main p,
+  .collection-item:hover .item-main p {
+    max-height: 320px;
   }
 
   .item-arrow {
