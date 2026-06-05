@@ -25,25 +25,9 @@
       '<nav class="navbar-drawer__nav" aria-label="Main menu">' +
       '<a class="navbar-drawer__link" href="' + rootHref + '">Home</a>' +
       '<a class="navbar-drawer__link" href="' + shopHref + '">Shop</a>' +
-      '<a class="navbar-drawer__link" href="/products/hair-care-bundle">Hair Care Bundle</a>' +
-      '<a class="navbar-drawer__link" href="/products/hair-regrowth-spray">Hair Regrowth Spray</a>' +
-      '<a class="navbar-drawer__link" href="/products/anti-frizz-keratin-serum">Anti Frizz Keratin Serum</a>' +
-      '<a class="navbar-drawer__link" href="/products/floral-blossom-hair-mist">Floral Blossom Hair Mist</a>' +
+      '<a class="navbar-drawer__link" href="/pages/about-us">About Us</a>' +
+      '<a class="navbar-drawer__link" href="/pages/contact">Contact Us</a>' +
       '</nav>' +
-      '<div class="navbar-drawer__divider" aria-hidden="true"></div>' +
-      '<nav class="navbar-drawer__nav navbar-drawer__nav--secondary" aria-label="Company">' +
-      '<a class="navbar-drawer__link navbar-drawer__link--secondary" href="/pages/about-us">About Us</a>' +
-      '<a class="navbar-drawer__link navbar-drawer__link--secondary" href="/pages/contact">Contact Us</a>' +
-      '<a class="navbar-drawer__link navbar-drawer__link--secondary" href="/account/login">Account</a>' +
-      '</nav>' +
-      '<div class="navbar-drawer__divider" aria-hidden="true"></div>' +
-      '<nav class="navbar-drawer__nav navbar-drawer__nav--policies" aria-label="Policies">' +
-      '<a class="navbar-drawer__link navbar-drawer__link--policy" href="/pages/privacy-policy">Privacy Policy</a>' +
-      '<a class="navbar-drawer__link navbar-drawer__link--policy" href="/pages/return-and-refund">Refund Policy</a>' +
-      '<a class="navbar-drawer__link navbar-drawer__link--policy" href="/pages/term-of-services">Terms of Service</a>' +
-      '<a class="navbar-drawer__link navbar-drawer__link--policy" href="/pages/shipping-policy">Shipping Policy</a>' +
-      '</nav>' +
-      '<a class="navbar-drawer__social" href="https://www.instagram.com/e7haircare0.01" target="_blank" rel="noopener noreferrer">Instagram</a>' +
       '</div>';
     navbar.insertAdjacentElement('afterend', drawer);
     return drawer;
@@ -88,7 +72,7 @@
       button.addEventListener('click', closeDrawer);
     });
 
-    drawer.querySelectorAll('.navbar-drawer__link, .navbar-drawer__logo, .navbar-drawer__social').forEach(function (link) {
+    drawer.querySelectorAll('.navbar-drawer__link, .navbar-drawer__logo').forEach(function (link) {
       link.addEventListener('click', closeDrawer);
     });
 
