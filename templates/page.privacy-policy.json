@@ -4,7 +4,7 @@
       "type": "elaris-policy-page",
       "settings": {
         "heading": "Privacy Policy",
-        "intro": "At ELARÉHAIR, your trust is our foundation. We are deeply committed to protecting your privacy, and we treat your personal information with the respect it deserves — like a promise kept."
+        "intro": "At ELARÉ, your trust is our foundation. We are deeply committed to protecting your privacy, and we treat your personal information with the respect it deserves — like a promise kept."
       },
       "blocks": {
         "section_1": {
@@ -60,7 +60,7 @@
           "type": "section",
           "settings": {
             "title": "8. Children's Privacy",
-            "body": "<p>ELARÉHAIR does not knowingly collect information from children under the age of 13. If we learn that we have done so unintentionally, we will delete it immediately.</p>"
+            "body": "<p>ELARÉ does not knowingly collect information from children under the age of 13. If we learn that we have done so unintentionally, we will delete it immediately.</p>"
           }
         },
         "section_9": {
@@ -83,7 +83,7 @@
             "body": "If you have any questions about this Privacy Policy, or how we use your data, please reach out:",
             "email": "iibdaeielaris7@gmail.com",
             "whatsapp": "03291934583",
-            "footer_note": "We're here to listen, serve, and build a community of trust — because ELARÉHAIR isn't just skincare; it's care that stays."
+            "footer_note": "We're here to listen, serve, and build a community of trust — because ELARÉ isn't just skincare; it's care that stays."
           }
         }
       },

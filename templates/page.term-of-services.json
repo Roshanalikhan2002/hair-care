@@ -4,14 +4,14 @@
       "type": "elaris-policy-page",
       "settings": {
         "heading": "Terms of Service",
-        "intro": "Welcome to ELARÉHAIR! By visiting our website, placing an order, or interacting with our brand, you agree to the following terms and conditions. These terms are designed to ensure transparency, mutual respect, and a smooth experience for both of us — because your trust means everything."
+        "intro": "Welcome to ELARÉ! By visiting our website, placing an order, or interacting with our brand, you agree to the following terms and conditions. These terms are designed to ensure transparency, mutual respect, and a smooth experience for both of us — because your trust means everything."
       },
       "blocks": {
         "section_1": {
           "type": "section",
           "settings": {
             "title": "1. Overview",
-            "body": "<p>ELARÉHAIR is owned and operated under ELARÉHAIR Enterprises. These terms apply to all users of our website, including browsers, customers, and contributors of content. We kindly ask that you read them carefully before engaging with our site or making a purchase.</p>"
+            "body": "<p>ELARÉ is owned and operated under ELARÉ Enterprises. These terms apply to all users of our website, including browsers, customers, and contributors of content. We kindly ask that you read them carefully before engaging with our site or making a purchase.</p>"
           }
         },
         "section_2": {
@@ -60,7 +60,7 @@
           "type": "section",
           "settings": {
             "title": "8. Intellectual Property",
-            "body": "<p>All content on this website — including text, visuals, logos, packaging design, and product names — is the intellectual property of ELARÉHAIR. Use of our content without permission is not allowed.</p>"
+            "body": "<p>All content on this website — including text, visuals, logos, packaging design, and product names — is the intellectual property of ELARÉ. Use of our content without permission is not allowed.</p>"
           }
         },
         "section_9": {
@@ -81,7 +81,7 @@
           "type": "section",
           "settings": {
             "title": "11. Limitation of Liability",
-            "body": "<p>ELARÉHAIR is not liable for any allergic reactions, misuse of products, or indirect damages arising from the use of our products or website. Always consult with a dermatologist if unsure about any skincare product.</p>"
+            "body": "<p>ELARÉ is not liable for any allergic reactions, misuse of products, or indirect damages arising from the use of our products or website. Always consult with a dermatologist if unsure about any skincare product.</p>"
           }
         },
         "section_12": {
