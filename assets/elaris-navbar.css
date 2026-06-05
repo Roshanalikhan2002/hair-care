@@ -19,16 +19,38 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: min(280px, 80vw);
+  width: min(300px, 86vw);
   background: #fff;
-  padding: 24px 20px;
+  padding: 0;
   transform: translateX(-100%);
   transition: transform 0.22s ease;
   box-shadow: 4px 0 24px rgba(88, 5, 20, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .navbar-drawer.is-open .navbar-drawer__panel {
   transform: translateX(0);
+}
+
+.navbar-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(88, 5, 20, 0.1);
+  flex-shrink: 0;
+}
+
+.navbar-drawer__logo {
+  text-decoration: none;
+  color: #580514;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 2px;
 }
 
 .navbar-drawer__close {
@@ -39,15 +61,66 @@
   line-height: 1;
   padding: 0;
   cursor: pointer;
+  flex-shrink: 0;
+}
+
+.navbar-drawer__nav {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
 }
 
 .navbar-drawer__link {
   display: block;
-  margin-top: 20px;
+  padding: 14px 20px;
   text-decoration: none;
   color: #580514;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
+  line-height: 1.3;
+}
+
+.navbar-drawer__link:hover,
+.navbar-drawer__link:focus-visible {
+  background: rgba(88, 5, 20, 0.06);
+}
+
+.navbar-drawer__link--secondary {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.navbar-drawer__link--policy {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 20px;
+  color: rgba(88, 5, 20, 0.85);
+}
+
+.navbar-drawer__divider {
+  height: 1px;
+  background: rgba(88, 5, 20, 0.1);
+  margin: 4px 20px;
+  flex-shrink: 0;
+}
+
+.navbar-drawer__social {
+  display: block;
+  margin: 12px 20px 24px;
+  padding: 12px 16px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background: #580514;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.navbar-drawer__social:hover,
+.navbar-drawer__social:focus-visible {
+  background: #3d040e;
 }
 
 @media (max-width: 1024px) {
@@ -79,5 +152,10 @@
   .navbar .logo {
     font-size: 22px !important;
     letter-spacing: 1px !important;
+  }
+
+  .navbar-drawer__link {
+    font-size: 16px;
+    padding: 12px 20px;
   }
 }

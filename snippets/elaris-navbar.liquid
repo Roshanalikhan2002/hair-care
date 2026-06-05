@@ -29,10 +29,47 @@
     </a>
   </div>
 </header>
+{% liquid
+  assign drawer_shop_url = section.settings.nav_shop_url | default: routes.all_products_collection_url
+  assign drawer_instagram = settings.social_instagram_link
+  if drawer_instagram == blank
+    assign drawer_instagram = 'https://www.instagram.com/e7haircare0.01?igsh=enQ4MWhyOXI2ZXZn'
+  endif
+%}
 <div class="navbar-drawer" data-navbar-drawer hidden>
   <div class="navbar-drawer__overlay" data-navbar-drawer-close></div>
   <div class="navbar-drawer__panel" role="dialog" aria-modal="true" aria-label="Navigation">
-    <button type="button" class="navbar-drawer__close" aria-label="Close menu" data-navbar-drawer-close>&times;</button>
-    <a class="navbar-drawer__link" href="{{ section.settings.nav_shop_url | default: routes.all_products_collection_url }}">Shop</a>
+    <div class="navbar-drawer__header">
+      <a class="navbar-drawer__logo" href="{{ routes.root_url }}">{% render 'elaris-logo-text', section: section %}</a>
+      <button type="button" class="navbar-drawer__close" aria-label="Close menu" data-navbar-drawer-close>&times;</button>
+    </div>
+
+    <nav class="navbar-drawer__nav" aria-label="Main menu">
+      <a class="navbar-drawer__link" href="{{ routes.root_url }}">Home</a>
+      <a class="navbar-drawer__link" href="{{ drawer_shop_url }}">Shop</a>
+      <a class="navbar-drawer__link" href="/products/hair-care-bundle">Hair Care Bundle</a>
+      <a class="navbar-drawer__link" href="/products/hair-regrowth-spray">Hair Regrowth Spray</a>
+      <a class="navbar-drawer__link" href="/products/anti-frizz-keratin-serum">Anti Frizz Keratin Serum</a>
+      <a class="navbar-drawer__link" href="/products/floral-blossom-hair-mist">Floral Blossom Hair Mist</a>
+    </nav>
+
+    <div class="navbar-drawer__divider" aria-hidden="true"></div>
+
+    <nav class="navbar-drawer__nav navbar-drawer__nav--secondary" aria-label="Company">
+      <a class="navbar-drawer__link navbar-drawer__link--secondary" href="/pages/about-us">About Us</a>
+      <a class="navbar-drawer__link navbar-drawer__link--secondary" href="/pages/contact">Contact Us</a>
+      <a class="navbar-drawer__link navbar-drawer__link--secondary" href="{{ routes.account_login_url }}">Account</a>
+    </nav>
+
+    <div class="navbar-drawer__divider" aria-hidden="true"></div>
+
+    <nav class="navbar-drawer__nav navbar-drawer__nav--policies" aria-label="Policies">
+      <a class="navbar-drawer__link navbar-drawer__link--policy" href="/pages/privacy-policy">Privacy Policy</a>
+      <a class="navbar-drawer__link navbar-drawer__link--policy" href="/pages/return-and-refund">Refund Policy</a>
+      <a class="navbar-drawer__link navbar-drawer__link--policy" href="/pages/term-of-services">Terms of Service</a>
+      <a class="navbar-drawer__link navbar-drawer__link--policy" href="/pages/shipping-policy">Shipping Policy</a>
+    </nav>
+
+    <a class="navbar-drawer__social" href="{{ drawer_instagram }}" target="_blank" rel="noopener noreferrer">Instagram</a>
   </div>
 </div>
