@@ -1,0 +1,67 @@
+{
+  "sections": {
+    "main": {
+      "type": "elaris-policy-page",
+      "settings": {
+        "heading": "Shipping Policy",
+        "intro": "At ELARÉHAIR, we believe your glow should never have to wait. That's why we aim to deliver your skincare essentials with care, speed, and transparency."
+      },
+      "blocks": {
+        "section_1": {
+          "type": "section",
+          "settings": {
+            "title": "Where We Ship",
+            "body": "<p>We currently deliver all across Pakistan.</p><p>International delivery is coming soon — stay tuned!</p>"
+          }
+        },
+        "section_2": {
+          "type": "section",
+          "settings": {
+            "title": "Processing Time",
+            "body": "<p>All orders are processed within 1–2 business days (Monday to Saturday).</p><p>You'll receive a confirmation email or WhatsApp message once your order is on its way.</p>"
+          }
+        },
+        "section_3": {
+          "type": "section",
+          "settings": {
+            "title": "Estimated Delivery Time",
+            "body": "<ul><li><strong>Major Cities:</strong> 2–4 working days</li><li><strong>Other Areas:</strong> 3–7 working days</li></ul><p>Please note: Unforeseen delays (weather, public holidays, or courier load) may affect delivery timelines, but we'll always keep you informed.</p>"
+          }
+        },
+        "section_4": {
+          "type": "section",
+          "settings": {
+            "title": "Shipping Charges",
+            "body": "<ul><li>Free delivery on skincare bundles</li><li>Flat rate for individual products — calculated and shown at checkout</li></ul>"
+          }
+        },
+        "section_5": {
+          "type": "section",
+          "settings": {
+            "title": "Order Tracking",
+            "body": "<p>Once shipped, you'll receive a tracking link via SMS or email.</p><p>You can also track your order anytime using the \"Order Tracking\" option in the menu on our website.</p>"
+          }
+        },
+        "closing": {
+          "type": "closing",
+          "settings": {
+            "title": "",
+            "body": "Need help? Just WhatsApp us — we're happy to assist you.",
+            "email": "",
+            "whatsapp": "03291934583",
+            "footer_note": "Your glow matters. Every package is sent with care, dua, and dedication — delivered from our care to your confidence."
+          }
+        }
+      },
+      "block_order": [
+        "section_1",
+        "section_2",
+        "section_3",
+        "section_4",
+        "section_5",
+        "closing"
+      ]
+    }
+  },
+  "order": ["main"]
+}
