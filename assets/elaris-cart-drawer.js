@@ -59,7 +59,6 @@
   var subtotalEl = qs('[data-elaris-cart-subtotal]', drawer);
   var countEls = qsa('[data-elaris-cart-count]');
 
-  var openers = qsa('.elaris-cart-trigger');
   var lastFocus = null;
 
   function setCounts(n) {
@@ -68,75 +67,85 @@
     });
   }
 
-  function renderCart(cart) {
-    if (!linesEl || !emptyEl || !footEl || !subtotalEl) return;
+  function buildLineItemHtml(item) {
+    var title = escapeHtml(lineItemDisplayTitle(item));
+    var variant =
+      item.variant_title && item.variant_title !== 'Default Title'
+        ? '<div class="elaris-cart-drawer__line-variant">' +
+          escapeHtml(item.variant_title) +
+          '</div>'
+        : '';
+    var img = item.image
+      ? '<img src="' +
+        escapeAttr(item.image) +
+        '" alt="" width="90" height="90" loading="lazy">'
+      : '<span class="elaris-cart-drawer__thumb-fallback"></span>';
+    var url = item.url ? escapeAttr(item.url) : '#';
+    return (
+      '<li class="elaris-cart-drawer__line" data-line-key="' +
+      escapeAttr(item.key) +
+      '">' +
+      '<a href="' +
+      url +
+      '" class="elaris-cart-drawer__thumb" tabindex="-1">' +
+      img +
+      '</a>' +
+      '<div class="elaris-cart-drawer__line-body">' +
+      '<a href="' +
+      url +
+      '" class="elaris-cart-drawer__line-title">' +
+      title +
+      '</a>' +
+      variant +
+      '<div class="elaris-cart-drawer__line-meta">' +
+      '<div class="elaris-cart-drawer__qty">' +
+      '<button type="button" data-line-key="' +
+      escapeAttr(item.key) +
+      '" data-qty-change="-1" aria-label="Decrease quantity">−</button>' +
+      '<span data-line-qty>' +
+      item.quantity +
+      '</span>' +
+      '<button type="button" data-line-key="' +
+      escapeAttr(item.key) +
+      '" data-qty-change="1" aria-label="Increase quantity">+</button>' +
+      '</div>' +
+      '<button type="button" class="elaris-cart-drawer__remove" data-line-key="' +
+      escapeAttr(item.key) +
+      '" data-remove-line aria-label="Remove">Remove</button>' +
+      '</div></div>' +
+      lineItemLinePriceHtml(item) +
+      '</li>'
+    );
+  }
 
+  function renderCart(cart) {
     var items = (cart && cart.items) || [];
+    var html = items.map(buildLineItemHtml).join('');
     setCounts(cart && typeof cart.item_count === 'number' ? cart.item_count : items.length);
 
-    if (items.length === 0) {
-      emptyEl.hidden = false;
-      footEl.hidden = true;
-      linesEl.innerHTML = '';
-      return;
+    if (linesEl && emptyEl && footEl && subtotalEl) {
+      if (items.length === 0) {
+        emptyEl.hidden = false;
+        footEl.hidden = true;
+        linesEl.innerHTML = '';
+      } else {
+        emptyEl.hidden = true;
+        footEl.hidden = false;
+        subtotalEl.textContent = formatMoney(cart.total_price);
+        linesEl.innerHTML = html;
+      }
     }
 
-    emptyEl.hidden = true;
-    footEl.hidden = false;
-    subtotalEl.textContent = formatMoney(cart.total_price);
-
-    linesEl.innerHTML = items
-      .map(function (item) {
-        var title = escapeHtml(lineItemDisplayTitle(item));
-        var variant =
-          item.variant_title && item.variant_title !== 'Default Title'
-            ? '<div class="elaris-cart-drawer__line-variant">' +
-              escapeHtml(item.variant_title) +
-              '</div>'
-            : '';
-        var img = item.image
-          ? '<img src="' +
-            escapeAttr(item.image) +
-            '" alt="" width="90" height="90" loading="lazy">'
-          : '<span class="elaris-cart-drawer__thumb-fallback"></span>';
-        var url = item.url ? escapeAttr(item.url) : '#';
-        return (
-          '<li class="elaris-cart-drawer__line" data-line-key="' +
-          escapeAttr(item.key) +
-          '">' +
-          '<a href="' +
-          url +
-          '" class="elaris-cart-drawer__thumb" tabindex="-1">' +
-          img +
-          '</a>' +
-          '<div class="elaris-cart-drawer__line-body">' +
-          '<a href="' +
-          url +
-          '" class="elaris-cart-drawer__line-title">' +
-          title +
-          '</a>' +
-          variant +
-          '<div class="elaris-cart-drawer__line-meta">' +
-          '<div class="elaris-cart-drawer__qty">' +
-          '<button type="button" data-line-key="' +
-          escapeAttr(item.key) +
-          '" data-qty-change="-1" aria-label="Decrease quantity">−</button>' +
-          '<span data-line-qty>' +
-          item.quantity +
-          '</span>' +
-          '<button type="button" data-line-key="' +
-          escapeAttr(item.key) +
-          '" data-qty-change="1" aria-label="Increase quantity">+</button>' +
-          '</div>' +
-          '<button type="button" class="elaris-cart-drawer__remove" data-line-key="' +
-          escapeAttr(item.key) +
-          '" data-remove-line aria-label="Remove">Remove</button>' +
-          '</div></div>' +
-          lineItemLinePriceHtml(item) +
-          '</li>'
-        );
-      })
-      .join('');
+    var pageLines = qs('#ElarisCartPageLines');
+    var pageSubtotal = qs('[data-elaris-cart-page-subtotal]');
+    if (pageLines) {
+      if (items.length === 0) {
+        window.location.reload();
+        return;
+      }
+      pageLines.innerHTML = html;
+      if (pageSubtotal) pageSubtotal.textContent = formatMoney(cart.total_price);
+    }
   }
 
   function escapeHtml(s) {
@@ -192,9 +201,15 @@
     else open();
   }
 
-  openers.forEach(function (a) {
-    a.addEventListener('click', toggle);
-  });
+  document.addEventListener(
+    'click',
+    function (e) {
+      var trigger = e.target.closest('.elaris-cart-trigger');
+      if (!trigger) return;
+      toggle(e);
+    },
+    true
+  );
 
   drawer.addEventListener('click', function (e) {
     if (e.target.closest('[data-elaris-cart-close]')) close();
@@ -204,9 +219,10 @@
     if (e.key === 'Escape' && drawer.classList.contains('is-open')) close();
   });
 
-  drawer.addEventListener('click', function (e) {
+  document.addEventListener('click', function (e) {
     var t = e.target;
     if (!(t instanceof Element)) return;
+    if (!t.closest('#ElarisCartDrawer') && !t.closest('#ElarisCartPageLines')) return;
 
     var rm = t.closest('[data-remove-line]');
     if (rm) {

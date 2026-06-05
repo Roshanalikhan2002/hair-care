@@ -2,6 +2,9 @@
   {{ 'elaris-home.css' | asset_url | stylesheet_tag }}
 {%- elsif template.name == 'product' -%}
   {{ 'elaris-product.css' | asset_url | stylesheet_tag }}
+{%- elsif template.name == 'cart' -%}
+  {{ 'elaris-home.css' | asset_url | stylesheet_tag }}
+  {{ 'elaris-cart-page.css' | asset_url | stylesheet_tag }}
 {%- elsif template.name == 'collection' -%}
   {{ 'elaris-home.css' | asset_url | stylesheet_tag }}
   {{ 'elaris-collection.css' | asset_url | stylesheet_tag }}

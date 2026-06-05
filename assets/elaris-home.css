@@ -80,7 +80,8 @@
   flex-shrink: 0;
 }
 
-.icons a {
+.icons a,
+.icons .elaris-cart-trigger {
   color: inherit;
   display: flex;
   align-items: center;
