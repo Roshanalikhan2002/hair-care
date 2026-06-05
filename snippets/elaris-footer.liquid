@@ -16,14 +16,8 @@
           <li><a href="/pages/return-and-refund">Refund Policy</a></li>
           <li><a href="/pages/term-of-services">Terms of Service</a></li>
           <li><a href="/pages/shipping-policy">Shipping Policy</a></li>
-          <li><a href="#">Cookies Policy</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li>
-            <a href="{% if pages['about-us'] %}{{ pages['about-us'].url }}{% elsif pages.about %}{{ pages.about.url }}{% else %}/pages/about-us{% endif %}">About Us</a>
-          </li>
-          <li>
-            <a href="{% if pages.contact %}{{ pages.contact.url }}{% else %}#{% endif %}">Contact Us</a>
-          </li>
+          <li><a href="/pages/about-us">About Us</a></li>
+          <li><a href="/pages/contact">Contact Us</a></li>
         </ul>
       </details>
     </div>
@@ -37,28 +31,42 @@
           <p>
             Enter your email below to be the first to know about new product launches, exclusive offers, and more!
           </p>
-          {% form 'customer', class: 'footer-newsletter-form' %}
-            <input type="hidden" name="contact[tags]" value="newsletter">
-            <div class="email-form">
-              <input type="email" name="contact[email]" placeholder="Enter your email" required value="">
-              <button type="submit" aria-label="Subscribe">&#8594;</button>
-            </div>
+          {% form 'customer', class: 'footer-newsletter-form', id: 'FooterNewsletter' %}
+            {% if form.posted_successfully? %}
+              <p class="footer-newsletter-success" role="status">Thank you for subscribing!</p>
+            {% endif %}
+
+            {% if form.errors %}
+              <p class="footer-newsletter-error" role="alert">
+                {% for field in form.errors %}
+                  {{ form.errors.messages[field] }}
+                {% endfor %}
+              </p>
+            {% endif %}
+
+            {% unless form.posted_successfully? %}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div class="email-form">
+                <input
+                  type="email"
+                  name="contact[email]"
+                  placeholder="Enter your email"
+                  required
+                  value="{% if form.email %}{{ form.email }}{% endif %}"
+                  {% if form.errors contains 'email' %}
+                    aria-invalid="true"
+                  {% endif %}
+                >
+                <button type="submit" aria-label="Subscribe">&#8594;</button>
+              </div>
+              <p class="disclaimer">
+                By subscribing you agree to the
+                <a href="/pages/term-of-services">Terms of Use</a>
+                &amp;
+                <a href="/pages/privacy-policy">Privacy Policy</a>.
+              </p>
+            {% endunless %}
           {% endform %}
-          <p class="disclaimer">
-            By subscribing you agree to the
-            {% if shop.terms_of_service %}
-              <a href="{{ shop.terms_of_service.url }}">Terms of Use</a>
-            {% else %}
-              <a href="#">Terms of Use</a>
-            {% endif %}
-            &amp;
-            {% if shop.privacy_policy %}
-              <a href="{{ shop.privacy_policy.url }}">Privacy Policy</a>
-            {% else %}
-              <a href="#">Privacy Policy</a>
-            {% endif %}
-            .
-          </p>
         </div>
       </details>
     </div>
