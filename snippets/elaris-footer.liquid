@@ -12,10 +12,12 @@
           Policies <span class="icon">+</span>
         </summary>
         <ul class="footer-links">
-          {% if shop.privacy_policy %}
+          {% if pages['privacy-policy'] %}
+            <li><a href="{{ pages['privacy-policy'].url }}">Privacy Policy</a></li>
+          {% elsif shop.privacy_policy %}
             <li><a href="{{ shop.privacy_policy.url }}">Privacy Policy</a></li>
           {% else %}
-            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
           {% endif %}
           {% if shop.refund_policy %}
             <li><a href="{{ shop.refund_policy.url }}">Refund Policy</a></li>
