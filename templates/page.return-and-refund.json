@@ -1,0 +1,59 @@
+{
+  "sections": {
+    "main": {
+      "type": "elaris-policy-page",
+      "settings": {
+        "heading": "Return and Refund Policy",
+        "intro": "At ELARÉHAIR, your satisfaction and trust are at the heart of everything we do. We follow ethical and fair practices to ensure a transparent, customer-first experience — rooted in care, honesty, and our values."
+      },
+      "blocks": {
+        "section_1": {
+          "type": "section",
+          "settings": {
+            "title": "Eligibility for Return",
+            "body": "<p>We gladly accept returns on:</p><ul><li>Unused and unopened products in original packaging</li><li>Within 7 days of delivery</li></ul><p>If the seal is broken or the product has been used, we unfortunately cannot accept a return — unless there is a genuine concern or dissatisfaction, in which case we will assess the issue with compassion and fairness.</p>"
+          }
+        },
+        "section_2": {
+          "type": "section",
+          "settings": {
+            "title": "How to Request a Return",
+            "body": "<p>To initiate a return:</p><ul><li>Email us at <a href=\"mailto:iibdaeielaris7@gmail.com\">iibdaeielaris7@gmail.com</a> with your order number.</li><li>Mention the reason for the return and attach clear photos if needed.</li><li>Our team will guide you through the process within 24 hours (Mon–Sat, 10AM to 6PM, PKT).</li></ul>"
+          }
+        },
+        "section_3": {
+          "type": "section",
+          "settings": {
+            "title": "Refunds",
+            "body": "<p>Once we receive and inspect your return, we'll notify you via email.</p><p>If approved, the refund will be processed within 5–7 working days.</p><p>For Cash on Delivery orders, refunds will be issued via bank transfer, mobile wallet, or another convenient method discussed during the return process.</p>"
+          }
+        },
+        "section_4": {
+          "type": "section",
+          "settings": {
+            "title": "Non-Returnable Items",
+            "body": "<ul><li>Items that have been opened, used, or tampered with</li><li>Gift cards or promotional items</li><li>Orders placed more than 7 days ago</li></ul>"
+          }
+        },
+        "closing": {
+          "type": "closing",
+          "settings": {
+            "title": "Our Promise",
+            "body": "If a product doesn't perform as expected and you're truly unhappy, reach out — we'll always try to make it right.",
+            "email": "iibdaeielaris7@gmail.com",
+            "whatsapp": "03291934583",
+            "footer_note": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_1",
+        "section_2",
+        "section_3",
+        "section_4",
+        "closing"
+      ]
+    }
+  },
+  "order": ["main"]
+}

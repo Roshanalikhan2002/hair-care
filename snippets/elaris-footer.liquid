@@ -13,11 +13,7 @@
         </summary>
         <ul class="footer-links">
           <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
-          {% if shop.refund_policy %}
-            <li><a href="{{ shop.refund_policy.url }}">Refund Policy</a></li>
-          {% else %}
-            <li><a href="#">Refund Policy</a></li>
-          {% endif %}
+          <li><a href="/pages/return-and-refund">Refund Policy</a></li>
           <li><a href="/pages/term-of-services">Terms of Service</a></li>
           {% if shop.shipping_policy %}
             <li><a href="{{ shop.shipping_policy.url }}">Shipping Policy</a></li>
