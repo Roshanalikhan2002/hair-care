@@ -86,6 +86,53 @@
   align-items: center;
 }
 
+.navbar-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+
+.navbar-drawer__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.38);
+}
+
+.navbar-drawer__panel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: min(280px, 80vw);
+  background: #fff;
+  padding: 24px 20px;
+  transform: translateX(-100%);
+  transition: transform 0.22s ease;
+}
+
+.navbar-drawer.is-open .navbar-drawer__panel {
+  transform: translateX(0);
+}
+
+.navbar-drawer__close {
+  border: none;
+  background: transparent;
+  color: #580514;
+  font-size: 32px;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+}
+
+.navbar-drawer__link {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #580514;
+  font-size: 18px;
+  font-weight: 700;
+}
+
 /* Legacy header (old .left-nav + .desktop-nav) until theme files sync to Shopify */
 .elaris-home-root .navbar:has(.desktop-nav) {
   position: relative;
@@ -414,8 +461,8 @@
   }
 
   .navbar__center.logo {
-    font-size: 32px;
-    letter-spacing: 3px;
+    font-size: 28px;
+    letter-spacing: 2px;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -427,6 +474,10 @@
   }
 
   .profile {
+    display: none;
+  }
+
+  .navbar__shop {
     display: none;
   }
 
@@ -542,7 +593,8 @@
 
 @media (max-width: 560px) {
   .logo {
-    font-size: 44px;
+    font-size: 30px;
+    letter-spacing: 2px;
   }
 
   .hero-left {
