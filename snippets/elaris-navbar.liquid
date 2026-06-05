@@ -36,35 +36,3 @@
     <a class="navbar-drawer__link" href="{{ section.settings.nav_shop_url | default: routes.all_products_collection_url }}">Shop</a>
   </div>
 </div>
-<script>
-  (function () {
-    var drawer = document.querySelector('[data-navbar-drawer]');
-    var menuButton = document.querySelector('.menu-btn');
-    if (!drawer || !menuButton) return;
-
-    var closeButtons = drawer.querySelectorAll('[data-navbar-drawer-close]');
-    var openDrawer = function () {
-      drawer.hidden = false;
-      requestAnimationFrame(function () {
-        drawer.classList.add('is-open');
-      });
-      document.body.style.overflow = 'hidden';
-    };
-    var closeDrawer = function () {
-      drawer.classList.remove('is-open');
-      drawer.hidden = true;
-      document.body.style.overflow = '';
-    };
-
-    menuButton.addEventListener('click', function () {
-      if (drawer.classList.contains('is-open')) {
-        closeDrawer();
-      } else {
-        openDrawer();
-      }
-    });
-    closeButtons.forEach(function (button) {
-      button.addEventListener('click', closeDrawer);
-    });
-  })();
-</script>
